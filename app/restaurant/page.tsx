@@ -30,6 +30,7 @@ export default function RestaurantPage() {
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
+          <div className="pointer-events-none absolute left-1/2 top-0 h-[120%] w-screen -translate-x-1/2 bg-[radial-gradient(circle_at_72%_22%,rgba(116,16,33,0.34),rgba(116,16,33,0.16)_22%,rgba(116,16,33,0.05)_42%,rgba(9,9,9,0)_68%)]" />
           <div className="brand-orb right-[-8rem] top-12 h-64 w-64 bg-[radial-gradient(circle,rgba(24,104,82,0.42),rgba(24,104,82,0))] md:h-[28rem] md:w-[28rem]" />
 
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">

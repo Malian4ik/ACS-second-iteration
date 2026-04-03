@@ -24,6 +24,7 @@ export default function CyberClubPage() {
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
+          <div className="pointer-events-none absolute left-1/2 top-0 h-[120%] w-screen -translate-x-1/2 bg-[radial-gradient(circle_at_72%_20%,rgba(111,52,163,0.28),rgba(111,52,163,0.14)_24%,rgba(111,52,163,0.05)_44%,rgba(9,9,9,0)_70%)]" />
           <div className="brand-orb left-[-10rem] top-4 h-64 w-64 md:h-[28rem] md:w-[28rem]" />
 
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
