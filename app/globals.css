@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --background: #090909;
+  --background-soft: #121212;
+  --panel: rgba(17, 17, 17, 0.82);
+  --panel-strong: rgba(10, 10, 10, 0.94);
+  --line: rgba(255, 255, 255, 0.1);
+  --text: #f4f1ea;
+  --muted: #ada79a;
+  --accent-red: #b11b36;
+  --accent-green: #125744;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(177, 27, 54, 0.16), transparent 24%),
+    radial-gradient(circle at right, rgba(18, 87, 68, 0.12), transparent 24%),
+    linear-gradient(180deg, #0c0c0c 0%, #090909 48%, #070707 100%);
+  color: var(--text);
+  font-family: var(--font-space-grotesk), sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    url("/images/avulus-logo-rgb.png"),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-position:
+    center 16vh,
+    0 0,
+    0 0;
+  background-repeat:
+    no-repeat,
+    repeat,
+    repeat;
+  background-size:
+    min(44vw, 420px) auto,
+    80px 80px,
+    80px 80px;
+  opacity: 0.18;
+  mask-image: radial-gradient(circle at center, black, transparent 88%);
+}
+
+::selection {
+  background: rgba(177, 27, 54, 0.32);
+  color: white;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.section-shell {
+  @apply mx-auto max-w-7xl px-4 md:px-6;
+}
+
+.section-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px);
+}
+
+.eyebrow {
+  @apply text-xs uppercase tracking-[0.34em] text-[#d7d1c4];
+}
+
+.brand-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(177, 27, 54, 0.45), rgba(177, 27, 54, 0));
+  filter: blur(78px);
+  opacity: 0.7;
+  animation: pulseFloat 8s ease-in-out infinite;
+}
+
+.brand-card {
+  background: linear-gradient(180deg, rgba(22, 22, 22, 0.92), rgba(12, 12, 12, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.32);
+  backdrop-filter: blur(18px);
+}
+
+.cta-panel {
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes pulseFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) scale(1.06);
+  }
+}
