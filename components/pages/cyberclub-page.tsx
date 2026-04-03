@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { PricingSection } from "@/components/club/pricing-section";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
 import { AvulusNav } from "@/components/layout/avulus-nav";
@@ -107,6 +108,8 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
             ))}
           </div>
         </section>
+
+        <PricingSection locale={locale} />
 
         <section className="section-shell pb-20" id="book">
           <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">

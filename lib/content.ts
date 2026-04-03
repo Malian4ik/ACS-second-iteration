@@ -524,6 +524,7 @@ export function getCyberclubNav(locale: Locale): NavItem[] {
   return [
     { label: c.cyberclubNavHero, href: "#top" },
     { label: c.cyberclubNavZones, href: "#zones" },
+    { label: locale === "ru" ? "Тарифы" : "Pricing", href: "#pricing" },
     { label: c.cyberclubNavBook, href: "#book" }
   ];
 }

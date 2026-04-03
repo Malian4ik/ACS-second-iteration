@@ -3,6 +3,7 @@ import Image from "next/image";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
 import { AvulusNav } from "@/components/layout/avulus-nav";
+import { MenuSection } from "@/components/restaurant/menu-section";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { contactLinks, getRestaurantNav, getSharedContent, type Locale } from "@/lib/content";
 
@@ -74,37 +75,7 @@ export function RestaurantPage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <section className="section-shell py-16" id="menu">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="eyebrow">{c.restaurantMenuEyebrow}</div>
-              <h2 className="mt-3 font-[family:var(--font-oswald)] text-5xl uppercase leading-none text-white md:text-6xl">{c.restaurantMenuTitle}</h2>
-            </div>
-            <p className="max-w-md text-sm leading-7 text-white/58">{c.restaurantMenuBody}</p>
-          </div>
-
-          <div className="mt-8 grid gap-4 md:grid-cols-3">
-            {c.menuCards.map((card) => (
-              <article key={card.title} className="brand-card p-6">
-                <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white">{card.title}</div>
-                <p className="mt-4 text-sm leading-7 text-white/62">{card.body}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-4 grid gap-4 md:grid-cols-2">
-            <div className="relative min-h-[360px] overflow-hidden border border-white/8 bg-[#101010]">
-              <Image alt="Avulus cocktails" className="object-cover" fill sizes="(max-width: 1024px) 100vw, 50vw" src="/images/dish-cocktail.jpg" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.46),rgba(8,8,8,0.94))]" />
-              <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-4xl uppercase text-white">{locale === "ru" ? "Коктейли" : "Cocktails"}</div>
-            </div>
-            <div className="relative min-h-[360px] overflow-hidden border border-white/8 bg-[#101010]">
-              <Image alt="Avulus kitchen" className="object-cover" fill sizes="(max-width: 1024px) 100vw, 50vw" src="/images/dish-burger.jpg" />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.46),rgba(8,8,8,0.94))]" />
-              <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-4xl uppercase text-white">{locale === "ru" ? "Кухня" : "Kitchen"}</div>
-            </div>
-          </div>
-        </section>
+        <MenuSection locale={locale} />
 
         <section className="section-shell pb-20" id="reserve">
           <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
