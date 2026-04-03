@@ -152,7 +152,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <section className="section-shell pb-20" id="map">
           <div className="brand-card rounded-none p-6 md:p-8">
             <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.mapTitle}</div>
-            <div className="mt-6 overflow-hidden border border-white/10">
+            <div className="relative mt-6 overflow-hidden border border-white/10">
               <iframe
                 className="h-[420px] w-full"
                 loading="lazy"
