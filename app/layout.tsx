@@ -1,24 +1,27 @@
-import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Oswald, Space_Grotesk } from "next/font/google";
+import type { ReactNode } from "react";
+import { Manrope, Oswald } from "next/font/google";
 
 import { YandexMetrika } from "@/components/analytics/yandex-metrika";
 
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  subsets: ["latin"],
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
   variable: "--font-space-grotesk"
 });
 
 const oswald = Oswald({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   variable: "--font-oswald"
 });
 
 export const metadata: Metadata = {
-  title: "Avulus Cyber Space",
-  description: "Флагманский cyberclub и ресторан 24/7 в центре Москвы."
+  title: {
+    default: "Avulus Cyber Space",
+    template: "%s"
+  },
+  description: "Премиальный киберклуб и ресторан 24/7 в центре Москвы."
 };
 
 export default function RootLayout({
@@ -27,8 +30,8 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${spaceGrotesk.variable} ${oswald.variable}`}>
+    <html lang="ru">
+      <body className={`${manrope.variable} ${oswald.variable}`}>
         <YandexMetrika />
         {children}
       </body>

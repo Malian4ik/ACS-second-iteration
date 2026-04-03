@@ -4,26 +4,27 @@ import Image from "next/image";
 import { startTransition, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { trackGoal } from "@/lib/analytics";
-import { contactLinks, roomCards } from "@/lib/site-data";
 import { TrackedLink } from "@/components/ui/tracked-link";
+import { trackGoal } from "@/lib/analytics";
+import { contactLinks, getRoomCards, getSharedContent, type Locale } from "@/lib/content";
 
 type FilterKey = "all" | "solo" | "duo" | "bootcamp";
 
-export function RoomsExplorer({ initialFilter }: { initialFilter: FilterKey }) {
+export function RoomsExplorer({ initialFilter, locale }: { initialFilter: FilterKey; locale: Locale }) {
+  const c = getSharedContent(locale);
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState<FilterKey>(initialFilter);
-
+  const roomCards = getRoomCards(locale);
   const visibleRooms =
     activeFilter === "all" ? roomCards : roomCards.filter((room) => room.format === activeFilter);
 
   const filters: { key: FilterKey; label: string }[] = [
-    { key: "all", label: "All rooms" },
-    { key: "solo", label: "Solo" },
-    { key: "duo", label: "Duo" },
-    { key: "bootcamp", label: "Bootcamp" }
+    { key: "all", label: c.roomsFilterAll },
+    { key: "solo", label: c.roomsFilterSolo },
+    { key: "duo", label: c.roomsFilterDuo },
+    { key: "bootcamp", label: c.roomsFilterBootcamp }
   ];
 
   function applyFilter(nextFilter: FilterKey) {
@@ -92,15 +93,15 @@ export function RoomsExplorer({ initialFilter }: { initialFilter: FilterKey }) {
 
               <div className="grid grid-cols-3 gap-3 rounded-[24px] border border-white/10 bg-slate-950/55 p-4 text-sm text-slate-200">
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">Price</div>
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">{c.roomsPriceLabel}</div>
                   <div className="mt-2 font-semibold">{room.price}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">Stay</div>
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">{c.roomsStayLabel}</div>
                   <div className="mt-2 font-semibold">{room.duration}</div>
                 </div>
                 <div>
-                  <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">Capacity</div>
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">{c.roomsCapacityLabel}</div>
                   <div className="mt-2 font-semibold">{room.capacity}</div>
                 </div>
               </div>
@@ -122,7 +123,7 @@ export function RoomsExplorer({ initialFilter }: { initialFilter: FilterKey }) {
                   label={room.title}
                   target="_blank"
                 >
-                  Open booking
+                  {c.roomsOpenBooking}
                 </TrackedLink>
                 <TrackedLink
                   className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200"
@@ -131,7 +132,7 @@ export function RoomsExplorer({ initialFilter }: { initialFilter: FilterKey }) {
                   label={room.title}
                   target="_blank"
                 >
-                  Ask in VK
+                  {c.roomsAskVk}
                 </TrackedLink>
               </div>
             </div>
@@ -142,13 +143,9 @@ export function RoomsExplorer({ initialFilter }: { initialFilter: FilterKey }) {
       <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(9,16,25,0.96),rgba(21,34,49,0.82))] p-8 md:p-10">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="max-w-2xl">
-            <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">Restaurant add-on</div>
-            <h3 className="mt-3 text-3xl font-semibold text-white md:text-4xl">
-              Keep the booking flow simple, but still push the restaurant as part of the full stay.
-            </h3>
-            <p className="mt-4 text-sm leading-7 text-slate-300">
-              Use the menu CTA for longer visits, duo sessions, and bootcamps that need food and downtime.
-            </p>
+            <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">{c.roomsAddonEyebrow}</div>
+            <h3 className="mt-3 text-3xl font-semibold text-white md:text-4xl">{c.roomsAddonTitle}</h3>
+            <p className="mt-4 text-sm leading-7 text-slate-300">{c.roomsAddonBody}</p>
           </div>
           <TrackedLink
             className="inline-flex items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
@@ -157,7 +154,7 @@ export function RoomsExplorer({ initialFilter }: { initialFilter: FilterKey }) {
             label="menu"
             target="_blank"
           >
-            View menu
+            {c.roomsAddonCta}
           </TrackedLink>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { RoomsPage } from "@/components/pages/rooms-page";
 import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata = buildPageMetadata("ru", "rooms");
+export const metadata = buildPageMetadata("en", "rooms");
 
 type Props = {
   searchParams?: Promise<{
@@ -11,5 +11,5 @@ type Props = {
 
 export default async function Page({ searchParams }: Props) {
   const resolved = await searchParams;
-  return <RoomsPage locale="ru" searchParams={resolved} />;
+  return <RoomsPage locale="en" searchParams={resolved} />;
 }

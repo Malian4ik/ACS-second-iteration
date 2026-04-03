@@ -1,8 +1,8 @@
 import { CyberclubPage } from "@/components/pages/cyberclub-page";
 import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata = buildPageMetadata("ru", "cyberclub");
+export const metadata = buildPageMetadata("en", "cyberclub");
 
 export default function Page() {
-  return <CyberclubPage locale="ru" />;
+  return <CyberclubPage locale="en" />;
 }

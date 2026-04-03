@@ -1,14 +1,27 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { LanguageSwitch } from "@/components/layout/language-switch";
 import { TrackedLink } from "@/components/ui/tracked-link";
-import type { NavItem } from "@/lib/site-data";
+import { getSharedContent, type Locale, type NavItem, withLocale } from "@/lib/content";
 
-export function AvulusNav({ ctaHref, ctaLabel, items }: { items: NavItem[]; ctaHref: string; ctaLabel: string }) {
+export function AvulusNav({
+  ctaHref,
+  ctaLabel,
+  items,
+  locale
+}: {
+  items: NavItem[];
+  ctaHref: string;
+  ctaLabel: string;
+  locale: Locale;
+}) {
+  const c = getSharedContent(locale);
+
   return (
     <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
       <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href={withLocale(locale, "/")} className="flex items-center gap-3">
           <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
             <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/images/avulus-logo-rgb.png" />
           </div>
@@ -16,11 +29,11 @@ export function AvulusNav({ ctaHref, ctaLabel, items }: { items: NavItem[]; ctaH
             <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">
               Avulus
             </div>
-            <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">Cyberclub + Restaurant</div>
+            <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{c.brandSubtitle}</div>
           </div>
         </Link>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-4 md:flex">
           {items.map((item) => (
             <Link
               key={item.href}
@@ -32,6 +45,7 @@ export function AvulusNav({ ctaHref, ctaLabel, items }: { items: NavItem[]; ctaH
               {item.label}
             </Link>
           ))}
+          <LanguageSwitch locale={locale} />
         </div>
 
         <TrackedLink
@@ -43,7 +57,8 @@ export function AvulusNav({ ctaHref, ctaLabel, items }: { items: NavItem[]; ctaH
           {ctaLabel}
         </TrackedLink>
 
-        <div className="flex max-w-[52vw] items-center gap-2 overflow-x-auto md:hidden">
+        <div className="flex max-w-[60vw] items-center gap-2 overflow-x-auto md:hidden">
+          <LanguageSwitch locale={locale} />
           {items.map((item) => (
             <Link
               key={item.href}
