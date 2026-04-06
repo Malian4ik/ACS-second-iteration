@@ -41,11 +41,11 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{c.roomsBody}</p>
           </div>
-          <div className="rounded-[32px] border border-white/10 bg-white/5 p-6">
-            <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">{c.roomsPanelEyebrow}</div>
+          <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(159,35,57,0.16),rgba(26,90,73,0.16))] p-6">
+            <div className="text-xs uppercase tracking-[0.3em] text-[var(--accent-sand)]">{c.roomsPanelEyebrow}</div>
             <p className="mt-3 text-base leading-7 text-slate-300">{c.roomsPanelBody}</p>
             <TrackedLink
-              className="mt-6 inline-flex rounded-full bg-fuchsia-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
+              className="mt-6 inline-flex rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-red-strong)]"
               goal="rooms_team_cta"
               href={contactLinks.telegram}
               target="_blank"
@@ -62,14 +62,14 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
         <section className="grid gap-4 md:grid-cols-3">
           {c.howItWorks.map((item) => (
             <article key={item.step} className="rounded-[30px] border border-white/10 bg-white/5 p-6">
-              <div className="text-xs uppercase tracking-[0.3em] text-fuchsia-200">{item.step}</div>
+              <div className="text-xs uppercase tracking-[0.3em] text-[var(--accent-sand)]">{item.step}</div>
               <h2 className="mt-4 text-2xl font-semibold text-white">{item.title}</h2>
               <p className="mt-3 text-sm leading-7 text-slate-300">{item.body}</p>
             </article>
           ))}
         </section>
 
-        <section className="rounded-[36px] border border-white/10 bg-[linear-gradient(135deg,rgba(20,10,34,0.92),rgba(8,22,38,0.92))] p-6 md:p-10" id="contact-options">
+        <section className="rounded-[36px] border border-white/10 bg-[linear-gradient(135deg,rgba(25,16,16,0.94),rgba(15,28,24,0.92))] p-6 md:p-10" id="contact-options">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <div>
               <div className="eyebrow">{c.roomsContactEyebrow}</div>
@@ -80,15 +80,15 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
               {contactOptions.map((option) => (
                 <TrackedLink
                   key={option.label}
-                  className="rounded-[28px] border border-white/10 bg-slate-950/45 p-6 transition hover:border-cyan-300/40 hover:bg-slate-950/65"
+                  className="rounded-[28px] border border-white/10 bg-slate-950/45 p-6 transition hover:border-[var(--accent-green)]/60 hover:bg-slate-950/65"
                   goal={option.goal}
                   href={option.href}
                   label={option.label}
                   target={option.href.startsWith("http") ? "_blank" : undefined}
                 >
-                  <div className="text-xs uppercase tracking-[0.28em] text-cyan-200">{option.label}</div>
+                  <div className="text-xs uppercase tracking-[0.28em] text-[var(--accent-sand)]">{option.label}</div>
                   <div className="mt-4 text-lg font-semibold text-white">{option.description}</div>
-                  <div className="mt-5 text-sm font-semibold text-fuchsia-200">{c.roomsOpenNow}</div>
+                  <div className="mt-5 text-sm font-semibold text-[var(--accent-sand)]">{c.roomsOpenNow}</div>
                 </TrackedLink>
               ))}
             </div>
@@ -99,7 +99,7 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/92 px-4 py-3 backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-xl gap-2">
           <TrackedLink
-            className="flex-1 rounded-full bg-fuchsia-400 px-4 py-3 text-center text-sm font-semibold text-slate-950"
+            className="flex-1 rounded-full bg-[var(--accent-red)] px-4 py-3 text-center text-sm font-semibold text-white"
             goal="rooms_sticky_telegram"
             href={contactLinks.telegram}
             target="_blank"
@@ -115,7 +115,7 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
             {c.roomsStickyVk}
           </TrackedLink>
           <TrackedLink
-            className="rounded-full border border-cyan-300/30 px-4 py-3 text-center text-sm font-semibold text-cyan-100"
+            className="rounded-full border border-[var(--accent-green)]/40 px-4 py-3 text-center text-sm font-semibold text-[var(--accent-sand)]"
             goal="rooms_sticky_call"
             href={contactLinks.call}
           >

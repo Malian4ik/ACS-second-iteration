@@ -29,17 +29,17 @@ export function RestaurantPage({ locale }: { locale: Locale }) {
               <div className="space-y-3">
                 {c.restaurantNotes.map((note) => (
                   <div key={note} className="flex items-start gap-3 text-sm leading-7 text-white/74">
-                    <span className="mt-3 h-1.5 w-1.5 rounded-full bg-[#ba6fff]" />
+                    <span className="mt-3 h-1.5 w-1.5 rounded-full bg-[var(--accent-red)]" />
                     <span>{note}</span>
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="restaurant_telegram" href={contactLinks.telegram} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="restaurant_telegram" href={contactLinks.telegram} target="_blank">
                   {c.restaurantPrimary}
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="restaurant_vk" href={contactLinks.vk} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_vk" href={contactLinks.vk} target="_blank">
                   {c.restaurantSecondary}
                 </TrackedLink>
               </div>
@@ -65,7 +65,7 @@ export function RestaurantPage({ locale }: { locale: Locale }) {
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.55),rgba(8,8,8,0.94))]" />
                   <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-3xl uppercase text-white">{c.restaurantHeroSideTitle}</div>
                 </div>
-                <div className="brand-card p-6">
+                <div className="brand-card rounded-[28px] p-6">
                   <div className="text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{c.restaurantMoodEyebrow}</div>
                   <div className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white">{c.restaurantMoodTitle}</div>
                   <p className="mt-4 text-sm leading-7 text-white/62">{c.restaurantMoodBody}</p>
@@ -85,16 +85,16 @@ export function RestaurantPage({ locale }: { locale: Locale }) {
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">{c.restaurantReserveBody}</p>
             </div>
 
-            <div className="flex flex-col justify-between gap-4 border border-white/8 bg-[#0f0f10] p-8">
+            <div className="flex flex-col justify-between gap-4 rounded-[30px] border border-white/8 bg-[#0f0f10] p-8">
               <div>
                 <div className="text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{c.restaurantDirectActions}</div>
                 <p className="mt-4 text-sm leading-7 text-white/62">{c.venueAddress}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="restaurant_contact_telegram" href={contactLinks.telegram} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="restaurant_contact_telegram" href={contactLinks.telegram} target="_blank">
                   Telegram
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="restaurant_contact_call" href={contactLinks.call}>
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_contact_call" href={contactLinks.call}>
                   +7 495 921-22-21
                 </TrackedLink>
               </div>

@@ -255,15 +255,15 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     cyberclubMoodEyebrow: "Атмосфера клуба",
     cyberclubMoodTitle: "Меньше аркады. Больше московской ночи.",
     cyberclubMoodBody:
-      "Avulus должен ощущаться премиальным, камерным и статусным еще до того, как гость начнет сравнивать спецификации.",
+      "Приватные комнаты, сильные конфиги и спокойная тёмная подача собирают клубный опыт без ощущения шумного общего зала.",
     cyberclubZonesEyebrow: "Зоны",
     cyberclubZonesTitle: "Форматы со статусом",
     cyberclubZonesBody:
-      "Каждая зона должна ощущаться как отдельный уровень клуба, а не как еще один набор столов.",
+      "У каждого формата свой сценарий: для соло-игры, пары, маленькой компании или полноценной командной сессии.",
     cyberclubBookingEyebrow: "Бронь",
     cyberclubBookingTitle: "Забронируй комнату до того, как кто-то займет твой вечер",
     cyberclubBookingBody:
-      "Сценарий для клуба должен закрываться без лишних переходов: открыть бронь, выбрать формат и приехать.",
+      "Выбирай формат, открывай бронь и приезжай без длинных форм, лишних шагов и лишней навигации.",
     cyberclubDirectActions: "Быстрые действия",
     cyberclubOpenBooking: "Открыть бронь",
     restaurantMetaTitle: "Ресторан | Avulus Cyber Space",
@@ -275,7 +275,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     restaurantEyebrow: "Ресторан",
     restaurantTitle: "Ресторан, который живет отдельно от клуба",
     restaurantBody:
-      "Ресторан Avulus должен ощущаться как самостоятельная ночная точка притяжения со своим ритмом, меню и поводом приехать.",
+      "Сюда можно приехать отдельно ради ужина, коктейлей и позднего вечера в центре Москвы, даже если ты не бронируешь клуб.",
     restaurantNotes: [
       "Можно приехать только ради ресторана, без брони клуба.",
       "Темный интерьер и ночная подача работают как самостоятельная точка притяжения.",
@@ -289,7 +289,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     restaurantMoodEyebrow: "Настроение ресторана",
     restaurantMoodTitle: "Не дополнение. Полноценная точка назначения.",
     restaurantMoodBody:
-      "Подача должна ощущаться как самостоятельный ресторанный бренд внутри Avulus, а не как приложение к клубу.",
+      "Тёмный интерьер, полноценная кухня и ночной ритм делают ресторан самостоятельной точкой притяжения внутри Avulus.",
     restaurantMenuEyebrow: "Меню",
     restaurantMenuTitle: "На весь день и на всю ночь",
     restaurantMenuBody:
@@ -297,7 +297,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     restaurantReserveEyebrow: "Резерв",
     restaurantReserveTitle: "Забронируй стол, пока настроение еще живо",
     restaurantReserveBody:
-      "Для ресторана сценарий должен быть еще проще, чем для клуба: написать, подтвердить стол и приехать.",
+      "Напиши нам, подтверди стол и приезжай. Резерв должен занимать меньше минуты.",
     restaurantDirectActions: "Быстрые действия",
     roomsMetaTitle: "Комнаты | Avulus Cyber Space",
     roomsMetaDescription:
@@ -313,7 +313,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     roomsPanelBody: "Для duo и bootcamp важно сразу показывать и клуб, и ресторан как единый сценарий вечера.",
     roomsPanelCta: "Написать по командам",
     roomsHowTitle: "Как это работает",
-    roomsHowBody: "CTA должен быть быстрым: мессенджер, мессенджер, звонок. Без длинных форм и лишних экранов.",
+    roomsHowBody: "Связаться можно сразу: бронь, Telegram, VK или звонок. Без длинных форм и лишних экранов.",
     roomsContactEyebrow: "Варианты связи",
     roomsContactTitle: "Закрывай решение, пока намерение еще высоко",
     roomsContactBody: "Быстрый слой контактов без трения: бронь, Telegram, VK и звонок.",
@@ -405,15 +405,15 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     cyberclubMoodEyebrow: "Club mood",
     cyberclubMoodTitle: "Less arcade. More capital city night.",
     cyberclubMoodBody:
-      "Avulus should feel premium, private and atmospheric before guests even start comparing technical specs.",
+      "Private rooms, strong setups and a darker atmosphere create a calmer premium club experience from the first glance.",
     cyberclubZonesEyebrow: "Zones",
     cyberclubZonesTitle: "Formats with status",
     cyberclubZonesBody:
-      "Each zone should feel like its own tier inside the club, not just another row of gaming desks.",
+      "Each format solves a different visit: solo play, a pair, a smaller group or a full team session.",
     cyberclubBookingEyebrow: "Booking",
     cyberclubBookingTitle: "Reserve the room before someone else takes your night",
     cyberclubBookingBody:
-      "The booking flow should close fast: open the booking page, choose the format and arrive.",
+      "Choose the format, open the booking page and arrive without heavy forms or extra steps.",
     cyberclubDirectActions: "Direct actions",
     cyberclubOpenBooking: "Open booking",
     restaurantMetaTitle: "Restaurant | Avulus Cyber Space",
@@ -425,7 +425,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     restaurantEyebrow: "Restaurant",
     restaurantTitle: "A restaurant that lives beyond the club",
     restaurantBody:
-      "Avulus restaurant should feel like an independent late-night destination with its own pace, menu and reason to arrive.",
+      "Guests can come here just for dinner, cocktails and a late-night atmosphere in central Moscow, even without booking the club.",
     restaurantNotes: [
       "Guests can come just for the restaurant, without booking the club.",
       "The dark interior and nightlife mood work as a destination of their own.",
@@ -439,7 +439,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     restaurantMoodEyebrow: "Restaurant mood",
     restaurantMoodTitle: "Not an add-on. A destination.",
     restaurantMoodBody:
-      "The restaurant has to feel like a complete brand within Avulus, not a side service attached to the club.",
+      "A darker interior, full kitchen and late-night rhythm make the restaurant a destination in its own right inside Avulus.",
     restaurantMenuEyebrow: "Menu",
     restaurantMenuTitle: "All-day and all-night",
     restaurantMenuBody:
@@ -447,7 +447,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     restaurantReserveEyebrow: "Reserve",
     restaurantReserveTitle: "Reserve the table while the mood is still there",
     restaurantReserveBody:
-      "For the restaurant, the path should be even simpler than for the club: message, confirm the table and arrive.",
+      "Message us, confirm the table and arrive. Reserving should take less than a minute.",
     restaurantDirectActions: "Direct actions",
     roomsMetaTitle: "Rooms | Avulus Cyber Space",
     roomsMetaDescription:
@@ -463,7 +463,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     roomsPanelBody: "For duo and bootcamp visits, the club and restaurant should read as one seamless evening.",
     roomsPanelCta: "Ask about team bookings",
     roomsHowTitle: "How it works",
-    roomsHowBody: "The CTA layer should feel immediate: messenger, messenger, phone. No heavy forms and no extra screens.",
+    roomsHowBody: "Reach out immediately through booking, Telegram, VK or a direct call. No heavy forms and no extra screens.",
     roomsContactEyebrow: "Contact options",
     roomsContactTitle: "Close the loop while intent is still high",
     roomsContactBody: "Keep the contact layer frictionless: booking, Telegram, VK and a direct call.",
@@ -562,19 +562,19 @@ export function getRoomCards(locale: Locale): RoomCard[] {
   return locale === "ru"
     ? [
         { key: "solo-core", format: "solo", title: "Stream Room", subtitle: "Solo-комната под личный режим", description: "Для стрима, спокойной игры и длинной сессии без общего шума и лишних отвлекающих факторов.", price: "от 290 ₽ / час", duration: "1–4 часа", capacity: "1 игрок", image: "/images/cyberclub-card.jpg", features: ["Приватная посадка", "Подходит для контента", "Быстрый вход в игровой режим"] },
-        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Ночной формат на длинную дистанцию", description: "Для гостей, которые приезжают в клуб не на час, а на полноценный вечер или ночной блок.", price: "от 980 ₽ / блок", duration: "4 часа", capacity: "1 игрок", image: "/images/dish-snack.jpg", features: ["Комфорт на длинной дистанции", "Легко сочетать с рестораном", "Подходит для late-night flow"] },
+        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Ночной формат на длинную дистанцию", description: "Для гостей, которые приезжают в клуб не на час, а на полноценный вечер или ночной блок.", price: "от 980 ₽ / блок", duration: "4 часа", capacity: "1 игрок", image: "/images/club-room-green.webp", features: ["Комфорт на длинной дистанции", "Легко сочетать с рестораном", "Подходит для late-night flow"] },
         { key: "duo-sync", format: "duo", title: "Privat", subtitle: "Комната для двоих", description: "Подходит для кооператива, пары, друзей и всех, кто хочет клуб без ощущения общего зала.", price: "от 490 ₽ / час", duration: "1–4 часа", capacity: "2 игрока", image: "/images/cyberclub-vip.jpg", features: ["TV и диваны", "Приватность", "Удобно для совместного вечера"] },
-        { key: "duo-premium", format: "duo", title: "Privat+ / VIP", subtitle: "Усиленный приватный опыт", description: "Для тех, кто хочет больше комфорта, атмосферы и камерности внутри клуба.", price: "от 890 ₽ / час", duration: "4 часа", capacity: "2–4 игрока", image: "/images/restaurant-card.jpg", features: ["Премиальный формат", "Для длинных сессий", "Сценарий клуб + ресторан"] },
+        { key: "duo-premium", format: "duo", title: "Privat+ / VIP", subtitle: "Усиленный приватный опыт", description: "Для тех, кто хочет больше комфорта, атмосферы и камерности внутри клуба.", price: "от 890 ₽ / час", duration: "4 часа", capacity: "2–4 игрока", image: "/images/club-room-red.webp", features: ["Премиальный формат", "Для длинных сессий", "Сценарий клуб + ресторан"] },
         { key: "bootcamp-squad", format: "bootcamp", title: "Bootcamp", subtitle: "Командная игровая зона", description: "Формат под скримы, тренировку, командные вечера и большие игровые блоки в приватной среде.", price: "от 850 ₽ / час", duration: "2–6 часов", capacity: "5 игроков", image: "/images/cyberclub-team.jpg", features: ["Командная посадка", "Сильные конфиги", "Оптимален для squads"] },
-        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "Самый статусный клубный формат", description: "Для гостей, которым нужен private premium experience с максимальным комфортом и контролем над пространством.", price: "по запросу", duration: "Индивидуально", capacity: "Малая группа", image: "/images/restaurant-room.jpg", features: ["Максимальный комфорт", "Премиальная подача", "Лучший room-based опыт"] }
+        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "Самый статусный клубный формат", description: "Для гостей, которым нужен private premium experience с максимальным комфортом и контролем над пространством.", price: "по запросу", duration: "Индивидуально", capacity: "Малая группа", image: "/images/cyberclub-vip.jpg", features: ["Максимальный комфорт", "Премиальная подача", "Лучший room-based опыт"] }
       ]
     : [
         { key: "solo-core", format: "solo", title: "Stream Room", subtitle: "A solo room for a private session", description: "Designed for streaming, focused gaming and longer stays without shared-hall noise.", price: "from 290 RUB / hour", duration: "1–4 hours", capacity: "1 player", image: "/images/cyberclub-card.jpg", features: ["Private seating", "Content-friendly setup", "Fast entry into game mode"] },
-        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Late-night format for longer stays", description: "For guests who come in for a full evening or a night block, not just a quick session.", price: "from 980 RUB / block", duration: "4 hours", capacity: "1 player", image: "/images/dish-snack.jpg", features: ["Comfort over longer stays", "Easy to combine with the restaurant", "Built for a late-night flow"] },
+        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Late-night format for longer stays", description: "For guests who come in for a full evening or a night block, not just a quick session.", price: "from 980 RUB / block", duration: "4 hours", capacity: "1 player", image: "/images/club-room-green.webp", features: ["Comfort over longer stays", "Easy to combine with the restaurant", "Built for a late-night flow"] },
         { key: "duo-sync", format: "duo", title: "Privat", subtitle: "A room for two", description: "A strong fit for co-op play, couples, friends and anyone who wants the club without the shared-hall atmosphere.", price: "from 490 RUB / hour", duration: "1–4 hours", capacity: "2 players", image: "/images/cyberclub-vip.jpg", features: ["TV and lounge seating", "Privacy", "Built for a shared evening"] },
-        { key: "duo-premium", format: "duo", title: "Privat+ / VIP", subtitle: "An elevated private experience", description: "For guests who want more comfort, atmosphere and intimacy inside the club.", price: "from 890 RUB / hour", duration: "4 hours", capacity: "2–4 players", image: "/images/restaurant-card.jpg", features: ["Premium format", "Built for longer sessions", "Club + restaurant flow"] },
+        { key: "duo-premium", format: "duo", title: "Privat+ / VIP", subtitle: "An elevated private experience", description: "For guests who want more comfort, atmosphere and intimacy inside the club.", price: "from 890 RUB / hour", duration: "4 hours", capacity: "2–4 players", image: "/images/club-room-red.webp", features: ["Premium format", "Built for longer sessions", "Club + restaurant flow"] },
         { key: "bootcamp-squad", format: "bootcamp", title: "Bootcamp", subtitle: "A team gaming zone", description: "Built for scrims, training, team sessions and longer competitive blocks inside a private environment.", price: "from 850 RUB / hour", duration: "2–6 hours", capacity: "5 players", image: "/images/cyberclub-team.jpg", features: ["Team seating", "High-end setups", "Ideal for squads"] },
-        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "The most elevated club format", description: "For guests who want a premium private experience with maximum comfort and control over the space.", price: "on request", duration: "Custom", capacity: "Small group", image: "/images/restaurant-room.jpg", features: ["Maximum comfort", "Premium presentation", "Top-tier room-based experience"] }
+        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "The most elevated club format", description: "For guests who want a premium private experience with maximum comfort and control over the space.", price: "on request", duration: "Custom", capacity: "Small group", image: "/images/cyberclub-vip.jpg", features: ["Maximum comfort", "Premium presentation", "Top-tier room-based experience"] }
       ];
 }
 

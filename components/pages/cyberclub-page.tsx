@@ -18,7 +18,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
-          <div className="pointer-events-none absolute left-1/2 top-0 h-[120%] w-screen -translate-x-1/2 bg-[radial-gradient(circle_at_72%_20%,rgba(111,52,163,0.28),rgba(111,52,163,0.14)_24%,rgba(111,52,163,0.05)_44%,rgba(9,9,9,0)_70%)]" />
+          <div className="pointer-events-none absolute left-1/2 top-0 h-[120%] w-screen -translate-x-1/2 bg-[radial-gradient(circle_at_72%_20%,rgba(159,35,57,0.22),rgba(159,35,57,0.12)_24%,rgba(159,35,57,0.04)_44%,rgba(9,9,9,0)_70%)]" />
           <div className="brand-orb left-[-10rem] top-4 h-64 w-64 md:h-[28rem] md:w-[28rem]" />
 
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
@@ -30,17 +30,17 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
               <div className="space-y-3">
                 {c.cyberclubNotes.map((note) => (
                   <div key={note} className="flex items-start gap-3 text-sm leading-7 text-white/74">
-                    <span className="mt-3 h-1.5 w-1.5 rounded-full bg-[#ba6fff]" />
+                    <span className="mt-3 h-1.5 w-1.5 rounded-full bg-[var(--accent-red)]" />
                     <span>{note}</span>
                   </div>
                 ))}
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="cyberclub_booking" href={contactLinks.booking} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="cyberclub_booking" href={contactLinks.booking} target="_blank">
                   {c.cyberclubPrimary}
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="cyberclub_hardware" href={contactLinks.hardware} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="cyberclub_hardware" href={contactLinks.hardware} target="_blank">
                   {c.cyberclubSecondary}
                 </TrackedLink>
               </div>
@@ -66,7 +66,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.55),rgba(8,8,8,0.94))]" />
                   <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-3xl uppercase text-white">{c.cyberclubVipRooms}</div>
                 </div>
-                <div className="brand-card p-6">
+                <div className="brand-card rounded-[28px] p-6">
                   <div className="text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{c.cyberclubMoodEyebrow}</div>
                   <div className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white">{c.cyberclubMoodTitle}</div>
                   <p className="mt-4 text-sm leading-7 text-white/62">{c.cyberclubMoodBody}</p>
@@ -87,7 +87,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
 
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {clubZones.map((zone, index) => (
-              <article key={zone.name} className="group overflow-hidden border border-white/8 bg-[#0f0f10]">
+              <article key={zone.name} className="group overflow-hidden rounded-[28px] border border-white/8 bg-[#0f0f10]">
                 <div className="relative aspect-[5/4] overflow-hidden">
                   <Image
                     alt={zone.name}
@@ -119,16 +119,16 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">{c.cyberclubBookingBody}</p>
             </div>
 
-            <div className="flex flex-col justify-between gap-4 border border-white/8 bg-[#0f0f10] p-8">
+            <div className="flex flex-col justify-between gap-4 rounded-[30px] border border-white/8 bg-[#0f0f10] p-8">
               <div>
                 <div className="text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{c.cyberclubDirectActions}</div>
                 <p className="mt-4 text-sm leading-7 text-white/62">{c.venueAddress}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="cyberclub_contact_booking" href={contactLinks.booking} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="cyberclub_contact_booking" href={contactLinks.booking} target="_blank">
                   {c.cyberclubOpenBooking}
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="cyberclub_contact_call" href={contactLinks.call}>
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="cyberclub_contact_call" href={contactLinks.call}>
                   +7 495 921-22-21
                 </TrackedLink>
               </div>
