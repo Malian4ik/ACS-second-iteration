@@ -8,7 +8,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import { trackGoal } from "@/lib/analytics";
 import { contactLinks, getRoomCards, getSharedContent, type Locale } from "@/lib/content";
 
-type FilterKey = "all" | "solo" | "duo" | "bootcamp";
+type FilterKey = "all" | "solo" | "privat" | "vip" | "bootcamp";
 
 export function RoomsExplorer({ initialFilter, locale }: { initialFilter: FilterKey; locale: Locale }) {
   const c = getSharedContent(locale);
@@ -23,7 +23,8 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
   const filters: { key: FilterKey; label: string }[] = [
     { key: "all", label: c.roomsFilterAll },
     { key: "solo", label: c.roomsFilterSolo },
-    { key: "duo", label: c.roomsFilterDuo },
+    { key: "privat", label: c.roomsFilterPrivat },
+    { key: "vip", label: c.roomsFilterVip },
     { key: "bootcamp", label: c.roomsFilterBootcamp }
   ];
 
@@ -62,6 +63,7 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
           </button>
         ))}
       </div>
+      <p className="text-sm text-slate-300">{c.roomsBootcampNote}</p>
 
       <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
         {visibleRooms.map((room, index) => (
@@ -94,7 +96,7 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
               <div className="grid grid-cols-3 gap-3 rounded-[24px] border border-white/10 bg-slate-950/55 p-4 text-sm text-slate-200">
                 <div>
                   <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">{c.roomsPriceLabel}</div>
-                  <div className="mt-2 font-semibold">{room.price}</div>
+                  <div className="mt-2 font-semibold">{room.price?.trim() ? room.price : c.roomsPricePending}</div>
                 </div>
                 <div>
                   <div className="text-[11px] uppercase tracking-[0.24em] text-slate-500">{c.roomsStayLabel}</div>
@@ -119,7 +121,7 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
                 <TrackedLink
                   className="inline-flex items-center justify-center rounded-full bg-fuchsia-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
                   goal={`book_room_${room.format}`}
-                  href={contactLinks.booking}
+                  href={contactLinks.telegram}
                   label={room.title}
                   target="_blank"
                 >
@@ -127,12 +129,11 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
                 </TrackedLink>
                 <TrackedLink
                   className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300 hover:text-cyan-200"
-                  goal={`book_room_vk_${room.format}`}
-                  href={contactLinks.vk}
+                  goal={`book_room_call_${room.format}`}
+                  href={contactLinks.call}
                   label={room.title}
-                  target="_blank"
                 >
-                  {c.roomsAskVk}
+                  {c.roomsStickyCall}
                 </TrackedLink>
               </div>
             </div>
@@ -147,15 +148,25 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
             <h3 className="mt-3 text-3xl font-semibold text-white md:text-4xl">{c.roomsAddonTitle}</h3>
             <p className="mt-4 text-sm leading-7 text-slate-300">{c.roomsAddonBody}</p>
           </div>
-          <TrackedLink
-            className="inline-flex items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
-            goal="view_menu"
-            href={contactLinks.menu}
-            label="menu"
-            target="_blank"
-          >
-            {c.roomsAddonCta}
-          </TrackedLink>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <TrackedLink
+              className="inline-flex items-center justify-center rounded-full bg-fuchsia-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-fuchsia-300"
+              goal="rooms_addon_telegram"
+              href={contactLinks.telegram}
+              target="_blank"
+            >
+              {c.roomsStickyTelegram}
+            </TrackedLink>
+            <TrackedLink
+              className="inline-flex items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 px-6 py-3 text-sm font-semibold text-cyan-100 transition hover:bg-cyan-300/20"
+              goal="view_menu"
+              href={contactLinks.menu}
+              label="menu"
+              target="_blank"
+            >
+              {c.roomsAddonCta}
+            </TrackedLink>
+          </div>
         </div>
       </div>
     </div>

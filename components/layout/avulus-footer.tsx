@@ -14,14 +14,8 @@ export function AvulusFooter({ locale }: { locale: Locale }) {
           <p className="mt-1 text-sm text-white/45">{c.venueSchedule}</p>
         </div>
         <div className="flex flex-wrap items-center gap-4 text-sm text-white/72">
-          <TrackedLink className="transition hover:text-white" goal="footer_booking" href={contactLinks.booking} target="_blank">
-            {c.footerBooking}
-          </TrackedLink>
           <TrackedLink className="transition hover:text-white" goal="footer_telegram" href={contactLinks.telegram} target="_blank">
             Telegram
-          </TrackedLink>
-          <TrackedLink className="transition hover:text-white" goal="footer_vk" href={contactLinks.vk} target="_blank">
-            VK
           </TrackedLink>
           <TrackedLink className="transition hover:text-white" goal="footer_call" href={contactLinks.call}>
             {c.footerCall}

@@ -23,14 +23,14 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
   const contactOptions = getContactOptions(locale);
   const requestedFilter = searchParams?.format;
   const initialFilter =
-    requestedFilter === "solo" || requestedFilter === "duo" || requestedFilter === "bootcamp"
+    requestedFilter === "solo" || requestedFilter === "privat" || requestedFilter === "vip" || requestedFilter === "bootcamp"
       ? requestedFilter
       : "all";
 
   return (
     <div className="pb-24 md:pb-0">
       <LocaleHtmlController locale={locale} />
-      <AvulusNav ctaHref={contactLinks.booking} ctaLabel={c.navBook} items={getRoomsNav(locale)} locale={locale} />
+      <AvulusNav ctaHref={contactLinks.telegram} ctaLabel={c.navBook} items={getRoomsNav(locale)} locale={locale} />
 
       <main className="section-shell space-y-16 pt-32 md:pt-36">
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
@@ -76,7 +76,7 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
               <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-white">{c.roomsContactTitle}</h2>
               <p className="mt-5 max-w-xl text-sm leading-7 text-slate-300">{c.roomsContactBody}</p>
             </div>
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2">
               {contactOptions.map((option) => (
                 <TrackedLink
                   key={option.label}
@@ -107,15 +107,7 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
             {c.roomsStickyTelegram}
           </TrackedLink>
           <TrackedLink
-            className="flex-1 rounded-full border border-white/15 px-4 py-3 text-center text-sm font-semibold text-white"
-            goal="rooms_sticky_vk"
-            href={contactLinks.vk}
-            target="_blank"
-          >
-            {c.roomsStickyVk}
-          </TrackedLink>
-          <TrackedLink
-            className="rounded-full border border-cyan-300/30 px-4 py-3 text-center text-sm font-semibold text-cyan-100"
+            className="flex-1 rounded-full border border-cyan-300/30 px-4 py-3 text-center text-sm font-semibold text-cyan-100"
             goal="rooms_sticky_call"
             href={contactLinks.call}
           >

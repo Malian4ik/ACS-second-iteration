@@ -16,7 +16,7 @@ export function HomePage({ locale }: { locale: Locale }) {
       title: "Cyberclub",
       body: c.homeCardClubBody,
       image: "/images/cyberclub-team.jpg",
-      href: contactLinks.booking,
+      href: contactLinks.telegram,
       label: c.homeCardClubLabel,
       pageHref: withLocale(locale, "/cyberclub"),
       pageLabel: c.homeCardClubPage
@@ -43,7 +43,7 @@ export function HomePage({ locale }: { locale: Locale }) {
   return (
     <div className="pb-28 md:pb-0">
       <LocaleHtmlController locale={locale} />
-      <AvulusNav ctaHref={contactLinks.booking} ctaLabel={c.navBook} items={getHomeNav(locale)} locale={locale} />
+      <AvulusNav ctaHref={contactLinks.telegram} ctaLabel={c.navBook} items={getHomeNav(locale)} locale={locale} />
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
@@ -55,17 +55,20 @@ export function HomePage({ locale }: { locale: Locale }) {
               <Image alt="Avulus logo" className="object-contain" fill priority sizes="144px" src="/images/avulus-logo-rgb.png" />
             </div>
 
-            <h1 className="mt-6 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.92] text-white md:text-7xl">
+            <p className="mt-6 inline-flex border border-[#ba6fff]/55 bg-[#ba6fff]/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-[#f0dcff] md:text-sm">
+              {c.homeOpenBadge}
+            </p>
+            <h1 className="mt-5 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.92] text-white md:text-7xl">
               Avulus <span className="text-[#ba6fff]">Cyber Space</span>
             </h1>
             <p className="mt-4 text-xs uppercase tracking-[0.34em] text-[#d7d1c4] md:text-sm">{c.homeHeroKicker}</p>
-            <p className="mt-4 text-sm text-white/56">{c.venueSchedule}</p>
+            <p className="mt-3 text-sm font-medium text-white/78">{c.homeOpenSupport}</p>
 
             <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
               <TrackedLink
                 className="inline-flex flex-1 items-center justify-center rounded-none bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-[#c989ff]"
                 goal="hero_book_club"
-                href={contactLinks.booking}
+                href={contactLinks.telegram}
                 target="_blank"
               >
                 {c.homeBookClub}
@@ -79,6 +82,26 @@ export function HomePage({ locale }: { locale: Locale }) {
                 {c.homeReserveTable}
               </TrackedLink>
             </div>
+          </div>
+        </section>
+
+        <section className="section-shell py-12 md:py-16">
+          <div className="mb-6 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.homeOffersTitle}</div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {c.homeOffersCards.map((offer, index) => (
+              <article key={offer.title} className="brand-card rounded-none p-6">
+                <h2 className="font-[family:var(--font-oswald)] text-3xl uppercase leading-none text-white">{offer.title}</h2>
+                <p className="mt-4 text-sm leading-7 text-white/62">{offer.body}</p>
+                <TrackedLink
+                  className="mt-5 inline-flex w-fit items-center justify-center border border-[#ba6fff]/45 bg-black/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#f0dcff] transition hover:border-[#ba6fff] hover:bg-[#ba6fff]/10"
+                  goal={`home_offer_${index + 1}`}
+                  href={contactLinks.telegram}
+                  target="_blank"
+                >
+                  {offer.cta}
+                </TrackedLink>
+              </article>
+            ))}
           </div>
         </section>
 
@@ -135,17 +158,26 @@ export function HomePage({ locale }: { locale: Locale }) {
                 <p className="mt-3 text-sm text-white/62">{c.contactsSubtitle}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="contact_call" href={contactLinks.call}>
-                  +7 495 921-22-21
-                </TrackedLink>
                 <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#e0c6ff]" goal="contact_tg" href={contactLinks.telegram} target="_blank">
                   Telegram
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#e0c6ff]" goal="contact_vk" href={contactLinks.vk} target="_blank">
-                  VK
+                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="contact_call" href={contactLinks.call}>
+                  {c.contactsPhone}
                 </TrackedLink>
               </div>
             </div>
+            <div className="mt-6 space-y-2 border-t border-white/10 pt-6 text-sm text-white/62">
+              <p>
+                <span className="text-white/42">{locale === "ru" ? "Адрес: " : "Address: "}</span>
+                {c.venueAddress}
+              </p>
+              <p>
+                <span className="text-white/42">{locale === "ru" ? "Телефон: " : "Phone: "}</span>
+                {c.contactsPhone}
+              </p>
+            </div>
+            <p className="mt-4 text-sm text-white/62">{c.contactsOpen247}</p>
+            <p className="mt-2 text-sm text-white/62">{c.contactsParking}</p>
           </div>
         </section>
 
@@ -167,11 +199,11 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-4 py-3 backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-xl gap-2">
-          <TrackedLink className="flex-1 bg-[#ba6fff] px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-black" goal="sticky_booking" href={contactLinks.booking} target="_blank">
-            {c.stickyClub}
+          <TrackedLink className="flex-1 bg-[#ba6fff] px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-black" goal="sticky_booking" href={contactLinks.telegram} target="_blank">
+            Telegram
           </TrackedLink>
-          <TrackedLink className="flex-1 border border-white/18 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white" goal="sticky_restaurant" href={contactLinks.telegram} target="_blank">
-            {c.stickyRestaurant}
+          <TrackedLink className="flex-1 border border-white/18 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white" goal="sticky_restaurant" href={contactLinks.call}>
+            {locale === "ru" ? "Позвонить" : "Call"}
           </TrackedLink>
         </div>
       </div>

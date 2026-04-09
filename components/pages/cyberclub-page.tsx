@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { PricingSection } from "@/components/club/pricing-section";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
 import { AvulusNav } from "@/components/layout/avulus-nav";
@@ -14,7 +13,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
   return (
     <div className="pb-28 md:pb-0" id="top">
       <LocaleHtmlController locale={locale} />
-      <AvulusNav ctaHref={contactLinks.booking} ctaLabel={c.navBook} items={getCyberclubNav(locale)} locale={locale} />
+      <AvulusNav ctaHref={contactLinks.telegram} ctaLabel={c.navBook} items={getCyberclubNav(locale)} locale={locale} />
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
@@ -25,6 +24,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
             <div className="space-y-6">
               <div className="eyebrow">{c.cyberclubEyebrow}</div>
               <h1 className="max-w-xl font-[family:var(--font-oswald)] text-6xl uppercase leading-[0.88] text-white md:text-8xl">{c.cyberclubTitle}</h1>
+              <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#ba6fff]">{c.homeOpenBadge}</p>
               <p className="max-w-lg text-sm leading-7 text-white/64">{c.cyberclubBody}</p>
 
               <div className="space-y-3">
@@ -37,10 +37,10 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="cyberclub_booking" href={contactLinks.booking} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="cyberclub_booking" href={contactLinks.telegram} target="_blank">
                   {c.cyberclubPrimary}
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="cyberclub_hardware" href={contactLinks.hardware} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="cyberclub_call" href={contactLinks.call}>
                   {c.cyberclubSecondary}
                 </TrackedLink>
               </div>
@@ -85,7 +85,21 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
             <p className="max-w-md text-sm leading-7 text-white/58">{c.cyberclubZonesBody}</p>
           </div>
 
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-10 brand-card rounded-none p-6 md:p-8">
+            <div className="eyebrow">{c.cyberclubSpecsEyebrow}</div>
+            <h3 className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white md:text-5xl">{c.cyberclubSpecsTitle}</h3>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/62">{c.cyberclubSpecsBody}</p>
+            <ul className="mt-6 grid gap-3 text-sm leading-7 text-white/72 md:grid-cols-2">
+              {c.cyberclubSpecsItems.map((item) => (
+                <li key={item} className="flex gap-3">
+                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#ba6fff]" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {clubZones.map((zone, index) => (
               <article key={zone.name} className="group overflow-hidden border border-white/8 bg-[#0f0f10]">
                 <div className="relative aspect-[5/4] overflow-hidden">
@@ -95,7 +109,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
                     fill
                     priority={index < 2}
                     sizes="(max-width: 1280px) 50vw, 33vw"
-                    src={index % 3 === 0 ? "/images/club-room-red.webp" : index % 2 === 0 ? "/images/cyberclub-team.jpg" : "/images/club-room-green.webp"}
+                    src={zone.image}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/10 to-transparent" />
                 </div>
@@ -108,8 +122,6 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
             ))}
           </div>
         </section>
-
-        <PricingSection locale={locale} />
 
         <section className="section-shell pb-20" id="book">
           <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
@@ -125,11 +137,11 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
                 <p className="mt-4 text-sm leading-7 text-white/62">{c.venueAddress}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="cyberclub_contact_booking" href={contactLinks.booking} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="cyberclub_contact_booking" href={contactLinks.telegram} target="_blank">
                   {c.cyberclubOpenBooking}
                 </TrackedLink>
                 <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#ecd5ff]" goal="cyberclub_contact_call" href={contactLinks.call}>
-                  +7 495 921-22-21
+                  {c.contactsPhone}
                 </TrackedLink>
               </div>
             </div>
