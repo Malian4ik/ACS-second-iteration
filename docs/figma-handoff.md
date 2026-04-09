@@ -1,96 +1,103 @@
-# Avulus Cyber Space Figma Handoff
+# Avulus Cyber Space: handoff в Figma
 
-## Primary product goal
+## Цель
 
-Build a high-conversion landing funnel that explains the product in seconds and routes users toward contact through Telegram, WhatsApp, or Call.
+Собрать не абстрактный футуристический лендинг, а понятный сайт реального места:
 
-## Page map
+- киберклуб с приватными форматами;
+- ресторан как самостоятельный продукт;
+- быстрый переход к брони и контакту;
+- русская аудитория как основная.
 
-### Home `/`
+## Карта страниц
+
+### Главная `/`
 
 1. Hero
-   - Positioning: private gaming rooms plus restaurant in one destination
-   - CTA 1: Book a room
-   - CTA 2: For teams and bootcamps
-   - Micro-proof: Solo, Duo, Bootcamp formats
-2. Formats
-   - Three cards: Solo, Duo, Bootcamp
-   - Each card needs short copy, price from, and direct CTA
-3. Product split
-   - CyberClub column
-   - Restaurant column
-   - Clear visual separation and different accents
-4. How it works
-   - Three steps leading to contact
-5. Contact close
+   - Avulus как киберклуб и ресторан в центре Москвы
+   - CTA на бронь клуба
+   - CTA на контакт по ресторану
+   - краткое подтверждение: 24/7, реальные комнаты, реальные сценарии
+2. Комнаты и форматы
+   - Solo / Stream
+   - Privat / VIP
+   - Team / Bootcamp
+   - стартовые тарифы или понятный ценовой ориентир
+3. Клуб и ресторан
+   - два самостоятельных сценария
+   - реальные фото вместо абстрактных техно-вижуалов
+4. Контактный блок
+   - бронь
    - Telegram
-   - WhatsApp
-   - Call
-6. Sticky mobile CTA
-   - Compact messenger-first bottom bar
+   - VK
+   - звонок
+   - адрес и карта
+5. Мобильный sticky CTA
+   - короткая панель с основными действиями
 
-### Rooms `/rooms`
+### Комнаты `/rooms`
 
-1. Intro block
-   - Explain room selection and mention restaurant support
-2. Filter row
-   - All, Solo, Duo, Bootcamp
-3. Room cards grid
-   - Image
-   - Short description
-   - Price
-   - Duration
-   - Capacity
+1. Вводный экран
+   - как выбрать формат
+   - что учитывать: количество людей, приватность, длительность
+2. Фильтр
+   - все
+   - solo / stream
+   - privat / vip
+   - bootcamp / team
+3. Карточки форматов
+   - реальное фото
+   - для кого подходит
+   - цена
+   - длительность
+   - вместимость
    - CTA
-4. How it works
-   - Choose room
-   - Contact
-   - Arrive and stay
-5. View menu CTA
-6. Final contact block
+4. Блок про ресторан как поддержку длинного визита
+5. Контакты
 
-## UX changes from the old version
+## Обязательные UX-принципы
 
-- Replace showcase-first storytelling with funnel-first hierarchy.
-- Remove the split between separate CyberClub and Restaurant destination pages as primary navigation.
-- Explain formats in the first screen instead of making users infer them.
-- Convert all major actions into messenger or call outcomes.
-- Reduce decorative copy and system-noise labels that slow comprehension.
-- Make restaurant support a conversion amplifier, not a disconnected screen.
+- Не заставлять пользователя догадываться о форматах.
+- Показывать комнаты и тарифы как можно раньше.
+- Не уводить в декоративный "киберпанк" без продуктового смысла.
+- На первом экране сразу давать понятный путь к действию.
+- Не дробить контекст на красивые, но вырванные из системы куски.
 
-## Visual direction
+## Визуальное направление
 
-- Premium cyber atmosphere without falling into noisy sci-fi clutter.
-- Dark carbon base, fuchsia action color, cyan support color.
-- Large confident typography and cleaner spacing than the original Stitch-inspired screens.
-- Strong card surfaces, rounded geometry, soft glows, and deliberate gradients.
-- Buttons must remain visually dominant on both desktop and mobile.
+- Тёмная премиальная база, близкая к реальному интерьеру клуба.
+- Акценты: бордовый, глубокий зелёный, тёплый песочный.
+- Меньше техно-графики, больше реальной атмосферы места.
+- Крупная уверенная типографика, но без sci-fi интерфейсности.
+- Скругления мягкие, не "квадратный кибер".
+- Фото помещений и зон важнее декоративных градиентов.
 
-## Suggested Figma component inventory
+## Набор компонентов
 
-- Header with CTA button
-- Hero stat pills
-- Format card
-- Product split panel
-- Step card
-- Contact option card
-- Filter pill
-- Room card
-- Sticky mobile CTA bar
+- Header
+- Hero с CTA
+- Карточка формата
+- Карточка комнаты
+- Блок "клуб / ресторан"
+- Контактная карточка
+- Фильтр
+- Sticky CTA
 - Footer
 
-## Token guidance
+## Токены
 
-- Background: near-black with blue undertone
-- Primary CTA: electric fuchsia
-- Secondary accent: cool cyan
-- Surface: layered dark panels with 8-12% white stroke
-- Radius: 24-32 for cards, full pill for CTA and filters
-- Spacing rhythm: 24 / 32 / 48 / 80
+- Background: near-black / warm dark
+- Primary CTA: deep burgundy
+- Secondary accent: dark green
+- Highlight text: warm sand
+- Surface: layered dark panels with subtle warm strokes
+- Radius: 24-32
+- Spacing: 24 / 32 / 48 / 80
 
-## Notes for Figma build
+## Что обязательно показать в макете целиком
 
-- Keep the first viewport conversion-focused.
-- Do not create extra sections unless they help room booking.
-- On mobile, keep CTA controls reachable without hunting.
-- If the layout starts looking like a generic template, increase contrast, remove weak blocks, and simplify the path to action.
+- полный первый экран;
+- секцию с форматами;
+- секцию с комнатами/тарифами;
+- контактный контур;
+- мобильную версию первого экрана и sticky CTA.

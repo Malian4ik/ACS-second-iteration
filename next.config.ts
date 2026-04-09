@@ -2,7 +2,8 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
-  distDir: ".next-local",
+  // Keep local builds isolated, but let Vercel use the default `.next` output.
+  distDir: process.env.VERCEL ? undefined : ".next-local",
   outputFileTracingRoot: path.join(__dirname),
   images: {
     formats: ["image/avif", "image/webp"],
