@@ -66,7 +66,7 @@ export function HomePage({ locale }: { locale: Locale }) {
 
             <div className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
               <TrackedLink
-                className="inline-flex flex-1 items-center justify-center rounded-none bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-[#c989ff]"
+                className="inline-flex flex-1 items-center justify-center rounded-full bg-[#ba6fff] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-[#c989ff]"
                 goal="hero_book_club"
                 href={contactLinks.telegram}
                 target="_blank"
@@ -74,7 +74,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                 {c.homeBookClub}
               </TrackedLink>
               <TrackedLink
-                className="inline-flex flex-1 items-center justify-center border border-white/18 bg-transparent px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-[#ba6fff] hover:text-[#e0c6ff]"
+                className="inline-flex flex-1 items-center justify-center rounded-full border border-white/18 bg-transparent px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-[#ba6fff] hover:text-[#e0c6ff]"
                 goal="hero_book_restaurant"
                 href={contactLinks.telegram}
                 target="_blank"
@@ -89,11 +89,11 @@ export function HomePage({ locale }: { locale: Locale }) {
           <div className="mb-6 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.homeOffersTitle}</div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {c.homeOffersCards.map((offer, index) => (
-              <article key={offer.title} className="brand-card rounded-none p-6">
+              <article key={offer.title} className="brand-card rounded-[24px] p-6">
                 <h2 className="font-[family:var(--font-oswald)] text-3xl uppercase leading-none text-white">{offer.title}</h2>
                 <p className="mt-4 text-sm leading-7 text-white/62">{offer.body}</p>
                 <TrackedLink
-                  className="mt-5 inline-flex w-fit items-center justify-center border border-[#ba6fff]/45 bg-black/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#f0dcff] transition hover:border-[#ba6fff] hover:bg-[#ba6fff]/10"
+                  className="mt-5 inline-flex w-fit items-center justify-center rounded-full border border-[#ba6fff]/45 bg-black/30 px-5 py-3 text-xs font-semibold uppercase tracking-[0.16em] text-[#f0dcff] transition hover:border-[#ba6fff] hover:bg-[#ba6fff]/10"
                   goal={`home_offer_${index + 1}`}
                   href={contactLinks.telegram}
                   target="_blank"
@@ -108,7 +108,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <section className="section-shell py-16 md:py-20">
           <div className="grid gap-6 md:grid-cols-2">
             {splitCards.map((card) => (
-              <article key={card.id} id={card.id} className="group relative min-h-[520px] overflow-hidden bg-[#101010]">
+              <article key={card.id} id={card.id} className="group relative min-h-[520px] overflow-hidden rounded-[28px] bg-[#101010]">
                 <div className="absolute inset-0">
                   <Image alt={card.title} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 768px) 100vw, 50vw" src={card.image} />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,7,7,0.08),rgba(7,7,7,0.78)_45%,rgba(7,7,7,0.96))]" />
@@ -119,7 +119,7 @@ export function HomePage({ locale }: { locale: Locale }) {
                   <h2 className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white md:text-6xl">{card.title}</h2>
                   <p className="mt-4 max-w-sm text-sm leading-7 text-white/68">{card.body}</p>
                   <TrackedLink
-                    className="mt-6 inline-flex w-fit items-center justify-center border border-[#ba6fff]/45 bg-black/30 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#f0dcff] transition hover:border-[#ba6fff] hover:bg-[#ba6fff]/10"
+                    className="mt-6 inline-flex w-fit items-center justify-center rounded-full border border-[#ba6fff]/45 bg-black/30 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[#f0dcff] transition hover:border-[#ba6fff] hover:bg-[#ba6fff]/10"
                     goal={`split_${card.id}_cta`}
                     href={card.href}
                     target="_blank"
@@ -142,7 +142,7 @@ export function HomePage({ locale }: { locale: Locale }) {
         <section className="section-shell pb-10">
           <div className="grid gap-4 md:grid-cols-3">
             {featureCards.map((card) => (
-              <article key={card.title} className="brand-card rounded-none p-6">
+              <article key={card.title} className="brand-card rounded-[24px] p-6">
                 <div className="font-[family:var(--font-oswald)] text-3xl uppercase leading-none text-white">{card.title}</div>
                 <p className="mt-4 text-sm leading-7 text-white/62">{card.body}</p>
               </article>
@@ -151,17 +151,17 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         <section className="section-shell py-10" id="contact">
-          <div className="brand-card rounded-none p-6 md:p-8">
+          <div className="brand-card rounded-[28px] p-6 md:p-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.contactsTitle}</div>
                 <p className="mt-3 text-sm text-white/62">{c.contactsSubtitle}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#e0c6ff]" goal="contact_tg" href={contactLinks.telegram} target="_blank">
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[#ba6fff] hover:text-[#e0c6ff]" goal="contact_tg" href={contactLinks.telegram} target="_blank">
                   Telegram
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="contact_call" href={contactLinks.call}>
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[#ba6fff] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-black transition hover:bg-[#c989ff]" goal="contact_call" href={contactLinks.call}>
                   {c.contactsPhone}
                 </TrackedLink>
               </div>
@@ -182,9 +182,9 @@ export function HomePage({ locale }: { locale: Locale }) {
         </section>
 
         <section className="section-shell pb-20" id="map">
-          <div className="brand-card rounded-none p-6 md:p-8">
+          <div className="brand-card rounded-[28px] p-6 md:p-8">
             <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.mapTitle}</div>
-            <div className="relative mt-6 overflow-hidden border border-white/10">
+            <div className="relative mt-6 overflow-hidden rounded-[20px] border border-white/10">
               <iframe
                 className="h-[420px] w-full"
                 loading="lazy"
@@ -199,10 +199,10 @@ export function HomePage({ locale }: { locale: Locale }) {
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-4 py-3 backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-xl gap-2">
-          <TrackedLink className="flex-1 bg-[#ba6fff] px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-black" goal="sticky_booking" href={contactLinks.telegram} target="_blank">
+          <TrackedLink className="flex-1 rounded-full bg-[#ba6fff] px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-black" goal="sticky_booking" href={contactLinks.telegram} target="_blank">
             Telegram
           </TrackedLink>
-          <TrackedLink className="flex-1 border border-white/18 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white" goal="sticky_restaurant" href={contactLinks.call}>
+          <TrackedLink className="flex-1 rounded-full border border-white/18 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white" goal="sticky_restaurant" href={contactLinks.call}>
             {locale === "ru" ? "Позвонить" : "Call"}
           </TrackedLink>
         </div>
