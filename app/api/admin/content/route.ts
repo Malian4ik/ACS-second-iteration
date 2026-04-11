@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 import { isAdminAuthenticated } from "@/lib/admin-auth";
+import { findCmsEncodingIssues } from "@/lib/cms-encoding-guard";
 import { getCmsContent, getCmsStorageMode, saveCmsContent } from "@/lib/cms";
 import type { CmsContent } from "@/lib/cms-schema";
 
@@ -34,6 +35,17 @@ export async function PUT(request: Request) {
 
   if (!content) {
     return NextResponse.json({ error: "INVALID_PAYLOAD" }, { status: 400 });
+  }
+
+  const encodingIssues = findCmsEncodingIssues(content);
+  if (encodingIssues.length > 0) {
+    return NextResponse.json(
+      {
+        error: "SUSPECT_ENCODING",
+        issues: encodingIssues.slice(0, 10)
+      },
+      { status: 400 }
+    );
   }
 
   const saved = await saveCmsContent(content);

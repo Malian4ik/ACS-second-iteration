@@ -66,7 +66,28 @@ async function readBlobCmsFile() {
   }
 }
 
+async function backupCurrentBlobCmsFile() {
+  try {
+    const blob = await get(CMS_BLOB_PATH, { access: "public" });
+    if (!blob || blob.statusCode !== 200) {
+      return;
+    }
+
+    const text = await new Response(blob.stream).text();
+    const stamp = new Date().toISOString().replace(/[:.]/g, "-");
+    await put(`cms/backups/${stamp}.json`, text, {
+      access: "public",
+      addRandomSuffix: false,
+      allowOverwrite: false,
+      contentType: "application/json"
+    });
+  } catch {
+    // Best-effort backup: saving current content should not fail if backup upload fails.
+  }
+}
+
 async function writeBlobCmsFile(content: CmsContent) {
+  await backupCurrentBlobCmsFile();
   await put(CMS_BLOB_PATH, JSON.stringify(content, null, 2), {
     access: "public",
     addRandomSuffix: false,
