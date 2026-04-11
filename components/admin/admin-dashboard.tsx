@@ -122,6 +122,48 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
     }));
   }
 
+  function createPromoCard(): PromoCard {
+    const id =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID().slice(0, 8)
+        : `promo-${Date.now()}`;
+
+    return {
+      id,
+      title: "Новый оффер",
+      description: "Короткое описание предложения.",
+      ctaLabel: "Написать в Telegram",
+      ctaHref: "https://t.me/AVULUSbot",
+      imageUrl: "/images/club-room-red.webp"
+    };
+  }
+
+  function addPromoCard() {
+    setContent((current) => ({
+      ...current,
+      home: {
+        ...current.home,
+        promoCards: [...current.home.promoCards, createPromoCard()]
+      }
+    }));
+  }
+
+  function removePromoCard(id: string) {
+    setContent((current) => {
+      if (current.home.promoCards.length <= 1) {
+        return current;
+      }
+
+      return {
+        ...current,
+        home: {
+          ...current.home,
+          promoCards: current.home.promoCards.filter((card) => card.id !== id)
+        }
+      };
+    });
+  }
+
   async function handleSave() {
     setIsSaving(true);
     setStatus("");
@@ -214,10 +256,30 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
             <TextInput label="Подзаголовок секции" multiline onChange={(value) => setContent((current) => ({ ...current, home: { ...current.home, promoSubtitle: value } }))} value={content.home.promoSubtitle} />
           </div>
 
+          <div className="flex justify-end">
+            <button
+              className="inline-flex items-center justify-center rounded-full border border-[var(--accent-green)]/40 bg-[var(--accent-green)]/12 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-[var(--accent-sand)] transition hover:bg-[var(--accent-green)]/18"
+              onClick={addPromoCard}
+              type="button"
+            >
+              Добавить карточку
+            </button>
+          </div>
+
           <div className="grid gap-4 xl:grid-cols-3">
             {promoCards.map((card) => (
               <div key={card.id} className="space-y-4 rounded-[28px] border border-white/10 bg-black/20 p-5">
-                <div className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent-sand)]">{card.id}</div>
+                <div className="flex items-center justify-between gap-3">
+                  <div className="text-[11px] uppercase tracking-[0.28em] text-[var(--accent-sand)]">{card.id}</div>
+                  <button
+                    className="inline-flex items-center justify-center rounded-full border border-[#7b3030] px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-[#ff9a9a] transition hover:bg-[#7b3030]/15 disabled:cursor-not-allowed disabled:opacity-50"
+                    disabled={promoCards.length <= 1}
+                    onClick={() => removePromoCard(card.id)}
+                    type="button"
+                  >
+                    Удалить
+                  </button>
+                </div>
                 <TextInput label="Заголовок" onChange={(value) => updatePromoCard(card.id, { title: value })} value={card.title} />
                 <TextInput label="Описание" multiline onChange={(value) => updatePromoCard(card.id, { description: value })} value={card.description} />
                 <TextInput label="CTA label" onChange={(value) => updatePromoCard(card.id, { ctaLabel: value })} value={card.ctaLabel} />

@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { PromoCarousel } from "@/components/home/promo-carousel";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
 import { AvulusNav } from "@/components/layout/avulus-nav";
@@ -187,28 +188,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
             </p>
           </div>
 
-          <div className="grid gap-5 lg:grid-cols-3">
-            {promoCards.map((card) => (
-              <article key={card.id} className="group overflow-hidden rounded-[30px] border border-white/10 bg-[#0f1115]">
-                <div className="relative aspect-[5/4] overflow-hidden">
-                  <Image alt={card.title} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 1024px) 100vw, 33vw" src={card.imageUrl} />
-                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,7,7,0.05),rgba(7,7,7,0.4),rgba(7,7,7,0.94))]" />
-                </div>
-                <div className="space-y-5 p-6">
-                  <h3 className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white">{card.title}</h3>
-                  <p className="text-sm leading-7 text-white/66">{card.description}</p>
-                  <TrackedLink
-                    className="inline-flex w-fit items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.14)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.26)]"
-                    goal={`promo_${card.id}`}
-                    href={card.ctaHref}
-                    target="_blank"
-                  >
-                    {card.ctaLabel}
-                  </TrackedLink>
-                </div>
-              </article>
-            ))}
-          </div>
+          <PromoCarousel cards={promoCards} />
         </section>
 
         <section className="section-shell py-16 md:py-20">
