@@ -33,7 +33,12 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
   return (
     <div className="pb-24 md:pb-0">
       <LocaleHtmlController locale={locale} />
-      <AvulusNav ctaHref={contactLinks.booking} ctaLabel={c.navBook} items={getRoomsNav(locale)} locale={locale} />
+      <AvulusNav
+        ctaHref={contactLinks.telegram}
+        ctaLabel={locale === "ru" ? "Написать в Telegram" : "Write in Telegram"}
+        items={getRoomsNav(locale)}
+        locale={locale}
+      />
 
       <main className="section-shell space-y-16 pt-32 md:pt-36">
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
