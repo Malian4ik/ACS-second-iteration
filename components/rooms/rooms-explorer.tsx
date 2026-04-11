@@ -8,7 +8,19 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import { trackGoal } from "@/lib/analytics";
 import { contactLinks, getRoomCards, getSharedContent, type Locale } from "@/lib/content";
 
-type FilterKey = "all" | "solo" | "duo" | "bootcamp";
+type FilterKey = "all" | "solo" | "private" | "vip" | "bootcamp";
+
+function getRoomBucket(roomKey: string, fallbackFormat: "solo" | "duo" | "bootcamp"): Exclude<FilterKey, "all"> {
+  if (fallbackFormat === "solo") {
+    return "solo";
+  }
+
+  if (fallbackFormat === "bootcamp") {
+    return "bootcamp";
+  }
+
+  return roomKey === "duo-premium" ? "vip" : "private";
+}
 
 export function RoomsExplorer({ initialFilter, locale }: { initialFilter: FilterKey; locale: Locale }) {
   const c = getSharedContent(locale);
@@ -18,12 +30,15 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
   const [activeFilter, setActiveFilter] = useState<FilterKey>(initialFilter);
   const roomCards = getRoomCards(locale);
   const visibleRooms =
-    activeFilter === "all" ? roomCards : roomCards.filter((room) => room.format === activeFilter);
+    activeFilter === "all"
+      ? roomCards
+      : roomCards.filter((room) => getRoomBucket(room.key, room.format) === activeFilter);
 
   const filters: { key: FilterKey; label: string }[] = [
     { key: "all", label: c.roomsFilterAll },
     { key: "solo", label: c.roomsFilterSolo },
-    { key: "duo", label: c.roomsFilterDuo },
+    { key: "private", label: locale === "ru" ? "Privat" : "Privat" },
+    { key: "vip", label: "VIP" },
     { key: "bootcamp", label: c.roomsFilterBootcamp }
   ];
 
@@ -80,7 +95,7 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-transparent" />
               <div className="absolute left-5 top-5 rounded-full border border-white/15 bg-slate-950/70 px-3 py-1 text-xs uppercase tracking-[0.24em] text-[var(--accent-sand)]">
-                {room.format}
+                {getRoomBucket(room.key, room.format)}
               </div>
               <div className="absolute bottom-5 left-5 right-5">
                 <div className="text-xs uppercase tracking-[0.26em] text-slate-300">{room.subtitle}</div>
@@ -89,7 +104,15 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
             </div>
 
             <div className="space-y-6 p-6">
-              <p className="text-sm leading-7 text-slate-300">{room.description}</p>
+              <p className="text-sm leading-7 text-slate-300">
+                {locale === "ru" && room.key === "duo-sync"
+                  ? "Комфортная приватная комната для двоих или небольшой компании: мягкий диван, приватность, room service и более спокойный вечерний сценарий."
+                  : locale === "ru" && room.key === "duo-premium"
+                    ? "VIP-комната для более длинной и приватной сессии: мягкая посадка, room service, мини-бар и ощущение отдельного пространства без общего шума."
+                    : locale === "ru" && room.key === "bootcamp-squad"
+                      ? "Комнатный формат для 5+ человек: командная посадка, совместная игра и понятный сценарий для больших составов."
+                      : room.description}
+              </p>
 
               <div className="grid grid-cols-3 gap-3 rounded-[24px] border border-white/10 bg-slate-950/55 p-4 text-sm text-slate-200">
                 <div>
@@ -119,20 +142,19 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
                 <TrackedLink
                   className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-red-strong)]"
                   goal={`book_room_${room.format}`}
-                  href={contactLinks.booking}
+                  href={contactLinks.telegram}
                   label={room.title}
                   target="_blank"
                 >
-                  {c.roomsOpenBooking}
+                  {locale === "ru" ? "Написать в Telegram" : c.roomsOpenBooking}
                 </TrackedLink>
                 <TrackedLink
                   className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]"
-                  goal={`book_room_vk_${room.format}`}
-                  href={contactLinks.vk}
+                  goal={`book_room_call_${room.format}`}
+                  href={contactLinks.call}
                   label={room.title}
-                  target="_blank"
                 >
-                  {c.roomsAskVk}
+                  {locale === "ru" ? "Позвонить" : c.roomsStickyCall}
                 </TrackedLink>
               </div>
             </div>

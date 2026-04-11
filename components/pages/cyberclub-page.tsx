@@ -5,16 +5,23 @@ import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
 import { AvulusNav } from "@/components/layout/avulus-nav";
 import { TrackedLink } from "@/components/ui/tracked-link";
+import { getCmsContent } from "@/lib/cms";
 import { contactLinks, getClubZones, getCyberclubNav, getSharedContent, type Locale } from "@/lib/content";
 
-export function CyberclubPage({ locale }: { locale: Locale }) {
+export async function CyberclubPage({ locale }: { locale: Locale }) {
   const c = getSharedContent(locale);
   const clubZones = getClubZones(locale);
+  const cms = locale === "ru" ? await getCmsContent() : null;
 
   return (
     <div className="pb-28 md:pb-0" id="top">
       <LocaleHtmlController locale={locale} />
-      <AvulusNav ctaHref={contactLinks.booking} ctaLabel={c.navBook} items={getCyberclubNav(locale)} locale={locale} />
+      <AvulusNav
+        ctaHref={contactLinks.telegram}
+        ctaLabel={cms?.club.primaryCtaLabel ?? c.navBook}
+        items={getCyberclubNav(locale)}
+        locale={locale}
+      />
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
@@ -26,6 +33,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
               <div className="eyebrow">{c.cyberclubEyebrow}</div>
               <h1 className="max-w-xl font-[family:var(--font-oswald)] text-6xl uppercase leading-[0.88] text-white md:text-8xl">{c.cyberclubTitle}</h1>
               <p className="max-w-lg text-sm leading-7 text-white/64">{c.cyberclubBody}</p>
+              <p className="max-w-xl text-sm leading-7 text-[var(--accent-sand)]">{cms?.club.heroSupport}</p>
 
               <div className="space-y-3">
                 {c.cyberclubNotes.map((note) => (
@@ -37,11 +45,11 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="cyberclub_booking" href={contactLinks.booking} target="_blank">
-                  {c.cyberclubPrimary}
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="cyberclub_telegram" href={contactLinks.telegram} target="_blank">
+                  {cms?.club.primaryCtaLabel ?? "Telegram"}
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="cyberclub_hardware" href={contactLinks.hardware} target="_blank">
-                  {c.cyberclubSecondary}
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="cyberclub_call" href={contactLinks.call}>
+                  {cms?.club.secondaryCtaLabel ?? "+7 495 921-22-21"}
                 </TrackedLink>
               </div>
 
@@ -52,9 +60,9 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
 
             <div className="grid gap-4 md:grid-cols-[1.08fr_0.92fr]">
               <div className="relative min-h-[540px] overflow-hidden bg-[#101010]">
-                <Image alt="Avulus club green zone" className="object-cover" fill priority sizes="(max-width: 1024px) 100vw, 50vw" src="/images/club-room-green.webp" />
+                <Image alt="Avulus club green zone" className="object-cover" fill priority sizes="(max-width: 1024px) 100vw, 50vw" src={cms?.media.clubHeroImage ?? "/images/club-room-green.webp"} />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.46),rgba(8,8,8,0.96))]" />
-                <div className="absolute left-6 top-6 border border-white/10 bg-black/45 px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">Stream / Privat</div>
+                <div className="absolute left-6 top-6 border border-white/10 bg-black/45 px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">Open 24/7</div>
                 <div className="absolute bottom-6 left-6 max-w-sm">
                   <div className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white">{c.cyberclubPrivateByDesign}</div>
                 </div>
@@ -62,7 +70,7 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
 
               <div className="grid gap-4">
                 <div className="relative min-h-[260px] overflow-hidden bg-[#101010]">
-                  <Image alt="Avulus club red zone" className="object-cover" fill sizes="(max-width: 1024px) 100vw, 24vw" src="/images/club-room-red.webp" />
+                  <Image alt="Avulus club red zone" className="object-cover" fill sizes="(max-width: 1024px) 100vw, 24vw" src={cms?.media.clubSideImage ?? "/images/club-room-red.webp"} />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.55),rgba(8,8,8,0.94))]" />
                   <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-3xl uppercase text-white">{c.cyberclubVipRooms}</div>
                 </div>
@@ -125,8 +133,8 @@ export function CyberclubPage({ locale }: { locale: Locale }) {
                 <p className="mt-4 text-sm leading-7 text-white/62">{c.venueAddress}</p>
               </div>
               <div className="flex flex-wrap gap-3">
-                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="cyberclub_contact_booking" href={contactLinks.booking} target="_blank">
-                  {c.cyberclubOpenBooking}
+                <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="cyberclub_contact_telegram" href={contactLinks.telegram} target="_blank">
+                  {cms?.club.primaryCtaLabel ?? "Telegram"}
                 </TrackedLink>
                 <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="cyberclub_contact_call" href={contactLinks.call}>
                   +7 495 921-22-21

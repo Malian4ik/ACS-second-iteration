@@ -23,7 +23,10 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
   const contactOptions = getContactOptions(locale);
   const requestedFilter = searchParams?.format;
   const initialFilter =
-    requestedFilter === "solo" || requestedFilter === "duo" || requestedFilter === "bootcamp"
+    requestedFilter === "solo" ||
+    requestedFilter === "private" ||
+    requestedFilter === "vip" ||
+    requestedFilter === "bootcamp"
       ? requestedFilter
       : "all";
 
@@ -43,7 +46,11 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
           </div>
           <div className="rounded-[32px] border border-white/10 bg-[linear-gradient(135deg,rgba(159,35,57,0.16),rgba(26,90,73,0.16))] p-6">
             <div className="text-xs uppercase tracking-[0.3em] text-[var(--accent-sand)]">{c.roomsPanelEyebrow}</div>
-            <p className="mt-3 text-base leading-7 text-slate-300">{c.roomsPanelBody}</p>
+            <p className="mt-3 text-base leading-7 text-slate-300">
+              {locale === "ru"
+                ? "Bootcamp здесь не как отдельный продукт, а как формат комнаты для 5+ человек. Для Privat и VIP акцент уходим в комфорт, приватность и длинный вечер."
+                : c.roomsPanelBody}
+            </p>
             <TrackedLink
               className="mt-6 inline-flex rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[var(--accent-red-strong)]"
               goal="rooms_team_cta"
@@ -108,18 +115,18 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
           </TrackedLink>
           <TrackedLink
             className="flex-1 rounded-full border border-white/15 px-4 py-3 text-center text-sm font-semibold text-white"
-            goal="rooms_sticky_vk"
-            href={contactLinks.vk}
-            target="_blank"
-          >
-            {c.roomsStickyVk}
-          </TrackedLink>
-          <TrackedLink
-            className="rounded-full border border-[var(--accent-green)]/40 px-4 py-3 text-center text-sm font-semibold text-[var(--accent-sand)]"
             goal="rooms_sticky_call"
             href={contactLinks.call}
           >
             {c.roomsStickyCall}
+          </TrackedLink>
+          <TrackedLink
+            className="rounded-full border border-[var(--accent-green)]/40 px-4 py-3 text-center text-sm font-semibold text-[var(--accent-sand)]"
+            goal="rooms_sticky_booking"
+            href={contactLinks.booking}
+            target="_blank"
+          >
+            {locale === "ru" ? "Бронь" : "Booking"}
           </TrackedLink>
         </div>
       </div>

@@ -3,17 +3,23 @@ import Image from "next/image";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
 import { AvulusNav } from "@/components/layout/avulus-nav";
-import { MenuSection } from "@/components/restaurant/menu-section";
 import { TrackedLink } from "@/components/ui/tracked-link";
+import { getCmsContent } from "@/lib/cms";
 import { contactLinks, getRestaurantNav, getSharedContent, type Locale } from "@/lib/content";
 
-export function RestaurantPage({ locale }: { locale: Locale }) {
+export async function RestaurantPage({ locale }: { locale: Locale }) {
   const c = getSharedContent(locale);
+  const cms = locale === "ru" ? await getCmsContent() : null;
 
   return (
     <div className="pb-28 md:pb-0" id="top">
       <LocaleHtmlController locale={locale} />
-      <AvulusNav ctaHref={contactLinks.telegram} ctaLabel={c.restaurantPrimary} items={getRestaurantNav(locale)} locale={locale} />
+      <AvulusNav
+        ctaHref={contactLinks.telegram}
+        ctaLabel={cms?.restaurant.telegramCtaLabel ?? c.restaurantPrimary}
+        items={getRestaurantNav(locale)}
+        locale={locale}
+      />
 
       <main>
         <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
@@ -23,66 +29,110 @@ export function RestaurantPage({ locale }: { locale: Locale }) {
           <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div className="space-y-6">
               <div className="eyebrow">{c.restaurantEyebrow}</div>
-              <h1 className="max-w-xl font-[family:var(--font-oswald)] text-6xl uppercase leading-[0.88] text-white md:text-8xl">{c.restaurantTitle}</h1>
-              <p className="max-w-lg text-sm leading-7 text-white/64">{c.restaurantBody}</p>
-
-              <div className="space-y-3">
-                {c.restaurantNotes.map((note) => (
-                  <div key={note} className="flex items-start gap-3 text-sm leading-7 text-white/74">
-                    <span className="mt-3 h-1.5 w-1.5 rounded-full bg-[var(--accent-red)]" />
-                    <span>{note}</span>
-                  </div>
-                ))}
-              </div>
+              <h1 className="max-w-xl font-[family:var(--font-oswald)] text-6xl uppercase leading-[0.88] text-white md:text-8xl">
+                {locale === "ru" ? "Ресторан внутри общей ночной сцены Avulus" : c.restaurantTitle}
+              </h1>
+              <p className="max-w-xl text-sm leading-7 text-white/64">
+                {locale === "ru"
+                  ? "Короткая страница без перегруженного меню: показываем атмосферу, еду, бар и сразу ведем в Telegram или к полному меню."
+                  : c.restaurantBody}
+              </p>
+              <p className="max-w-xl text-sm leading-7 text-[var(--accent-sand)]">{cms?.restaurant.shortDescription}</p>
 
               <div className="flex flex-wrap gap-3">
                 <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="restaurant_telegram" href={contactLinks.telegram} target="_blank">
-                  {c.restaurantPrimary}
+                  {cms?.restaurant.telegramCtaLabel ?? c.restaurantPrimary}
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_vk" href={contactLinks.vk} target="_blank">
-                  {c.restaurantSecondary}
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_call" href={contactLinks.call}>
+                  +7 495 921-22-21
+                </TrackedLink>
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_menu" href={contactLinks.menu} target="_blank">
+                  {cms?.restaurant.menuButtonLabel ?? "Смотреть полное меню"}
                 </TrackedLink>
               </div>
 
               <div className="text-xs uppercase tracking-[0.24em] text-[#d7d1c4]">
-                {c.venueSchedule} • {c.venueAddress}
+                {cms?.restaurant.heroBadge ?? c.restaurantHeroBadge} • {c.venueAddress}
               </div>
             </div>
 
             <div className="grid gap-4 md:grid-cols-[1.08fr_0.92fr]">
               <div className="relative min-h-[540px] overflow-hidden bg-[#101010]">
-                <Image alt="Avulus restaurant interior" className="object-cover" fill priority sizes="(max-width: 1024px) 100vw, 50vw" src="/images/restaurant-real-1.jpg" />
+                <Image alt="Avulus restaurant interior" className="object-cover" fill priority sizes="(max-width: 1024px) 100vw, 50vw" src={cms?.media.restaurantHeroImage ?? "/images/restaurant-real-1.jpg"} />
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.46),rgba(8,8,8,0.96))]" />
-                <div className="absolute left-6 top-6 border border-white/10 bg-black/45 px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{c.restaurantHeroBadge}</div>
+                <div className="absolute left-6 top-6 border border-white/10 bg-black/45 px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">
+                  {cms?.restaurant.heroBadge ?? c.restaurantHeroBadge}
+                </div>
                 <div className="absolute bottom-6 left-6 max-w-sm">
-                  <div className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white">{c.restaurantHeroHeadline}</div>
+                  <div className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white">
+                    {locale === "ru" ? "Еда, бар и поздний ритм" : c.restaurantHeroHeadline}
+                  </div>
                 </div>
               </div>
 
               <div className="grid gap-4">
                 <div className="relative min-h-[260px] overflow-hidden bg-[#101010]">
-                  <Image alt="Avulus restaurant lounge" className="object-cover" fill sizes="(max-width: 1024px) 100vw, 24vw" src="/images/restaurant-real-2.jpg" />
+                  <Image alt="Avulus restaurant lounge" className="object-cover" fill sizes="(max-width: 1024px) 100vw, 24vw" src={cms?.media.restaurantSideImage ?? "/images/restaurant-real-2.jpg"} />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.55),rgba(8,8,8,0.94))]" />
-                  <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-3xl uppercase text-white">{c.restaurantHeroSideTitle}</div>
+                  <div className="absolute bottom-5 left-5 font-[family:var(--font-oswald)] text-3xl uppercase text-white">
+                    {locale === "ru" ? "Dark lounge" : c.restaurantHeroSideTitle}
+                  </div>
                 </div>
                 <div className="brand-card rounded-[28px] p-6">
                   <div className="text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{c.restaurantMoodEyebrow}</div>
-                  <div className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white">{c.restaurantMoodTitle}</div>
-                  <p className="mt-4 text-sm leading-7 text-white/62">{c.restaurantMoodBody}</p>
+                  <div className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white">
+                    {locale === "ru" ? "Короткая и понятная страница" : c.restaurantMoodTitle}
+                  </div>
+                  <p className="mt-4 text-sm leading-7 text-white/62">
+                    {locale === "ru"
+                      ? "Убираем длинный каталог еды с ценами и оставляем то, что помогает принять решение: визуалы, описание и быстрый CTA."
+                      : c.restaurantMoodBody}
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <MenuSection locale={locale} />
+        <section className="section-shell py-16" id="menu">
+          <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="eyebrow">{locale === "ru" ? "Визуальное меню" : "Visual menu"}</div>
+              <h2 className="mt-3 font-[family:var(--font-oswald)] text-5xl uppercase leading-none text-white md:text-6xl">
+                {cms?.restaurant.visualTitle ?? (locale === "ru" ? "Еда и бар" : "Food and bar")}
+              </h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-7 text-white/58">{cms?.restaurant.visualBody}</p>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-2">
+            {(cms?.restaurant.foodVisuals ?? []).map((card) => (
+              <article key={card.id} className="group overflow-hidden rounded-[30px] border border-white/10 bg-[#101010]">
+                <div className="relative aspect-[5/4] overflow-hidden">
+                  <Image alt={card.title} className="object-cover transition duration-700 group-hover:scale-105" fill sizes="(max-width: 1024px) 100vw, 50vw" src={card.imageUrl} />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.04),rgba(8,8,8,0.44),rgba(8,8,8,0.94))]" />
+                </div>
+                <div className="space-y-4 p-6">
+                  <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white">{card.title}</div>
+                  <p className="text-sm leading-7 text-white/64">{card.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
         <section className="section-shell pb-20" id="reserve">
           <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="brand-card p-8 md:p-10">
               <div className="eyebrow">{c.restaurantReserveEyebrow}</div>
-              <div className="mt-4 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white md:text-6xl">{c.restaurantReserveTitle}</div>
-              <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">{c.restaurantReserveBody}</p>
+              <div className="mt-4 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white md:text-6xl">
+                {locale === "ru" ? "Сделай контакт за минуту" : c.restaurantReserveTitle}
+              </div>
+              <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">
+                {locale === "ru"
+                  ? "Основной сценарий здесь один: быстро перейти в Telegram или позвонить, а полное меню открыть отдельной кнопкой."
+                  : c.restaurantReserveBody}
+              </p>
             </div>
 
             <div className="flex flex-col justify-between gap-4 rounded-[30px] border border-white/8 bg-[#0f0f10] p-8">
@@ -92,10 +142,13 @@ export function RestaurantPage({ locale }: { locale: Locale }) {
               </div>
               <div className="flex flex-wrap gap-3">
                 <TrackedLink className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]" goal="restaurant_contact_telegram" href={contactLinks.telegram} target="_blank">
-                  Telegram
+                  {cms?.restaurant.telegramCtaLabel ?? "Telegram"}
                 </TrackedLink>
                 <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_contact_call" href={contactLinks.call}>
                   +7 495 921-22-21
+                </TrackedLink>
+                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_contact_menu" href={contactLinks.menu} target="_blank">
+                  {cms?.restaurant.menuButtonLabel ?? "Смотреть полное меню"}
                 </TrackedLink>
               </div>
             </div>
