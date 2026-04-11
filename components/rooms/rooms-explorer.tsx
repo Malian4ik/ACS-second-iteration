@@ -106,11 +106,11 @@ export function RoomsExplorer({ initialFilter, locale }: { initialFilter: Filter
             <div className="space-y-6 p-6">
               <p className="text-sm leading-7 text-slate-300">
                 {locale === "ru" && room.key === "duo-sync"
-                  ? "Комфортная приватная комната для двоих или небольшой компании: мягкий диван, приватность, room service и более спокойный вечерний сценарий."
+                  ? "Приватная комната для двоих или небольшой компании."
                   : locale === "ru" && room.key === "duo-premium"
-                    ? "VIP-комната для более длинной и приватной сессии: мягкая посадка, room service, мини-бар и ощущение отдельного пространства без общего шума."
+                    ? "VIP-комната для длинной и приватной сессии."
                     : locale === "ru" && room.key === "bootcamp-squad"
-                      ? "Комнатный формат для 5+ человек: командная посадка, совместная игра и понятный сценарий для больших составов."
+                      ? "Комнатный формат для 5+ человек."
                       : room.description}
               </p>
 

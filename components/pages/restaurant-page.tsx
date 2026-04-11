@@ -34,7 +34,7 @@ export async function RestaurantPage({ locale }: { locale: Locale }) {
               </h1>
               <p className="max-w-xl text-sm leading-7 text-white/64">
                 {locale === "ru"
-                  ? "Короткая страница без перегруженного меню: показываем атмосферу, еду, бар и сразу ведем в Telegram или к полному меню."
+                  ? "Ресторан внутри Avulus. Открыто 24/7."
                   : c.restaurantBody}
               </p>
               <p className="max-w-xl text-sm leading-7 text-[var(--accent-sand)]">{cms?.restaurant.shortDescription}</p>
@@ -85,7 +85,7 @@ export async function RestaurantPage({ locale }: { locale: Locale }) {
                   </div>
                   <p className="mt-4 text-sm leading-7 text-white/62">
                     {locale === "ru"
-                      ? "Убираем длинный каталог еды с ценами и оставляем то, что помогает принять решение: визуалы, описание и быстрый CTA."
+                      ? "Только главное: атмосфера, еда, бар и быстрый контакт."
                       : c.restaurantMoodBody}
                   </p>
                 </div>
@@ -130,7 +130,7 @@ export async function RestaurantPage({ locale }: { locale: Locale }) {
               </div>
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">
                 {locale === "ru"
-                  ? "Основной сценарий здесь один: быстро перейти в Telegram или позвонить, а полное меню открыть отдельной кнопкой."
+                  ? "Напишите в Telegram или позвоните."
                   : c.restaurantReserveBody}
               </p>
             </div>

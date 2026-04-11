@@ -22,7 +22,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
     {
       title: isRu ? "Stream / Solo" : "Stream / Solo",
       description: isRu
-        ? "Для тех, кому нужен личный ритм: стрим, спокойная игра и длинная сессия без общего зала."
+        ? "Для соло-игры и стрима."
         : "For guests who need a private rhythm: streaming, focused play and longer sessions away from the main hall.",
       audience: isRu ? "1 гость" : "1 guest",
       price: isRu ? "от 290 ₽ / час" : "from 290 RUB / hour",
@@ -32,7 +32,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
     {
       title: isRu ? "Privat / VIP" : "Privat / VIP",
       description: isRu
-        ? "Комнаты для пары, кооператива и камерных встреч, когда важны приватность и комфорт."
+        ? "Приватные комнаты для пары и коопа."
         : "Rooms for pairs, co-op sessions and intimate evenings where privacy and comfort matter.",
       audience: isRu ? "2-4 гостя" : "2-4 guests",
       price: isRu ? "от 490 ₽ / час" : "from 490 RUB / hour",
@@ -42,7 +42,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
     {
       title: isRu ? "Team / Bootcamp" : "Team / Bootcamp",
       description: isRu
-        ? "Формат для сквадов, командных сессий и длинных игровых блоков с прямым переходом в ресторан."
+        ? "Формат для команд и больших составов."
         : "Built for squads, team sessions and longer gaming blocks with an easy handoff into the restaurant.",
       audience: isRu ? "5+ гостей" : "5+ guests",
       price: isRu ? "от 850 ₽ / час" : "from 850 RUB / hour",
@@ -114,9 +114,9 @@ export async function HomePage({ locale }: { locale: Locale }) {
               Avulus <span className="text-[var(--accent-sand)]">Cyber Space</span>
             </h1>
             <p className="mt-4 text-xs uppercase tracking-[0.34em] text-[#d7d1c4] md:text-sm">{c.homeHeroKicker}</p>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64 md:text-base">
+              <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64 md:text-base">
               {isRu
-                ? "Реальные приватные комнаты, командные форматы, ресторан 24/7 и понятный путь к контакту без декоративного шума."
+                ? "Клуб в центре Москвы. Приватные комнаты и ресторан 24/7."
                 : "Real private rooms, team formats, a 24/7 restaurant and a clear path to contact without decorative noise."}
             </p>
             <p className="mt-3 text-sm text-[var(--accent-sand)]">{cms?.home.heroSupport ?? c.venueSchedule}</p>
@@ -150,10 +150,10 @@ export async function HomePage({ locale }: { locale: Locale }) {
 
             <div className="mt-8 grid w-full max-w-4xl gap-3 text-left md:grid-cols-3">
               <div className="brand-card rounded-[28px] p-5">
-                <div className="eyebrow">{isRu ? "Форматы" : "Formats"}</div>
-                <div className="mt-3 text-base leading-7 text-white/72">
-                  {isRu ? "Solo, Privat, VIP, Bootcamp и командные сценарии." : "Solo, Privat, VIP, Bootcamp and team scenarios."}
-                </div>
+              <div className="eyebrow">{isRu ? "Форматы" : "Formats"}</div>
+              <div className="mt-3 text-base leading-7 text-white/72">
+                  {isRu ? "Solo, Privat, VIP, Bootcamp." : "Solo, Privat, VIP, Bootcamp and team scenarios."}
+              </div>
               </div>
               <div className="brand-card rounded-[28px] p-5">
                 <div className="eyebrow">{isRu ? "24/7" : "24/7"}</div>
@@ -162,10 +162,10 @@ export async function HomePage({ locale }: { locale: Locale }) {
                 </div>
               </div>
               <div className="brand-card rounded-[28px] p-5">
-                <div className="eyebrow">{isRu ? "Контакт" : "Contact"}</div>
-                <div className="mt-3 text-base leading-7 text-white/72">
-                  {isRu ? "Telegram, звонок и бронь доступны с первого экрана." : "Telegram, direct call and booking are available from the first screen."}
-                </div>
+              <div className="eyebrow">{isRu ? "Контакт" : "Contact"}</div>
+              <div className="mt-3 text-base leading-7 text-white/72">
+                  {isRu ? "Telegram, звонок и бронь сразу на первом экране." : "Telegram, direct call and booking are available from the first screen."}
+              </div>
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
             <p className="max-w-2xl text-sm leading-7 text-white/58">
               {cms?.home.promoSubtitle ??
                 (isRu
-                  ? "Подготовленный блок под реальные акции. Каждый оффер должен быстро переводить в Telegram без сложного выбора."
+                  ? "Короткие актуальные офферы с быстрым переходом в Telegram."
                   : "A prepared area for real offers. Each card should move the user into Telegram fast.")}
             </p>
           </div>
@@ -221,7 +221,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
             </div>
             <p className="max-w-2xl text-sm leading-7 text-white/62">
               {isRu
-                ? "Этот блок нужен, чтобы на главной были не абстрактные обещания, а реальные сценарии: кто приходит, какой формат выбирает и от какой цены начинается вход."
+                ? "Сразу видно, какой формат вам подходит."
                 : "This block replaces abstract promises with real scenarios: who comes in, which format they choose and where pricing starts."}
             </p>
           </div>

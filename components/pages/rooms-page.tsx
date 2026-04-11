@@ -53,7 +53,7 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
             <div className="text-xs uppercase tracking-[0.3em] text-[var(--accent-sand)]">{c.roomsPanelEyebrow}</div>
             <p className="mt-3 text-base leading-7 text-slate-300">
               {locale === "ru"
-                ? "Bootcamp здесь не как отдельный продукт, а как формат комнаты для 5+ человек. Для Privat и VIP акцент уходим в комфорт, приватность и длинный вечер."
+                ? "Bootcamp — формат для 5+ человек. Privat и VIP — про комфорт и приватность."
                 : c.roomsPanelBody}
             </p>
             <TrackedLink
