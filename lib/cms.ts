@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 
 import { get, put } from "@vercel/blob";
+import { unstable_noStore as noStore } from "next/cache";
 
 import { defaultCmsContent } from "@/lib/cms-default";
 import type { CmsContent } from "@/lib/cms-schema";
@@ -97,6 +98,7 @@ async function writeBlobCmsFile(content: CmsContent) {
 }
 
 export async function getCmsContent() {
+  noStore();
   return hasBlobToken() ? readBlobCmsFile() : readLocalCmsFile();
 }
 
