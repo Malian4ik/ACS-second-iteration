@@ -2,8 +2,8 @@ import type { CmsContent } from "@/lib/cms-schema";
 
 export const defaultCmsContent: CmsContent = {
   home: {
-    heroSupport: "Клуб, ресторан и бар открыты 24/7",
-    heroStatusLine: "Открыты 24 часа в сутки, 7 дней в неделю. Быстрый ответ в Telegram и по телефону.",
+    heroSupport: "Собственный ресторан и бар. Открыты без перерывов.",
+    heroStatusLine: "Прямая связь и мгновенная бронь через Telegram.",
     contactsOpenLine: "Открыты 24 часа в сутки, 7 дней в неделю",
     contactsParkingLine: "Бесплатная парковка рядом",
     promoTitle: "Спецпредложения",

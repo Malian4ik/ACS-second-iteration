@@ -24,7 +24,7 @@ export async function CyberclubPage({ locale }: { locale: Locale }) {
       />
 
       <main>
-        <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
+        <section className="section-shell relative pt-28 md:pt-36">
           <div className="pointer-events-none absolute left-1/2 top-0 h-[120%] w-screen -translate-x-1/2 bg-[radial-gradient(circle_at_72%_20%,rgba(159,35,57,0.22),rgba(159,35,57,0.12)_24%,rgba(159,35,57,0.04)_44%,rgba(9,9,9,0)_70%)]" />
           <div className="brand-orb left-[-10rem] top-4 h-64 w-64 md:h-[28rem] md:w-[28rem]" />
 
@@ -64,7 +64,7 @@ export async function CyberclubPage({ locale }: { locale: Locale }) {
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,8,8,0.08),rgba(8,8,8,0.46),rgba(8,8,8,0.96))]" />
                 <div className="absolute left-6 top-6 border border-white/10 bg-black/45 px-3 py-2 text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">Open 24/7</div>
                 <div className="absolute bottom-6 left-6 max-w-sm">
-                  <div className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white">{c.cyberclubPrivateByDesign}</div>
+                  <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.9] break-words text-white md:text-5xl">{c.cyberclubPrivateByDesign}</div>
                 </div>
               </div>
 
@@ -88,7 +88,7 @@ export async function CyberclubPage({ locale }: { locale: Locale }) {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="eyebrow">{c.cyberclubZonesEyebrow}</div>
-              <h2 className="mt-3 font-[family:var(--font-oswald)] text-5xl uppercase leading-none text-white md:text-6xl">{c.cyberclubZonesTitle}</h2>
+              <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none break-words text-white md:text-6xl">{c.cyberclubZonesTitle}</h2>
             </div>
             <p className="max-w-md text-sm leading-7 text-white/58">{c.cyberclubZonesBody}</p>
           </div>
@@ -123,7 +123,7 @@ export async function CyberclubPage({ locale }: { locale: Locale }) {
           <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="brand-card p-8 md:p-10">
               <div className="eyebrow">{c.cyberclubBookingEyebrow}</div>
-              <div className="mt-4 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white md:text-6xl">{c.cyberclubBookingTitle}</div>
+              <div className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.9] break-words text-white md:text-6xl">{c.cyberclubBookingTitle}</div>
               <p className="mt-5 max-w-xl text-sm leading-7 text-white/62">{c.cyberclubBookingBody}</p>
             </div>
 

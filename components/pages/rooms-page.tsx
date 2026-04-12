@@ -44,7 +44,7 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
         <section className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
           <div>
             <div className="eyebrow">{c.roomsEyebrow}</div>
-            <h1 className="mt-4 max-w-4xl text-5xl font-semibold leading-[0.96] tracking-[-0.05em] text-white md:text-6xl">
+            <h1 className="mt-4 max-w-4xl text-4xl font-semibold break-words leading-[0.96] tracking-[-0.05em] text-white md:text-6xl">
               {c.roomsTitle}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">{c.roomsBody}</p>
@@ -108,10 +108,10 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
         </section>
       </main>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/92 px-4 py-3 backdrop-blur md:hidden">
-        <div className="mx-auto flex max-w-xl gap-2">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-slate-950/92 px-2 py-2.5 backdrop-blur md:hidden">
+        <div className="mx-auto flex max-w-xl gap-1.5 text-[11px]">
           <TrackedLink
-            className="flex-1 rounded-full bg-[var(--accent-red)] px-4 py-3 text-center text-sm font-semibold text-white"
+            className="flex-1 rounded-full bg-[var(--accent-red)] px-1.5 py-2 text-center font-semibold uppercase tracking-wider text-white"
             goal="rooms_sticky_telegram"
             href={contactLinks.telegram}
             target="_blank"
@@ -119,14 +119,14 @@ export function RoomsPage({ locale, searchParams }: RoomsPageProps) {
             {c.roomsStickyTelegram}
           </TrackedLink>
           <TrackedLink
-            className="flex-1 rounded-full border border-white/15 px-4 py-3 text-center text-sm font-semibold text-white"
+            className="flex-1 rounded-full border border-white/15 px-1.5 py-2 text-center font-semibold uppercase tracking-wider text-white"
             goal="rooms_sticky_call"
             href={contactLinks.call}
           >
             {c.roomsStickyCall}
           </TrackedLink>
           <TrackedLink
-            className="rounded-full border border-[var(--accent-green)]/40 px-4 py-3 text-center text-sm font-semibold text-[var(--accent-sand)]"
+            className="flex-1 rounded-full border border-[var(--accent-green)]/40 px-1.5 py-2 text-center font-semibold uppercase tracking-wider text-[var(--accent-sand)]"
             goal="rooms_sticky_booking"
             href={contactLinks.booking}
             target="_blank"

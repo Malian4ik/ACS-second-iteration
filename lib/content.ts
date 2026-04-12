@@ -213,7 +213,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     homeTitle: "Avulus Cyber Space | Киберклуб и ресторан 24/7 в центре Москвы",
     homeDescription:
       "Avulus Cyber Space — премиальный киберклуб и самостоятельный ресторан 24/7 в центре Москвы. Бронь клуба, резерв стола, контакты и карта в один клик.",
-    homeHeroKicker: "Киберклуб и ресторан в центре Москвы",
+    homeHeroKicker: "Премиальное игровое пространство",
     homeBookClub: "Забронировать комп",
     homeReserveTable: "Зарезервировать стол",
     homeCardClubEyebrow: "Клуб",
@@ -363,7 +363,7 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     homeTitle: "Avulus Cyber Space | Premium cyberclub and restaurant in Moscow",
     homeDescription:
       "Avulus Cyber Space is a premium cyberclub and standalone 24/7 restaurant in central Moscow. Book a setup, reserve a table, or get in touch in one click.",
-    homeHeroKicker: "Cyberclub and restaurant in central Moscow",
+    homeHeroKicker: "Premium gaming space",
     homeBookClub: "Book a setup",
     homeReserveTable: "Reserve a table",
     homeCardClubEyebrow: "Club",

@@ -102,8 +102,8 @@ export async function HomePage({ locale }: { locale: Locale }) {
       />
 
       <main>
-        <section className="section-shell relative overflow-hidden pt-28 md:pt-36">
-          <div className="brand-orb left-[-10rem] top-10 h-64 w-64 md:h-96 md:w-96" />
+        <section className="section-shell relative pt-28 md:pt-36">
+          <div className="brand-orb left-1/2 top-0 h-80 w-[120vw] -translate-x-1/2 md:-translate-x-0 md:left-[-10rem] md:top-10 md:h-96 md:w-96" />
           <div className="brand-orb right-[-8rem] top-24 h-56 w-56 bg-[radial-gradient(circle,rgba(26,90,73,0.34),rgba(26,90,73,0))] md:h-80 md:w-80" />
 
           <div className="relative z-10 flex flex-col items-center text-center">
@@ -117,8 +117,8 @@ export async function HomePage({ locale }: { locale: Locale }) {
             <p className="mt-4 text-xs uppercase tracking-[0.34em] text-[#d7d1c4] md:text-sm">{c.homeHeroKicker}</p>
               <p className="mt-4 max-w-3xl text-sm leading-7 text-white/64 md:text-base">
               {isRu
-                ? "Клуб в центре Москвы. Приватные комнаты и ресторан 24/7."
-                : "Real private rooms, team formats, a 24/7 restaurant and a clear path to contact without decorative noise."}
+                ? "Флагманский киберклуб в сердце Москвы. Уединенные форматы для соло-игры, bootcamp-зоны для команд и самостоятельная кухня."
+                : "A flagship cyberclub in central Moscow. Private solo formats, team bootcamp zones and a fully independent kitchen."}
             </p>
             <p className="mt-3 text-sm text-[var(--accent-sand)]">{cms?.home.heroSupport ?? c.venueSchedule}</p>
             <p className="text-sm text-white/52">{cms?.home.heroStatusLine ?? c.featureAlwaysOpenBody}</p>
@@ -176,7 +176,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="eyebrow">{isRu ? "Актуальные офферы" : "Current offers"}</div>
-              <h2 className="mt-3 font-[family:var(--font-oswald)] text-5xl uppercase leading-none text-white md:text-6xl">
+              <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none break-words text-white md:text-6xl">
                 {cms?.home.promoTitle ?? (isRu ? "Спецпредложения" : "Special offers")}
               </h2>
             </div>
@@ -195,7 +195,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <div className="eyebrow">{isRu ? "Комнаты и форматы" : "Rooms and formats"}</div>
-              <h2 className="mt-3 font-[family:var(--font-oswald)] text-5xl uppercase leading-none text-white md:text-6xl">
+              <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none break-words text-white md:text-6xl">
                 {isRu ? "Сразу видно, что можно забронировать" : "See what can be booked right away"}
               </h2>
             </div>
@@ -246,7 +246,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
 
                 <div className="relative z-10 flex h-full flex-col justify-end p-6 md:p-8">
                   <div className="mb-3 text-[11px] uppercase tracking-[0.28em] text-[#d7d1c4]">{card.eyebrow}</div>
-                  <h2 className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.9] text-white md:text-6xl">{card.title}</h2>
+                  <h2 className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.9] break-words text-white md:text-6xl">{card.title}</h2>
                   <p className="mt-4 max-w-sm text-sm leading-7 text-white/68">{card.body}</p>
                   <TrackedLink
                     className={`mt-6 inline-flex w-fit items-center justify-center rounded-full border px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] transition ${
@@ -288,7 +288,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
           <div className="brand-card rounded-[32px] p-6 md:p-8">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
-                <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.contactsTitle}</div>
+                <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none break-words text-white md:text-5xl">{c.contactsTitle}</div>
                 <p className="mt-3 text-sm text-white/62">{c.contactsSubtitle}</p>
               </div>
               <div className="flex flex-wrap gap-3">
@@ -309,13 +309,13 @@ export async function HomePage({ locale }: { locale: Locale }) {
 
         <section className="section-shell pb-20" id="map">
           <div className="brand-card rounded-[32px] p-6 md:p-8">
-            <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-5xl">{c.mapTitle}</div>
+            <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none break-words text-white md:text-5xl">{c.mapTitle}</div>
             <div className="relative mt-6 overflow-hidden rounded-[28px] border border-white/10">
               <iframe
                 className="h-[420px] w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                src="https://yandex.ru/map-widget/v1/?ll=37.648860%2C55.750838&mode=search&ol=geo&ouri=ymapsbm1%3A%2F%2Fgeo%3Fdata%3DCgg1Njc4MjI2NxJG0KDQvtGB0YHQuNGPLCDQnNC-0YHQutCy0LAsINCh0LXRgNC10LHRgNGP0L3QuNGH0LXRgdC60LjQuSDQv9C10YDQtdGD0LvQvtC6LCAxMtGBMSIKDcs4FkIVN0ZC&z=16"
+                src="https://yandex.ru/map-widget/v1/?ll=37.648335%2C55.750049&mode=search&oid=244165336383&ol=biz&z=21"
                 title={c.mapFrameTitle}
               />
             </div>
@@ -323,12 +323,12 @@ export async function HomePage({ locale }: { locale: Locale }) {
         </section>
       </main>
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-4 py-3 backdrop-blur md:hidden">
-        <div className="mx-auto flex max-w-xl gap-2">
-          <TrackedLink className="flex-1 rounded-full bg-[var(--accent-red)] px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white" goal="sticky_telegram" href={contactLinks.telegram} target="_blank">
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-2 py-2.5 backdrop-blur md:hidden">
+        <div className="mx-auto flex max-w-xl gap-1.5 text-xs">
+          <TrackedLink className="flex-1 rounded-full bg-[var(--accent-red)] px-2 py-2 text-center font-semibold uppercase tracking-wider text-white" goal="sticky_telegram" href={contactLinks.telegram} target="_blank">
             Telegram
           </TrackedLink>
-          <TrackedLink className="flex-1 rounded-full border border-white/18 px-4 py-3 text-center text-sm font-semibold uppercase tracking-[0.14em] text-white" goal="sticky_call" href={contactLinks.call}>
+          <TrackedLink className="flex-1 rounded-full border border-white/18 px-2 py-2 text-center font-semibold uppercase tracking-wider text-white" goal="sticky_call" href={contactLinks.call}>
             {isRu ? "Звонок" : "Call"}
           </TrackedLink>
         </div>

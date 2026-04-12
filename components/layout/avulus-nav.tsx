@@ -57,7 +57,7 @@ export function AvulusNav({
           {ctaLabel}
         </TrackedLink>
 
-        <div className="flex max-w-[60vw] items-center gap-2 overflow-x-auto md:hidden">
+        <div className="flex flex-1 items-center justify-end gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:hidden">
           <LanguageSwitch locale={locale} />
           {items.map((item) => (
             <Link
