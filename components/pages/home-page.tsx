@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 
 import { PromoCarousel } from "@/components/home/promo-carousel";
 import { AvulusFooter } from "@/components/layout/avulus-footer";
@@ -13,95 +13,99 @@ import {
   type Locale
 } from "@/lib/content";
 
-/* в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
+/* ─────────────────────────────────────────────
    Room card data (section 3)
-в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
+───────────────────────────────────────────── */
 const roomCards = [
   {
     key: "stream",
     title: "Stream",
-    capacity: "1 С‡РµР»",
-    description: "РћРґРЅРѕ РјРµСЃС‚Рѕ, СЃРІРѕР№ РјРѕРЅРёС‚РѕСЂ, С‚РёС€РёРЅР°. Р”Р»СЏ РёРіСЂС‹ РёР»Рё СЃС‚СЂРёРјР°.",
-    priceDay: "РѕС‚ 290 в‚Ѕ/С‡Р°СЃ",
-    priceNight: "РѕС‚ 330 в‚Ѕ/С‡Р°СЃ",
+    capacity: "1 чел",
+    description: "Одно место, свой монитор, тишина. Для игры или стрима.",
+    priceDay: "от 290 ₽/час",
+    priceNight: "от 330 ₽/час",
     image: "/images/club-room-green.webp"
   },
   {
     key: "privat",
     title: "Privat",
-    capacity: "2 С‡РµР»",
-    description: "РћС‚РґРµР»СЊРЅР°СЏ РєРѕРјРЅР°С‚Р° РЅР° РґРІРѕРёС…. TV, РґРёРІР°РЅ, С‚РёС…Рѕ.",
-    priceDay: "РѕС‚ 490 в‚Ѕ/С‡Р°СЃ",
-    priceNight: "РѕС‚ 590 в‚Ѕ/С‡Р°СЃ",
+    capacity: "2 чел",
+    description: "Отдельная комната на двоих. TV, диван, тихо.",
+    priceDay: "от 490 ₽/час",
+    priceNight: "от 590 ₽/час",
     image: "/images/cyberclub-card.jpg"
   },
   {
     key: "privat-plus",
     title: "Privat+",
-    capacity: "2 С‡РµР»",
-    description: "Р‘РѕР»СЊС€Рµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РґР»СЏ РґР»РёРЅРЅРѕРіРѕ РІРµС‡РµСЂР° РІРґРІРѕС‘Рј. Р”РёРІР°РЅ, РјРёРЅРёР±Р°СЂ.",
-    priceDay: "РѕС‚ 690 в‚Ѕ/С‡Р°СЃ",
-    priceNight: "РѕС‚ 790 в‚Ѕ/С‡Р°СЃ",
+    capacity: "2 чел",
+    description: "Больше пространства для длинного вечера вдвоём. Диван, минибар.",
+    priceDay: "от 690 ₽/час",
+    priceNight: "от 790 ₽/час",
     image: "/images/cyberclub-vip.jpg"
   },
   {
     key: "vip",
     title: "VIP",
-    capacity: "2вЂ“4 С‡РµР»",
-    description: "Р‘РѕР»СЊС€Р°СЏ РїСЂРёРІР°С‚РЅР°СЏ РєРѕРјРЅР°С‚Р°. Р”РёРІР°РЅ, РјРёРЅРёР±Р°СЂ, СЂСѓРјСЃРµСЂРІРёСЃ РёР· СЂРµСЃС‚РѕСЂР°РЅР°. РњРѕР¶РЅРѕ РїСЂРѕРІРµСЃС‚Рё РЅРѕС‡СЊ СЃ РєРѕРјС„РѕСЂС‚РѕРј.",
-    priceDay: "РѕС‚ 890 в‚Ѕ/С‡Р°СЃ",
-    priceNight: "РѕС‚ 990 в‚Ѕ/С‡Р°СЃ",
+    capacity: "2–4 чел",
+    description: "Большая приватная комната. Диван, минибар, румсервис из ресторана. Можно провести ночь с комфортом.",
+    priceDay: "от 890 ₽/час",
+    priceNight: "от 990 ₽/час",
     image: "/images/club-room-red.webp"
   },
   {
     key: "super-vip",
     title: "Super VIP",
-    capacity: "2вЂ“4 С‡РµР»",
-    description: "РњР°РєСЃРёРјСѓРј РїСЂРёРІР°С‚РЅРѕСЃС‚Рё Рё РјРµСЃС‚Р°. РЎРІРѕР№ РІС…РѕРґ, РїРѕР»РЅС‹Р№ СЃРµСЂРІРёСЃ, С‚РёС€РёРЅР°. Р”Р»СЏ С‚РµС…, РєРѕРјСѓ РІР°Р¶РЅРѕ, С‡С‚РѕР±С‹ РЅРёРєС‚Рѕ РЅРµ РјРµС€Р°Р».",
-    priceDay: "РџРѕ Р·Р°РїСЂРѕСЃСѓ",
-    priceNight: "РџРѕ Р·Р°РїСЂРѕСЃСѓ",
+    capacity: "2–4 чел",
+    description: "Максимум приватности и места. Свой вход, полный сервис, тишина. Для тех, кому важно, чтобы никто не мешал.",
+    priceDay: "По запросу",
+    priceNight: "По запросу",
     image: "/images/cyberclub-vip.jpg"
   },
   {
     key: "bootcamp",
     title: "Bootcamp",
-    capacity: "5+ С‡РµР»",
-    description: "РљРѕРјРЅР°С‚Р° РґР»СЏ РєРѕРјР°РЅРґС‹. 5 Рё Р±РѕР»СЊС€Рµ РјРµСЃС‚ Р·Р° РѕРґРЅРёРј СЃС‚РѕР»РѕРј. Р”Р»РёРЅРЅС‹Рµ СЃРµСЃСЃРёРё, С‚СЂРµРЅРёСЂРѕРІРєРё, С‚СѓСЂРЅРёСЂС‹.",
-    priceDay: "РѕС‚ 850 в‚Ѕ/С‡Р°СЃ",
-    priceNight: "РѕС‚ 850 в‚Ѕ/С‡Р°СЃ",
+    capacity: "5+ чел",
+    description: "Комната для команды. 5 и больше мест за одним столом. Длинные сессии, тренировки, турниры.",
+    priceDay: "от 850 ₽/час",
+    priceNight: "от 850 ₽/час",
     image: "/images/cyberclub-team.jpg"
   }
 ];
 
-/* в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
+/* ─────────────────────────────────────────────
    Restaurant photos (section 4)
-в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
-/* в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ
+───────────────────────────────────────────── */
+const restaurantPhotos = [
+  { src: "/images/dish-burger.jpg", alt: "Кухня Avulus" },
+  { src: "/images/dish-cocktail.jpg", alt: "Бар и коктейли" },
+  { src: "/images/dish-ramen.jpg", alt: "Горячие блюда" },
+  { src: "/images/dish-snack.jpg", alt: "Закуски" }
+];
+
+/* ─────────────────────────────────────────────
    Page component
-в”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђв”Ђ */
+───────────────────────────────────────────── */
 export async function HomePage({ locale }: { locale: Locale }) {
   const c = getSharedContent(locale);
   const isRu = locale === "ru";
   const cms = isRu ? await getCmsContent() : null;
   const promoCards = cms?.home.promoCards ?? [];
-  const restaurantPhotos = (cms?.restaurant.foodVisuals ?? [])
-    .slice(0, 4)
-    .map((item) => ({ src: item.imageUrl, alt: item.title || "Restaurant photo" }));
 
   return (
     <div className="pb-28 md:pb-0">
       <LocaleHtmlController locale={locale} />
       <AvulusNav
         ctaHref={contactLinks.telegram}
-        ctaLabel={cms?.home.primaryCtaLabel ?? "РќР°РїРёСЃР°С‚СЊ РІ Telegram"}
+        ctaLabel={cms?.home.primaryCtaLabel ?? "Написать в Telegram"}
         items={getHomeNav(locale)}
         locale={locale}
       />
 
       <main>
-        {/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
-            SECTION 1 вЂ” HERO
-        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */}
+        {/* ═══════════════════════════════════════
+            SECTION 1 — HERO
+        ═══════════════════════════════════════ */}
         <section className="section-shell relative pt-28 pb-16 md:pt-36 md:pb-20">
           {/* background orbs */}
           <div className="brand-orb left-1/2 top-0 h-80 w-[120vw] -translate-x-1/2 md:-translate-x-0 md:left-[-10rem] md:top-10 md:h-96 md:w-96" />
@@ -127,14 +131,14 @@ export async function HomePage({ locale }: { locale: Locale }) {
 
             {/* Subtitle */}
             <p className="mt-4 text-sm uppercase tracking-[0.26em] text-[#d7d1c4] md:text-base">
-              {isRu ? "РљР»СѓР± Рё СЂРµСЃС‚РѕСЂР°РЅ 24/7 РІ С†РµРЅС‚СЂРµ РњРѕСЃРєРІС‹" : "Club & restaurant 24/7 in central Moscow"}
+              {isRu ? "Клуб и ресторан 24/7 в центре Москвы" : "Club & restaurant 24/7 in central Moscow"}
             </p>
 
             {/* Tagline */}
             <p className="mt-3 max-w-xl text-sm leading-7 text-white/60 md:text-base">
               {isRu
-                ? "РџСЂРёРІР°С‚РЅС‹Рµ РёРіСЂРѕРІС‹Рµ РєРѕРјРЅР°С‚С‹, РєСѓС…РЅСЏ Рё Р±Р°СЂ вЂ” РєСЂСѓРіР»РѕСЃСѓС‚РѕС‡РЅРѕ."
-                : "Private gaming rooms, kitchen and bar вЂ” around the clock."}
+                ? "Приватные игровые комнаты, кухня и бар — круглосуточно."
+                : "Private gaming rooms, kitchen and bar — around the clock."}
             </p>
 
             {/* CTAs */}
@@ -145,20 +149,20 @@ export async function HomePage({ locale }: { locale: Locale }) {
                 href={contactLinks.telegram}
                 target="_blank"
               >
-                {isRu ? "РќР°РїРёСЃР°С‚СЊ РІ Telegram" : "Message on Telegram"}
+                {isRu ? "Написать в Telegram" : "Message on Telegram"}
               </TrackedLink>
               <TrackedLink
                 className="inline-flex flex-1 items-center justify-center rounded-full border border-[rgba(255,244,224,0.18)] bg-transparent px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]"
                 goal="hero_phone"
                 href={contactLinks.call}
               >
-                {isRu ? "РџРѕР·РІРѕРЅРёС‚СЊ" : "Call"}
+                {isRu ? "Позвонить" : "Call"}
               </TrackedLink>
             </div>
 
             {/* Badge pills */}
             <div className="mt-6 flex flex-wrap justify-center gap-2">
-              {["24/7", isRu ? "Р¦РµРЅС‚СЂ РњРѕСЃРєРІС‹" : "Central Moscow", isRu ? "Р‘РµСЃРїР»Р°С‚РЅР°СЏ РїР°СЂРєРѕРІРєР°" : "Free parking"].map(
+              {["24/7", isRu ? "Центр Москвы" : "Central Moscow", isRu ? "Бесплатная парковка" : "Free parking"].map(
                 (badge) => (
                   <span
                     key={badge}
@@ -172,41 +176,41 @@ export async function HomePage({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        {/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
-            SECTION 2 вЂ” РћР¤Р¤Р•Р Р« (CMS-driven)
-        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */}
+        {/* ═══════════════════════════════════════
+            SECTION 2 — ОФФЕРЫ (CMS-driven)
+        ═══════════════════════════════════════ */}
         <section className="section-shell pb-16 md:pb-20" id="offers">
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="eyebrow">{isRu ? "РђРєС‚СѓР°Р»СЊРЅС‹Рµ РѕС„С„РµСЂС‹" : "Current offers"}</div>
+              <div className="eyebrow">{isRu ? "Актуальные офферы" : "Current offers"}</div>
               <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">
-                {cms?.home.promoTitle ?? (isRu ? "РЎРїРµС†РїСЂРµРґР»РѕР¶РµРЅРёСЏ" : "Special offers")}
+                {cms?.home.promoTitle ?? (isRu ? "Спецпредложения" : "Special offers")}
               </h2>
             </div>
             <p className="max-w-sm text-sm leading-7 text-white/55">
               {cms?.home.promoSubtitle ??
                 (isRu
-                  ? "РђРєС‚СѓР°Р»СЊРЅС‹Рµ С„РѕСЂРјР°С‚С‹. РљР°Р¶РґР°СЏ РєР°СЂС‚РѕС‡РєР° РІРµРґРµС‚ РІ Telegram."
+                  ? "Актуальные форматы. Каждая карточка ведет в Telegram."
                   : "Current formats. Each card leads straight to Telegram.")}
             </p>
           </div>
           <PromoCarousel cards={promoCards} />
         </section>
 
-        {/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
-            SECTION 3 вЂ” РљРћРњРќРђРўР«
-        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */}
+        {/* ═══════════════════════════════════════
+            SECTION 3 — КОМНАТЫ
+        ═══════════════════════════════════════ */}
         <section className="section-shell py-16 md:py-20" id="rooms">
           {/* Section header */}
           <div className="mb-10">
-            <div className="eyebrow">{isRu ? "РљРѕРјРЅР°С‚С‹" : "Rooms"}</div>
+            <div className="eyebrow">{isRu ? "Комнаты" : "Rooms"}</div>
             <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">
-              {isRu ? "РљРѕРјРЅР°С‚С‹" : "Rooms"}
+              {isRu ? "Комнаты" : "Rooms"}
             </h2>
             <p className="mt-3 max-w-xl text-sm leading-7 text-white/58">
               {isRu
-                ? "Р’С‹Р±РёСЂР°Р№С‚Рµ С„РѕСЂРјР°С‚, РїРёС€РёС‚Рµ РІ Telegram вЂ” Р·Р°Р±СЂРѕРЅРёСЂСѓРµРј."
-                : "Pick your format, message us on Telegram вЂ” we'll book it."}
+                ? "Выбирайте формат, пишите в Telegram — забронируем."
+                : "Pick your format, message us on Telegram — we'll book it."}
             </p>
           </div>
 
@@ -249,7 +253,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
                   <div className="flex gap-4 text-xs">
                     <div className="flex flex-col gap-0.5">
                       <span className="uppercase tracking-[0.2em] text-white/40">
-                        {isRu ? "Р”РµРЅСЊ" : "Day"}
+                        {isRu ? "День" : "Day"}
                       </span>
                       <span className="font-semibold text-[var(--accent-sand)]">
                         {room.priceDay}
@@ -258,7 +262,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
                     <div className="w-px bg-white/10" />
                     <div className="flex flex-col gap-0.5">
                       <span className="uppercase tracking-[0.2em] text-white/40">
-                        {isRu ? "РќРѕС‡СЊ" : "Night"}
+                        {isRu ? "Ночь" : "Night"}
                       </span>
                       <span className="font-semibold text-[var(--accent-sand)]">
                         {room.priceNight}
@@ -281,7 +285,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
                       goal={`room_call_${room.key}`}
                       href={contactLinks.call}
                     >
-                      {isRu ? "РџРѕР·РІРѕРЅРёС‚СЊ" : "Call"}
+                      {isRu ? "Позвонить" : "Call"}
                     </TrackedLink>
                   </div>
                 </div>
@@ -292,25 +296,25 @@ export async function HomePage({ locale }: { locale: Locale }) {
           {/* Pricing note */}
           <p className="mt-6 text-center text-xs text-white/38">
             {isRu
-              ? "РџРѕРґСЂРѕР±РЅС‹Р№ РїСЂР°Р№СЃ вЂ” РІ Telegram. РўР°СЂРёС„С‹ Р·Р°РІРёСЃСЏС‚ РѕС‚ РґРЅСЏ РЅРµРґРµР»Рё Рё РІСЂРµРјРµРЅРё СЃСѓС‚РѕРє."
+              ? "Подробный прайс — в Telegram. Тарифы зависят от дня недели и времени суток."
               : "Full pricing in Telegram. Rates vary by day and time."}
           </p>
         </section>
 
-        {/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
-            SECTION 4 вЂ” Р Р•РЎРўРћР РђРќ
-        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */}
+        {/* ═══════════════════════════════════════
+            SECTION 4 — РЕСТОРАН
+        ═══════════════════════════════════════ */}
         <section className="section-shell py-16 md:py-20" id="restaurant">
           {/* Header */}
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
-              <div className="eyebrow">{isRu ? "Р РµСЃС‚РѕСЂР°РЅ" : "Restaurant"}</div>
+              <div className="eyebrow">{isRu ? "Ресторан" : "Restaurant"}</div>
               <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">
-                {isRu ? "Р РµСЃС‚РѕСЂР°РЅ Рё Р±Р°СЂ" : "Restaurant & bar"}
+                {isRu ? "Ресторан и бар" : "Restaurant & bar"}
               </h2>
               <p className="mt-3 max-w-lg text-sm leading-7 text-white/55">
                 {isRu
-                  ? "РљСѓС…РЅСЏ, РєРѕРєС‚РµР№Р»Рё Рё СЂСѓРјСЃРµСЂРІРёСЃ РІ РєРѕРјРЅР°С‚С‹ РєР»СѓР±Р°. РћС‚РєСЂС‹С‚С‹ 24/7."
+                  ? "Кухня, коктейли и румсервис в комнаты клуба. Открыты 24/7."
                   : "Kitchen, cocktails and room service to club rooms. Open 24/7."}
               </p>
             </div>
@@ -319,8 +323,8 @@ export async function HomePage({ locale }: { locale: Locale }) {
           {/* Body text */}
           <p className="mb-8 max-w-2xl text-sm leading-7 text-white/62">
             {isRu
-              ? "РџРѕР»РЅРѕС†РµРЅРЅС‹Р№ СЂРµСЃС‚РѕСЂР°РЅ РІРЅСѓС‚СЂРё Avulus. РњРѕР¶РЅРѕ Р·Р°Р№С‚Рё РѕС‚РґРµР»СЊРЅРѕ РёР»Рё Р·Р°РєР°Р·Р°С‚СЊ РµРґСѓ РїСЂСЏРјРѕ РІ РєРѕРјРЅР°С‚Сѓ. Р Р°Р±РѕС‚Р°РµРј РєСЂСѓРіР»РѕСЃСѓС‚РѕС‡РЅРѕ вЂ” Р·Р°РІС‚СЂР°Рє РІ 6 СѓС‚СЂР°, СѓР¶РёРЅ РІ 3 РЅРѕС‡Рё, Р±РµР· СЂР°Р·РЅРёС†С‹."
-              : "A full restaurant inside Avulus. You can come in separately or order food straight to your room. Open around the clock вЂ” breakfast at 6am, dinner at 3am, no problem."}
+              ? "Полноценный ресторан внутри Avulus. Можно зайти отдельно или заказать еду прямо в комнату. Работаем круглосуточно — завтрак в 6 утра, ужин в 3 ночи, без разницы."
+              : "A full restaurant inside Avulus. You can come in separately or order food straight to your room. Open around the clock — breakfast at 6am, dinner at 3am, no problem."}
           </p>
 
           {/* Photo grid */}
@@ -353,35 +357,35 @@ export async function HomePage({ locale }: { locale: Locale }) {
               href={contactLinks.menu}
               target="_blank"
             >
-              {isRu ? "РџРѕСЃРјРѕС‚СЂРµС‚СЊ РјРµРЅСЋ" : "View menu"}
+              {isRu ? "Посмотреть меню" : "View menu"}
             </TrackedLink>
             <TrackedLink
               className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/28 hover:text-white"
               goal="restaurant_call"
               href={contactLinks.call}
             >
-              {isRu ? "РџРѕР·РІРѕРЅРёС‚СЊ" : "Call"}
+              {isRu ? "Позвонить" : "Call"}
             </TrackedLink>
           </div>
         </section>
 
-        {/* в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ
-            SECTION 5 вЂ” РљРћРќРўРђРљРўР«
-        в•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђв•ђ */}
+        {/* ═══════════════════════════════════════
+            SECTION 5 — КОНТАКТЫ
+        ═══════════════════════════════════════ */}
         <section className="section-shell py-16 pb-24 md:py-20" id="contact">
           <div className="brand-card rounded-[32px] p-6 md:p-10">
             <div className="grid gap-10 md:grid-cols-2 md:items-center">
 
-              {/* в”Ђв”Ђ LEFT: info column в”Ђв”Ђ */}
+              {/* ── LEFT: info column ── */}
               <div className="flex flex-col gap-7">
 
                 {/* Eyebrow */}
-                <div className="eyebrow">{isRu ? "РљРѕРЅС‚Р°РєС‚С‹" : "Contacts"}</div>
+                <div className="eyebrow">{isRu ? "Контакты" : "Contacts"}</div>
 
                 {/* Big heading */}
                 <h2 className="font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.92] text-white md:text-6xl">
                   {isRu ? (
-                    <>РџСЂРёС…РѕРґРёС‚Рµ<br />РІ Avulus</>
+                    <>Приходите<br />в Avulus</>
                   ) : (
                     <>Come to<br />Avulus</>
                   )}
@@ -399,7 +403,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
                     </div>
                     <div>
                       <div className="mb-0.5 text-[10px] uppercase tracking-[0.26em] text-white/38">
-                        {isRu ? "РђРґСЂРµСЃ" : "Address"}
+                        {isRu ? "Адрес" : "Address"}
                       </div>
                       <div className="text-sm leading-6 text-white/80">{c.venueAddress}</div>
                     </div>
@@ -414,10 +418,10 @@ export async function HomePage({ locale }: { locale: Locale }) {
                     </div>
                     <div>
                       <div className="mb-0.5 text-[10px] uppercase tracking-[0.26em] text-white/38">
-                        {isRu ? "Р§Р°СЃС‹ СЂР°Р±РѕС‚С‹" : "Hours"}
+                        {isRu ? "Часы работы" : "Hours"}
                       </div>
                       <div className="text-sm leading-6 text-white/80">
-                        {isRu ? "Р•Р¶РµРґРЅРµРІРЅРѕ, 24/7" : "Daily, 24/7"}
+                        {isRu ? "Ежедневно, 24/7" : "Daily, 24/7"}
                       </div>
                     </div>
                   </div>
@@ -431,10 +435,10 @@ export async function HomePage({ locale }: { locale: Locale }) {
                     </div>
                     <div>
                       <div className="mb-0.5 text-[10px] uppercase tracking-[0.26em] text-white/38">
-                        {isRu ? "РџР°СЂРєРѕРІРєР°" : "Parking"}
+                        {isRu ? "Парковка" : "Parking"}
                       </div>
                       <div className="text-sm leading-6 text-white/80">
-                        {isRu ? "Р‘РµСЃРїР»Р°С‚РЅР°СЏ РїР°СЂРєРѕРІРєР° СЂСЏРґРѕРј" : "Free parking nearby"}
+                        {isRu ? "Бесплатная парковка рядом" : "Free parking nearby"}
                       </div>
                     </div>
                   </div>
@@ -443,10 +447,10 @@ export async function HomePage({ locale }: { locale: Locale }) {
                 {/* Hint */}
                 <div>
                   <p className="text-sm font-semibold text-[var(--accent-sand)]">
-                    {isRu ? "РћС‚РІРµС‚РёРј Р·Р° 2 РјРёРЅСѓС‚С‹" : "We reply within 2 minutes"}
+                    {isRu ? "Ответим за 2 минуты" : "We reply within 2 minutes"}
                   </p>
                   <p className="mt-0.5 text-xs text-white/40">
-                    {isRu ? "РџРѕРјРѕР¶РµРј РІС‹Р±СЂР°С‚СЊ С„РѕСЂРјР°С‚" : "We'll help you pick the right format"}
+                    {isRu ? "Поможем выбрать формат" : "We'll help you pick the right format"}
                   </p>
                 </div>
 
@@ -461,7 +465,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
                     <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                     </svg>
-                    {isRu ? "РќР°РїРёСЃР°С‚СЊ РІ Telegram" : "Message on Telegram"}
+                    {isRu ? "Написать в Telegram" : "Message on Telegram"}
                   </TrackedLink>
                   <TrackedLink
                     className="inline-flex items-center gap-2 rounded-full border border-white/16 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/30 hover:text-white"
@@ -471,12 +475,12 @@ export async function HomePage({ locale }: { locale: Locale }) {
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 6.75Z" />
                     </svg>
-                    {isRu ? "РџРѕР·РІРѕРЅРёС‚СЊ" : "Call"}
+                    {isRu ? "Позвонить" : "Call"}
                   </TrackedLink>
                 </div>
               </div>
 
-              {/* в”Ђв”Ђ RIGHT: map в”Ђв”Ђ */}
+              {/* ── RIGHT: map ── */}
               <div className="relative overflow-hidden rounded-[22px] border border-white/10">
                 <iframe
                   className="h-[380px] w-full md:h-[460px]"
@@ -509,7 +513,7 @@ export async function HomePage({ locale }: { locale: Locale }) {
             goal="sticky_call"
             href={contactLinks.call}
           >
-            {isRu ? "Р—РІРѕРЅРѕРє" : "Call"}
+            {isRu ? "Звонок" : "Call"}
           </TrackedLink>
         </div>
       </div>
@@ -518,7 +522,3 @@ export async function HomePage({ locale }: { locale: Locale }) {
     </div>
   );
 }
-
-
-
-

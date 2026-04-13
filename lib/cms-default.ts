@@ -73,18 +73,6 @@ export const defaultCmsContent: CmsContent = {
         title: "Бар",
         description: "Барная карта для позднего ритма площадки: коктейли и напитки без лишнего шума на странице.",
         imageUrl: "/images/dish-cocktail.jpg"
-      },
-      {
-        id: "hot",
-        title: "Р“РѕСЂСЏС‡РµРµ",
-        description: "РџРѕРґР±РѕСЂРєР° РіРѕСЂСЏС‡РёС… РїРѕР·РёС†РёР№ РґР»СЏ РєРѕРјРїР°РЅРёРё Рё РґРѕР»РіРёС… СЃРµСЃСЃРёР№.",
-        imageUrl: "/images/dish-ramen.jpg"
-      },
-      {
-        id: "snacks",
-        title: "Р—Р°РєСѓСЃРєРё",
-        description: "Р›РµРіРєРёРµ Р·Р°РєСѓСЃРєРё РїРѕРґ РёРіСЂСѓ, РѕР±С‰РµРЅРёРµ Рё РЅРѕС‡РЅРѕР№ СЂРёС‚Рј.",
-        imageUrl: "/images/dish-snack.jpg"
       }
     ]
   },
