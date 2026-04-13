@@ -157,6 +157,48 @@ function Input({
   );
 }
 
+function ImageInput({
+  label,
+  value,
+  onChange,
+  onUpload,
+  isUploading,
+  error
+}: {
+  label: string;
+  value: string;
+  onChange: (next: string) => void;
+  onUpload: (file: File) => Promise<void>;
+  isUploading: boolean;
+  error?: string;
+}) {
+  return (
+    <div className="space-y-2">
+      <Input label={label} value={value} onChange={onChange} />
+      <div className="flex items-center gap-2">
+        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+          <input
+            className="hidden"
+            type="file"
+            accept="image/*"
+            onChange={(event) => {
+              const file = event.currentTarget.files?.[0];
+              if (!file) {
+                return;
+              }
+              void onUpload(file);
+              event.currentTarget.value = "";
+            }}
+          />
+          {isUploading ? "Загрузка..." : "Загрузить файл"}
+        </label>
+        <span className="text-xs text-white/55">или вставьте ссылку вручную</span>
+      </div>
+      {error ? <div className="text-xs text-[#ff9a9a]">{error}</div> : null}
+    </div>
+  );
+}
+
 function StringListEditor({
   label,
   values,
@@ -219,6 +261,8 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
   const [dragBlockId, setDragBlockId] = useState<string | null>(null);
   const [status, setStatus] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [uploadingByField, setUploadingByField] = useState<Record<string, boolean>>({});
+  const [uploadErrorByField, setUploadErrorByField] = useState<Record<string, string>>({});
   const selectedBlock = useMemo(() => content.blocks.find((block) => block.id === selection.blockId), [content.blocks, selection.blockId]);
 
   function setBlock(blockId: string, updater: (block: CmsBlock) => CmsBlock) {
@@ -290,6 +334,46 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
   async function handleLogout() {
     await fetch("/api/admin/logout", { method: "POST" });
     router.refresh();
+  }
+
+  async function handleImageUpload(fieldKey: string, file: File, onUploaded: (url: string) => void) {
+    if (!file.type.startsWith("image/")) {
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: "Выберите файл изображения." }));
+      return;
+    }
+
+    if (file.size > 12 * 1024 * 1024) {
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: "Файл слишком большой. Максимум 12MB." }));
+      return;
+    }
+
+    setUploadingByField((current) => ({ ...current, [fieldKey]: true }));
+    setUploadErrorByField((current) => ({ ...current, [fieldKey]: "" }));
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      const payload = (await response.json().catch(() => null)) as { url?: string; error?: string } | null;
+
+      if (!response.ok || !payload?.url) {
+        const message = payload?.error ? `Ошибка загрузки: ${payload.error}` : "Не удалось загрузить файл.";
+        throw new Error(message);
+      }
+
+      onUploaded(payload.url);
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: "" }));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось загрузить файл.";
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: message }));
+    } finally {
+      setUploadingByField((current) => ({ ...current, [fieldKey]: false }));
+    }
   }
 
   return (
@@ -469,7 +553,21 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                                 <div className="text-xs uppercase tracking-[0.2em] text-white/50">Карточка оффера</div>
                                 <Input label="Заголовок" value={card.title} onChange={(value) => setOffers(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, title: value } : item) }))} />
                                 <Input label="Описание" multiline value={card.description} onChange={(value) => setOffers(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, description: value } : item) }))} />
-                                <Input label="Изображение URL" value={card.imageUrl} onChange={(value) => setOffers(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, imageUrl: value } : item) }))} />
+                                <ImageInput
+                                  label="Изображение URL"
+                                  value={card.imageUrl}
+                                  onChange={(value) => setOffers(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, imageUrl: value } : item) }))}
+                                  onUpload={(file) =>
+                                    handleImageUpload(`offers-${card.id}`, file, (url) =>
+                                      setOffers(selectedBlock.id, (block) => ({
+                                        ...block,
+                                        cards: block.cards.map((item) => item.id === card.id ? { ...item, imageUrl: url } : item)
+                                      }))
+                                    )
+                                  }
+                                  isUploading={Boolean(uploadingByField[`offers-${card.id}`])}
+                                  error={uploadErrorByField[`offers-${card.id}`]}
+                                />
                                 <Input label="CTA текст" value={card.cta.label} onChange={(value) => setOffers(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, cta: { ...item.cta, label: value } } : item) }))} />
                                 <Input label="CTA ссылка" value={card.cta.href} onChange={(value) => setOffers(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, cta: { ...item.cta, href: value } } : item) }))} />
                                 <div className="grid grid-cols-3 gap-2">
@@ -516,7 +614,21 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                                 <Input label="Цена день" value={card.dayPrice} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, dayPrice: value } : item) }))} />
                                 <Input label="Цена ночь" value={card.nightPrice} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, nightPrice: value } : item) }))} />
                                 <Input label="Описание" multiline value={card.description} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, description: value } : item) }))} />
-                                <Input label="Изображение URL" value={card.imageUrl} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, imageUrl: value } : item) }))} />
+                                <ImageInput
+                                  label="Изображение URL"
+                                  value={card.imageUrl}
+                                  onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, imageUrl: value } : item) }))}
+                                  onUpload={(file) =>
+                                    handleImageUpload(`rooms-${card.id}`, file, (url) =>
+                                      setRooms(selectedBlock.id, (block) => ({
+                                        ...block,
+                                        cards: block.cards.map((item) => item.id === card.id ? { ...item, imageUrl: url } : item)
+                                      }))
+                                    )
+                                  }
+                                  isUploading={Boolean(uploadingByField[`rooms-${card.id}`])}
+                                  error={uploadErrorByField[`rooms-${card.id}`]}
+                                />
                                 <Input label="Telegram CTA текст" value={card.telegramCta.label} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, telegramCta: { ...item.telegramCta, label: value } } : item) }))} />
                                 <Input label="Telegram CTA ссылка" value={card.telegramCta.href} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, telegramCta: { ...item.telegramCta, href: value } } : item) }))} />
                                 <Input label="Звонок CTA текст" value={card.callCta.label} onChange={(value) => setRooms(selectedBlock.id, (block) => ({ ...block, cards: block.cards.map((item) => item.id === card.id ? { ...item, callCta: { ...item.callCta, label: value } } : item) }))} />
@@ -544,7 +656,21 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                               <div className="space-y-3 rounded-2xl border border-white/10 bg-black/25 p-3">
                                 <div className="text-xs uppercase tracking-[0.2em] text-white/50">Фото</div>
                                 <Input label="Alt/подпись" value={photo.alt} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, photos: block.photos.map((item) => item.id === photo.id ? { ...item, alt: value } : item) }))} />
-                                <Input label="URL" value={photo.imageUrl} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, photos: block.photos.map((item) => item.id === photo.id ? { ...item, imageUrl: value } : item) }))} />
+                                <ImageInput
+                                  label="URL"
+                                  value={photo.imageUrl}
+                                  onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, photos: block.photos.map((item) => item.id === photo.id ? { ...item, imageUrl: value } : item) }))}
+                                  onUpload={(file) =>
+                                    handleImageUpload(`restaurant-${photo.id}`, file, (url) =>
+                                      setRestaurant(selectedBlock.id, (block) => ({
+                                        ...block,
+                                        photos: block.photos.map((item) => item.id === photo.id ? { ...item, imageUrl: url } : item)
+                                      }))
+                                    )
+                                  }
+                                  isUploading={Boolean(uploadingByField[`restaurant-${photo.id}`])}
+                                  error={uploadErrorByField[`restaurant-${photo.id}`]}
+                                />
                               </div>
                             );
                           })()}
