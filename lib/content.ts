@@ -15,7 +15,7 @@ export type ClubZone = {
 
 export type RoomCard = {
   key: string;
-  format: "solo" | "privat" | "vip" | "bootcamp";
+  format: "solo" | "duo" | "bootcamp";
   title: string;
   subtitle: string;
   description: string;
@@ -67,8 +67,7 @@ export const contactLinks = {
   booking: "https://langame.ru/799454394_computerniy_club_avulus-cyber-space_moskva",
   hardware:
     "https://vk.com/away.php?to=https%3A%2F%2Flangame.ru%2F799454394_computerniy_club_avulus-cyber-space_moskva&cc_key=",
-  /** Full menu (QR / Yandex Maps) — replace when the final public menu URL is confirmed */
-  menu: "https://yandex.ru/maps/?text=Avulus%20Cyber%20Space%20ресторан%20меню",
+  menu: "https://vk.me/avuluscyberspace",
   privacy: "#",
   terms: "#",
   cookies: "#"
@@ -108,13 +107,6 @@ type SharedContent = {
   featureContactsBody: string;
   contactsTitle: string;
   contactsSubtitle: string;
-  contactsPhone: string;
-  contactsOpen247: string;
-  contactsParking: string;
-  homeOpenBadge: string;
-  homeOpenSupport: string;
-  homeOffersTitle: string;
-  homeOffersCards: { title: string; body: string; cta: string }[];
   stickyClub: string;
   stickyRestaurant: string;
   cyberclubMetaTitle: string;
@@ -136,10 +128,6 @@ type SharedContent = {
   cyberclubZonesEyebrow: string;
   cyberclubZonesTitle: string;
   cyberclubZonesBody: string;
-  cyberclubSpecsEyebrow: string;
-  cyberclubSpecsTitle: string;
-  cyberclubSpecsBody: string;
-  cyberclubSpecsItems: string[];
   cyberclubBookingEyebrow: string;
   cyberclubBookingTitle: string;
   cyberclubBookingBody: string;
@@ -165,10 +153,6 @@ type SharedContent = {
   restaurantMenuEyebrow: string;
   restaurantMenuTitle: string;
   restaurantMenuBody: string;
-  restaurantShortDescription: string;
-  restaurantMenuButton: string;
-  restaurantMenuUrl: string;
-  restaurantMenuHint: string;
   restaurantReserveEyebrow: string;
   restaurantReserveTitle: string;
   restaurantReserveBody: string;
@@ -195,12 +179,9 @@ type SharedContent = {
   roomsStickyCall: string;
   roomsFilterAll: string;
   roomsFilterSolo: string;
-  roomsFilterPrivat: string;
-  roomsFilterVip: string;
+  roomsFilterDuo: string;
   roomsFilterBootcamp: string;
-  roomsBootcampNote: string;
   roomsPriceLabel: string;
-  roomsPricePending: string;
   roomsStayLabel: string;
   roomsCapacityLabel: string;
   roomsOpenBooking: string;
@@ -231,38 +212,25 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     mapFrameTitle: "Карта Avulus",
     homeTitle: "Avulus Cyber Space | Киберклуб и ресторан 24/7 в центре Москвы",
     homeDescription:
-      "Avulus Cyber Space — премиальный киберклуб, ресторан и бар 24/7 в центре Москвы. Бронь клуба, стол и контакты — в один клик.",
-    homeHeroKicker: "Киберклуб и ресторан в центре Москвы",
+      "Avulus Cyber Space — премиальный киберклуб и самостоятельный ресторан 24/7 в центре Москвы. Бронь клуба, резерв стола, контакты и карта в один клик.",
+    homeHeroKicker: "Премиальное игровое пространство",
     homeBookClub: "Забронировать комп",
-    homeReserveTable: "Забронировать стол",
+    homeReserveTable: "Зарезервировать стол",
     homeCardClubEyebrow: "Клуб",
     homeCardClubBody: "Приватные комнаты, сильные конфиги и быстрая бронь 24/7.",
     homeCardClubLabel: "Забронировать клуб",
     homeCardClubPage: "Страница клуба",
     homeCardRestaurantEyebrow: "Ресторан",
     homeCardRestaurantBody: "Полноценный ресторан 24/7. Можно приехать отдельно, даже без брони клуба.",
-    homeCardRestaurantLabel: "Забронировать стол",
+    homeCardRestaurantLabel: "Зарезервировать стол",
     homeCardRestaurantPage: "Страница ресторана",
     featureAlwaysOpenTitle: "24/7",
     featureAlwaysOpenBody: "Клуб и ресторан работают круглосуточно.",
     featureLocationTitle: "Центр Москвы",
     featureContactsTitle: "Контакты",
-    featureContactsBody: "+7 495 921-22-21 • Telegram",
+    featureContactsBody: "+7 495 921-22-21 • Telegram • VK",
     contactsTitle: "Контакты",
     contactsSubtitle: "Серебрянический переулок, 12с1",
-    contactsPhone: "+7 495 921-22-21",
-    contactsOpen247: "Открыты 24 часа в сутки, 7 дней в неделю",
-    contactsParking: "Бесплатная парковка рядом",
-    homeOpenBadge: "Открыты 24/7",
-    homeOpenSupport: "Клуб, ресторан и бар открыты 24/7",
-    homeOffersTitle: "Специальные предложения",
-    homeOffersCards: [
-      { title: "Ночной слот", body: "Комнаты с комфортной посадкой и быстрым подтверждением в Telegram.", cta: "Уточнить в Telegram" },
-      { title: "Privat / VIP", body: "Форматы для пары и небольшой компании: приватность, диван, сервис.", cta: "Забронировать в Telegram" },
-      { title: "Командные блоки", body: "Bootcamp — комнаты на 5+ человек, единый сценарий вечера.", cta: "Согласовать в Telegram" },
-      { title: "Клуб + ужин", body: "Соберём вечер: игровой формат и стол в ресторане в одном визите.", cta: "Собрать в Telegram" },
-      { title: "Праздник в Avulus", body: "Индивидуальный сценарий без лишних шагов — обсудим детали в мессенджере.", cta: "Обсудить в Telegram" }
-    ],
     stickyClub: "Клуб",
     stickyRestaurant: "Ресторан",
     cyberclubMetaTitle: "Клуб | Avulus Cyber Space",
@@ -281,103 +249,86 @@ const sharedByLocale: Record<Locale, SharedContent> = {
       "Место, куда приезжают не просто поиграть, а провести весь вечер правильно."
     ],
     cyberclubPrimary: "Забронировать комп",
-    cyberclubSecondary: "Позвонить",
+    cyberclubSecondary: "Фото и железо",
     cyberclubPrivateByDesign: "Приватность как часть дизайна",
     cyberclubVipRooms: "VIP-комнаты",
     cyberclubMoodEyebrow: "Атмосфера клуба",
     cyberclubMoodTitle: "Меньше аркады. Больше московской ночи.",
     cyberclubMoodBody:
-      "Avulus должен ощущаться премиальным, камерным и статусным еще до того, как гость начнет сравнивать спецификации.",
+      "Приватные комнаты, сильные конфиги и спокойная тёмная подача собирают клубный опыт без ощущения шумного общего зала.",
     cyberclubZonesEyebrow: "Зоны",
     cyberclubZonesTitle: "Форматы со статусом",
     cyberclubZonesBody:
-      "Каждая зона должна ощущаться как отдельный уровень клуба, а не как еще один набор столов.",
-    cyberclubSpecsEyebrow: "Станции",
-    cyberclubSpecsTitle: "Игровые ПК и периферия",
-    cyberclubSpecsBody:
-      "Понятный уровень конфигураций для соревновательного ритма, стриминга и длинных сессий — без ухода на внешние каталоги.",
-    cyberclubSpecsItems: [
-      "Видеокарты NVIDIA GeForce RTX 4080",
-      "Процессоры Intel Core i7 и AMD Ryzen 7",
-      "32 ГБ оперативной памяти, накопители NVMe SSD",
-      "Мониторы с высокой частотой обновления и геймерская периферия"
-    ],
+      "У каждого формата свой сценарий: для соло-игры, пары, маленькой компании или полноценной командной сессии.",
     cyberclubBookingEyebrow: "Бронь",
     cyberclubBookingTitle: "Забронируй комнату до того, как кто-то займет твой вечер",
     cyberclubBookingBody:
-      "Сценарий для клуба должен закрываться без лишних переходов: открыть бронь, выбрать формат и приехать.",
+      "Выбирай формат, открывай бронь и приезжай без длинных форм, лишних шагов и лишней навигации.",
     cyberclubDirectActions: "Быстрые действия",
-    cyberclubOpenBooking: "Забронировать в Telegram",
+    cyberclubOpenBooking: "Открыть бронь",
     restaurantMetaTitle: "Ресторан | Avulus Cyber Space",
     restaurantMetaDescription:
-      "Кухня и бар Avulus Cyber Space 24/7 в центре Москвы. Бронь стола в Telegram, визуал блюд и ссылка на полное меню.",
+      "Ресторан Avulus — полноценный ресторан 24/7 в центре Москвы. Завтраки, кухня, коктейли и резерв стола отдельно от клуба.",
     restaurantNavHero: "Главное",
     restaurantNavMenu: "Меню",
     restaurantNavReserve: "Резерв",
     restaurantEyebrow: "Ресторан",
-    restaurantTitle: "Ресторан внутри Avulus Cyber Space",
+    restaurantTitle: "Ресторан, который живет отдельно от клуба",
     restaurantBody:
-      "Кухня и бар внутри киберпространства. Открыто 24/7.",
+      "Сюда можно приехать отдельно ради ужина, коктейлей и позднего вечера в центре Москвы, даже если ты не бронируешь клуб.",
     restaurantNotes: [
-      "Кухня и бар работают в едином пространстве с клубом.",
-      "Подходит для ужина, напитков и длинного вечернего ритма.",
-      "Открыто 24/7: можно приехать в любое время."
+      "Можно приехать только ради ресторана, без брони клуба.",
+      "Темный интерьер и ночная подача работают как самостоятельная точка притяжения.",
+      "Ресторан живет в ритме большого города и не выключается ночью."
     ],
-    restaurantPrimary: "Забронировать стол",
-    restaurantSecondary: "Позвонить",
+    restaurantPrimary: "Зарезервировать стол",
+    restaurantSecondary: "Написать в VK",
     restaurantHeroBadge: "Открыто 24/7",
     restaurantHeroHeadline: "Приезжай на ужин. Оставайся до ночи.",
     restaurantHeroSideTitle: "Темный lounge",
     restaurantMoodEyebrow: "Настроение ресторана",
-    restaurantMoodTitle: "Еда и атмосфера без лишних шагов",
+    restaurantMoodTitle: "Не дополнение. Полноценная точка назначения.",
     restaurantMoodBody:
-      "Показываем визуал блюд и напитков; полный список — по ссылке на меню в Яндекс.Картах (обновим после финального QR).",
-    restaurantShortDescription: "Кухня и бар внутри киберпространства. Открыто 24/7.",
-    restaurantMenuButton: "Смотреть полное меню",
-    restaurantMenuUrl: contactLinks.menu,
-    restaurantMenuHint:
-      "Ссылка ведёт на карточку заведения и меню в Яндекс.Картах — заменим на финальный QR, как только команда пришлёт адрес.",
+      "Тёмный интерьер, полноценная кухня и ночной ритм делают ресторан самостоятельной точкой притяжения внутри Avulus.",
     restaurantMenuEyebrow: "Меню",
-    restaurantMenuTitle: "Еда и напитки",
-    restaurantMenuBody: "Коллекция фото ниже; полный перечень — по кнопке меню (обновим ссылку после финального QR).",
+    restaurantMenuTitle: "На весь день и на всю ночь",
+    restaurantMenuBody:
+      "Меню должно читаться не как список категорий, а как уверенное обещание длинного и полноценного вечера.",
     restaurantReserveEyebrow: "Резерв",
     restaurantReserveTitle: "Забронируй стол, пока настроение еще живо",
     restaurantReserveBody:
-      "Для ресторана сценарий должен быть еще проще, чем для клуба: написать, подтвердить стол и приехать.",
+      "Напиши нам, подтверди стол и приезжай. Резерв должен занимать меньше минуты.",
     restaurantDirectActions: "Быстрые действия",
     roomsMetaTitle: "Комнаты | Avulus Cyber Space",
     roomsMetaDescription:
-      "Форматы комнат в Avulus Cyber Space: solo, privat, VIP и bootcamp. Вместимость, сценарии и бронь в Telegram.",
+      "Выберите формат комнаты в Avulus Cyber Space: solo, privat, VIP и bootcamp. Быстрая бронь и контакты в один клик.",
     roomsNavHome: "Главная",
     roomsNavRooms: "Комнаты",
     roomsNavContacts: "Контакты",
     roomsEyebrow: "Комнаты",
     roomsTitle: "Выбери формат быстро, затем сразу перейди к брони",
     roomsBody:
-      "Эта страница убирает сомнения: понятные форматы, вместимость и быстрый контакт без лишних шагов.",
+      "Эта страница убирает сомнения: понятные форматы, видимый прайс и быстрые контакты без лишних шагов.",
     roomsPanelEyebrow: "Для длинных сессий",
     roomsPanelBody: "Для duo и bootcamp важно сразу показывать и клуб, и ресторан как единый сценарий вечера.",
     roomsPanelCta: "Написать по командам",
     roomsHowTitle: "Как это работает",
-    roomsHowBody: "CTA должен быть быстрым: мессенджер, мессенджер, звонок. Без длинных форм и лишних экранов.",
+    roomsHowBody: "Связаться можно сразу: бронь, Telegram, VK или звонок. Без длинных форм и лишних экранов.",
     roomsContactEyebrow: "Варианты связи",
     roomsContactTitle: "Закрывай решение, пока намерение еще высоко",
-    roomsContactBody: "Быстрый контакт: сначала Telegram, при необходимости — звонок.",
+    roomsContactBody: "Быстрый слой контактов без трения: бронь, Telegram, VK и звонок.",
     roomsOpenNow: "Открыть сейчас",
     roomsStickyTelegram: "Telegram",
     roomsStickyVk: "VK",
     roomsStickyCall: "Звонок",
     roomsFilterAll: "Все комнаты",
     roomsFilterSolo: "Solo",
-    roomsFilterPrivat: "Privat",
-    roomsFilterVip: "VIP",
+    roomsFilterDuo: "Privat / VIP",
     roomsFilterBootcamp: "Bootcamp",
-    roomsBootcampNote: "Bootcamp — не отдельный продукт: это комнаты на 5+ человек в общем фильтре форматов.",
-    roomsPriceLabel: "Условия",
-    roomsPricePending: "Уточняем в Telegram",
+    roomsPriceLabel: "Цена",
     roomsStayLabel: "Время",
     roomsCapacityLabel: "Вместимость",
-    roomsOpenBooking: "Забронировать в Telegram",
+    roomsOpenBooking: "Открыть бронь",
     roomsAskVk: "Спросить в VK",
     roomsAddonEyebrow: "Ресторан",
     roomsAddonTitle: "Сохраняй бронь простой, но показывай ресторан как часть длинного визита",
@@ -411,38 +362,25 @@ const sharedByLocale: Record<Locale, SharedContent> = {
     mapFrameTitle: "Avulus map",
     homeTitle: "Avulus Cyber Space | Premium cyberclub and restaurant in Moscow",
     homeDescription:
-      "Avulus Cyber Space is a premium cyberclub with restaurant and bar open 24/7 in central Moscow. Book club time, a table, or reach us in one click.",
-    homeHeroKicker: "Cyberclub and restaurant in central Moscow",
+      "Avulus Cyber Space is a premium cyberclub and standalone 24/7 restaurant in central Moscow. Book a setup, reserve a table, or get in touch in one click.",
+    homeHeroKicker: "Premium gaming space",
     homeBookClub: "Book a setup",
-    homeReserveTable: "Book a table",
+    homeReserveTable: "Reserve a table",
     homeCardClubEyebrow: "Club",
     homeCardClubBody: "Private rooms, high-end gaming hardware and a frictionless booking flow 24/7.",
     homeCardClubLabel: "Book the club",
     homeCardClubPage: "Club page",
     homeCardRestaurantEyebrow: "Restaurant",
     homeCardRestaurantBody: "A full restaurant open 24/7. Guests can come purely for dinner, drinks and the atmosphere.",
-    homeCardRestaurantLabel: "Book a table",
+    homeCardRestaurantLabel: "Reserve a table",
     homeCardRestaurantPage: "Restaurant page",
     featureAlwaysOpenTitle: "24/7",
     featureAlwaysOpenBody: "Both the club and the restaurant are open around the clock.",
     featureLocationTitle: "Central Moscow",
     featureContactsTitle: "Contacts",
-    featureContactsBody: "+7 495 921-22-21 • Telegram",
+    featureContactsBody: "+7 495 921-22-21 • Telegram • VK",
     contactsTitle: "Contacts",
     contactsSubtitle: "12 bld. 1 Serebryanichesky Lane",
-    contactsPhone: "+7 495 921-22-21",
-    contactsOpen247: "Open 24 hours a day, 7 days a week",
-    contactsParking: "Free parking nearby",
-    homeOpenBadge: "Open 24/7",
-    homeOpenSupport: "Club, restaurant, and bar are open 24/7",
-    homeOffersTitle: "Current offers",
-    homeOffersCards: [
-      { title: "Late-night slot", body: "Room formats with comfortable seating and fast confirmation in Telegram.", cta: "Check in Telegram" },
-      { title: "Privat / VIP", body: "Formats for couples and small groups: privacy, sofa, in-room service.", cta: "Book in Telegram" },
-      { title: "Team blocks", body: "Bootcamp means rooms for 5+ people—one flexible evening flow.", cta: "Arrange in Telegram" },
-      { title: "Club + dinner", body: "We’ll shape one visit: gaming time and a restaurant table.", cta: "Plan in Telegram" },
-      { title: "Celebrations", body: "A tailored scenario without extra friction—details in the messenger.", cta: "Discuss in Telegram" }
-    ],
     stickyClub: "Club",
     stickyRestaurant: "Restaurant",
     cyberclubMetaTitle: "Club | Avulus Cyber Space",
@@ -461,103 +399,86 @@ const sharedByLocale: Record<Locale, SharedContent> = {
       "A place people choose for the entire evening, not just for a quick session."
     ],
     cyberclubPrimary: "Book a setup",
-    cyberclubSecondary: "Call",
+    cyberclubSecondary: "Photos and hardware",
     cyberclubPrivateByDesign: "Private by design",
     cyberclubVipRooms: "VIP rooms",
     cyberclubMoodEyebrow: "Club mood",
     cyberclubMoodTitle: "Less arcade. More capital city night.",
     cyberclubMoodBody:
-      "Avulus should feel premium, private and atmospheric before guests even start comparing technical specs.",
+      "Private rooms, strong setups and a darker atmosphere create a calmer premium club experience from the first glance.",
     cyberclubZonesEyebrow: "Zones",
     cyberclubZonesTitle: "Formats with status",
     cyberclubZonesBody:
-      "Each zone should feel like its own tier inside the club, not just another row of gaming desks.",
-    cyberclubSpecsEyebrow: "Setups",
-    cyberclubSpecsTitle: "Gaming PCs and peripherals",
-    cyberclubSpecsBody:
-      "High-tier configurations for competitive play, streaming and long sessions—shown here, without sending people to external catalogs.",
-    cyberclubSpecsItems: [
-      "NVIDIA GeForce RTX 4080 graphics cards",
-      "Intel Core i7 and AMD Ryzen 7 processors",
-      "32 GB RAM and NVMe SSD storage",
-      "High refresh-rate monitors and gaming peripherals"
-    ],
+      "Each format solves a different visit: solo play, a pair, a smaller group or a full team session.",
     cyberclubBookingEyebrow: "Booking",
     cyberclubBookingTitle: "Reserve the room before someone else takes your night",
     cyberclubBookingBody:
-      "The booking flow should close fast: open the booking page, choose the format and arrive.",
+      "Choose the format, open the booking page and arrive without heavy forms or extra steps.",
     cyberclubDirectActions: "Direct actions",
-    cyberclubOpenBooking: "Book in Telegram",
+    cyberclubOpenBooking: "Open booking",
     restaurantMetaTitle: "Restaurant | Avulus Cyber Space",
     restaurantMetaDescription:
-      "Kitchen and bar at Avulus Cyber Space, open 24/7 in central Moscow. Book a table in Telegram, food visuals and link to the full menu.",
+      "Avulus restaurant is a standalone 24/7 destination in central Moscow with breakfast, kitchen, cocktails and quick table reservations.",
     restaurantNavHero: "Hero",
     restaurantNavMenu: "Menu",
     restaurantNavReserve: "Reserve",
     restaurantEyebrow: "Restaurant",
-    restaurantTitle: "Restaurant inside Avulus Cyber Space",
+    restaurantTitle: "A restaurant that lives beyond the club",
     restaurantBody:
-      "Kitchen and bar inside a cyber space. Open 24/7.",
+      "Guests can come here just for dinner, cocktails and a late-night atmosphere in central Moscow, even without booking the club.",
     restaurantNotes: [
-      "Kitchen and bar work in one space with the club.",
-      "Built for food, drinks and a long evening rhythm.",
-      "Open 24/7, so guests can arrive anytime."
+      "Guests can come just for the restaurant, without booking the club.",
+      "The dark interior and nightlife mood work as a destination of their own.",
+      "The restaurant follows the pulse of the city and stays on long after midnight."
     ],
-    restaurantPrimary: "Book a table",
-    restaurantSecondary: "Call",
+    restaurantPrimary: "Reserve a table",
+    restaurantSecondary: "Message on VK",
     restaurantHeroBadge: "Open 24/7",
     restaurantHeroHeadline: "Come for dinner. Stay for the night.",
     restaurantHeroSideTitle: "Dark lounge",
     restaurantMoodEyebrow: "Restaurant mood",
-    restaurantMoodTitle: "Food visuals first, full menu by link",
+    restaurantMoodTitle: "Not an add-on. A destination.",
     restaurantMoodBody:
-      "We showcase food and drinks on the site; the full list opens via the Yandex Maps menu link (we’ll swap in the final QR once the team confirms it).",
-    restaurantShortDescription: "Kitchen and bar inside a cyber space. Open 24/7.",
-    restaurantMenuButton: "View full menu",
-    restaurantMenuUrl: contactLinks.menu,
-    restaurantMenuHint:
-      "Link goes to our venue card and menu on Yandex Maps—we’ll replace it with the final QR URL when you send it.",
+      "A darker interior, full kitchen and late-night rhythm make the restaurant a destination in its own right inside Avulus.",
     restaurantMenuEyebrow: "Menu",
-    restaurantMenuTitle: "Food and drinks",
-    restaurantMenuBody: "Gallery below; full list opens via the menu button (we’ll update the link after the final QR).",
+    restaurantMenuTitle: "All-day and all-night",
+    restaurantMenuBody:
+      "The menu should read less like a category list and more like a promise of a long, fully-formed evening.",
     restaurantReserveEyebrow: "Reserve",
     restaurantReserveTitle: "Reserve the table while the mood is still there",
     restaurantReserveBody:
-      "For the restaurant, the path should be even simpler than for the club: message, confirm the table and arrive.",
+      "Message us, confirm the table and arrive. Reserving should take less than a minute.",
     restaurantDirectActions: "Direct actions",
     roomsMetaTitle: "Rooms | Avulus Cyber Space",
     roomsMetaDescription:
-      "Room formats at Avulus Cyber Space: solo, privat, VIP and bootcamp. Capacity, scenarios and booking in Telegram.",
+      "Choose a room format at Avulus Cyber Space: solo, privat, VIP and bootcamp. Clear options, fast booking and direct contact.",
     roomsNavHome: "Home",
     roomsNavRooms: "Rooms",
     roomsNavContacts: "Contacts",
     roomsEyebrow: "Rooms",
     roomsTitle: "Choose the format fast, then move straight into contact",
     roomsBody:
-      "This page removes uncertainty: clear formats, headcount and one-tap contact without extra steps.",
+      "This page removes uncertainty: clear room formats, visible pricing and one-tap contact options.",
     roomsPanelEyebrow: "For longer stays",
     roomsPanelBody: "For duo and bootcamp visits, the club and restaurant should read as one seamless evening.",
     roomsPanelCta: "Ask about team bookings",
     roomsHowTitle: "How it works",
-    roomsHowBody: "The CTA layer should feel immediate: messenger, messenger, phone. No heavy forms and no extra screens.",
+    roomsHowBody: "Reach out immediately through booking, Telegram, VK or a direct call. No heavy forms and no extra screens.",
     roomsContactEyebrow: "Contact options",
     roomsContactTitle: "Close the loop while intent is still high",
-    roomsContactBody: "Keep the contact layer frictionless: Telegram first, then a direct call.",
+    roomsContactBody: "Keep the contact layer frictionless: booking, Telegram, VK and a direct call.",
     roomsOpenNow: "Open now",
     roomsStickyTelegram: "Telegram",
     roomsStickyVk: "VK",
     roomsStickyCall: "Call",
     roomsFilterAll: "All rooms",
     roomsFilterSolo: "Solo",
-    roomsFilterPrivat: "Privat",
-    roomsFilterVip: "VIP",
+    roomsFilterDuo: "Privat / VIP",
     roomsFilterBootcamp: "Bootcamp",
-    roomsBootcampNote: "Bootcamp is not a separate product—it filters rooms for groups of 5+.",
-    roomsPriceLabel: "Details",
-    roomsPricePending: "Ask in Telegram",
+    roomsPriceLabel: "Price",
     roomsStayLabel: "Stay",
     roomsCapacityLabel: "Capacity",
-    roomsOpenBooking: "Book in Telegram",
+    roomsOpenBooking: "Open booking",
     roomsAskVk: "Ask in VK",
     roomsAddonEyebrow: "Restaurant",
     roomsAddonTitle: "Keep the booking simple, but show the restaurant as part of the full stay",
@@ -581,11 +502,12 @@ export function getSharedContent(locale: Locale) {
 }
 
 export function getHomeNav(locale: Locale): NavItem[] {
-  const c = getSharedContent(locale);
+  const isRu = locale === "ru";
   return [
-    { label: c.homeCardClubEyebrow, href: "#club" },
-    { label: c.homeCardRestaurantEyebrow, href: "#restaurant" },
-    { label: c.contactsTitle, href: "#contact" }
+    { label: isRu ? "Офферы" : "Offers", href: "#offers" },
+    { label: isRu ? "Комнаты" : "Rooms", href: "#rooms" },
+    { label: isRu ? "Ресторан" : "Restaurant", href: "#restaurant" },
+    { label: isRu ? "Контакты" : "Contacts", href: "#contact" }
   ];
 }
 
@@ -603,6 +525,7 @@ export function getCyberclubNav(locale: Locale): NavItem[] {
   return [
     { label: c.cyberclubNavHero, href: "#top" },
     { label: c.cyberclubNavZones, href: "#zones" },
+    { label: locale === "ru" ? "Тарифы" : "Pricing", href: "#pricing" },
     { label: c.cyberclubNavBook, href: "#book" }
   ];
 }
@@ -639,30 +562,32 @@ export function getClubZones(locale: Locale): ClubZone[] {
 export function getRoomCards(locale: Locale): RoomCard[] {
   return locale === "ru"
     ? [
-        { key: "solo-core", format: "solo", title: "Stream Room", subtitle: "Solo-комната под личный режим", description: "Для стрима, спокойной игры и длинной сессии без общего шума и лишних отвлекающих факторов.", price: "", duration: "1–4 часа", capacity: "1 человек", image: "/images/cyberclub-card.jpg", features: ["Приватная посадка", "Подходит для контента", "Быстрый вход в игровой режим"] },
-        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Ночной формат на длинную дистанцию", description: "Для гостей, которые приезжают в клуб не на час, а на полноценный вечерний блок.", price: "", duration: "4 часа", capacity: "1 человек", image: "/images/dish-snack.jpg", features: ["Комфорт на длинной дистанции", "Легко сочетать с рестораном", "Подходит для позднего ритма"] },
-        { key: "privat-sync", format: "privat", title: "Privat", subtitle: "Комната для двоих", description: "Комфортный диван, room service, мини-бар и приватность. Вечер до глубокой ночи — спокойно, уютно, без лишнего шума.", price: "", duration: "1–4 часа", capacity: "1–2 человека", image: "/images/cyberclub-vip.jpg", features: ["Комфортный диван", "Room service", "Мини-бар", "Приватность"] },
-        { key: "vip-premium", format: "vip", title: "VIP", subtitle: "Усиленный приватный формат", description: "Больше пространства и сервиса: диван, room service и мини-бар. Формат для вечера и ночи в комфорте — со статусной подачей.", price: "", duration: "4 часа", capacity: "2–4 человека", image: "/images/restaurant-card.jpg", features: ["Премиальная приватность", "Комфортный диван", "Room service", "Мини-бар"] },
-        { key: "bootcamp-squad", format: "bootcamp", title: "Bootcamp", subtitle: "Комнаты для 5+ человек", description: "Не отдельный продукт — те же комнаты, отфильтрованные под группы 5+: скримы, тренировки и командные блоки в приватной среде.", price: "", duration: "2–6 часов", capacity: "5–8 человек", image: "/images/cyberclub-team.jpg", features: ["Командная посадка", "Сильные конфиги", "Для squads и командных вечеров"] },
-        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "Статусный групповой формат", description: "Для компании, которой нужен максимум комфорта и контроля над пространством на весь вечер.", price: "", duration: "Индивидуально", capacity: "4–8 человек", image: "/images/restaurant-room.jpg", features: ["Максимальный комфорт", "Премиальная подача", "Приватный формат для компании"] }
+        { key: "solo-core", format: "solo", title: "Stream Room", subtitle: "Solo-комната под личный режим", description: "Для стрима, спокойной игры и длинной сессии без общего шума и лишних отвлекающих факторов.", price: "от 290 ₽ / час", duration: "1–4 часа", capacity: "1 игрок", image: "/images/cyberclub-card.jpg", features: ["Приватная посадка", "Подходит для контента", "Быстрый вход в игровой режим"] },
+        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Ночной формат на длинную дистанцию", description: "Для гостей, которые приезжают в клуб не на час, а на полноценный вечер или ночной блок.", price: "от 980 ₽ / блок", duration: "4 часа", capacity: "1 игрок", image: "/images/club-room-green.webp", features: ["Комфорт на длинной дистанции", "Легко сочетать с рестораном", "Подходит для late-night flow"] },
+        { key: "duo-sync", format: "duo", title: "Privat", subtitle: "Комната для двоих", description: "Подходит для кооператива, пары, друзей и всех, кто хочет клуб без ощущения общего зала.", price: "от 490 ₽ / час", duration: "1–4 часа", capacity: "2 игрока", image: "/images/cyberclub-vip.jpg", features: ["TV и диваны", "Приватность", "Удобно для совместного вечера"] },
+        { key: "duo-premium", format: "duo", title: "Privat+ / VIP", subtitle: "Усиленный приватный опыт", description: "Для тех, кто хочет больше комфорта, атмосферы и камерности внутри клуба.", price: "от 890 ₽ / час", duration: "4 часа", capacity: "2–4 игрока", image: "/images/club-room-red.webp", features: ["Премиальный формат", "Для длинных сессий", "Сценарий клуб + ресторан"] },
+        { key: "bootcamp-squad", format: "bootcamp", title: "Bootcamp", subtitle: "Командная игровая зона", description: "Формат под скримы, тренировку, командные вечера и большие игровые блоки в приватной среде.", price: "от 850 ₽ / час", duration: "2–6 часов", capacity: "5 игроков", image: "/images/cyberclub-team.jpg", features: ["Командная посадка", "Сильные конфиги", "Оптимален для squads"] },
+        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "Самый статусный клубный формат", description: "Для гостей, которым нужен private premium experience с максимальным комфортом и контролем над пространством.", price: "по запросу", duration: "Индивидуально", capacity: "Малая группа", image: "/images/cyberclub-vip.jpg", features: ["Максимальный комфорт", "Премиальная подача", "Лучший room-based опыт"] }
       ]
     : [
-        { key: "solo-core", format: "solo", title: "Stream Room", subtitle: "A solo room for a private session", description: "Designed for streaming, focused gaming and longer stays without shared-hall noise.", price: "", duration: "1–4 hours", capacity: "1 person", image: "/images/cyberclub-card.jpg", features: ["Private seating", "Content-friendly setup", "Fast entry into game mode"] },
-        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Late-night format for longer stays", description: "For guests who come in for a full evening block, not just a quick session.", price: "", duration: "4 hours", capacity: "1 person", image: "/images/dish-snack.jpg", features: ["Comfort over longer stays", "Easy to combine with the restaurant", "Built for a late-night flow"] },
-        { key: "privat-sync", format: "privat", title: "Privat", subtitle: "A room for two", description: "Comfortable sofa, room service, minibar and privacy. An evening deep into the night—calm, cosy, without hall noise.", price: "", duration: "1–4 hours", capacity: "1–2 people", image: "/images/cyberclub-vip.jpg", features: ["Comfortable sofa", "Room service", "Minibar", "Privacy"] },
-        { key: "vip-premium", format: "vip", title: "VIP", subtitle: "An elevated private format", description: "More space and service: sofa, room service and minibar. A comfortable evening-and-night format—with a premium feel.", price: "", duration: "4 hours", capacity: "2–4 people", image: "/images/restaurant-card.jpg", features: ["Premium privacy", "Comfortable sofa", "Room service", "Minibar"] },
-        { key: "bootcamp-squad", format: "bootcamp", title: "Bootcamp", subtitle: "Rooms for 5+ people", description: "Not a separate product—the same rooms, filtered for groups of 5+: scrims, training and team blocks in a private setting.", price: "", duration: "2–6 hours", capacity: "5–8 people", image: "/images/cyberclub-team.jpg", features: ["Team seating", "High-end setups", "Built for squads"] },
-        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "Top group format", description: "For groups that want maximum comfort and control over the space for the full evening.", price: "", duration: "Custom", capacity: "4–8 people", image: "/images/restaurant-room.jpg", features: ["Maximum comfort", "Premium presentation", "Private format for groups"] }
+        { key: "solo-core", format: "solo", title: "Stream Room", subtitle: "A solo room for a private session", description: "Designed for streaming, focused gaming and longer stays without shared-hall noise.", price: "from 290 RUB / hour", duration: "1–4 hours", capacity: "1 player", image: "/images/cyberclub-card.jpg", features: ["Private seating", "Content-friendly setup", "Fast entry into game mode"] },
+        { key: "solo-night", format: "solo", title: "Solo Night", subtitle: "Late-night format for longer stays", description: "For guests who come in for a full evening or a night block, not just a quick session.", price: "from 980 RUB / block", duration: "4 hours", capacity: "1 player", image: "/images/club-room-green.webp", features: ["Comfort over longer stays", "Easy to combine with the restaurant", "Built for a late-night flow"] },
+        { key: "duo-sync", format: "duo", title: "Privat", subtitle: "A room for two", description: "A strong fit for co-op play, couples, friends and anyone who wants the club without the shared-hall atmosphere.", price: "from 490 RUB / hour", duration: "1–4 hours", capacity: "2 players", image: "/images/cyberclub-vip.jpg", features: ["TV and lounge seating", "Privacy", "Built for a shared evening"] },
+        { key: "duo-premium", format: "duo", title: "Privat+ / VIP", subtitle: "An elevated private experience", description: "For guests who want more comfort, atmosphere and intimacy inside the club.", price: "from 890 RUB / hour", duration: "4 hours", capacity: "2–4 players", image: "/images/club-room-red.webp", features: ["Premium format", "Built for longer sessions", "Club + restaurant flow"] },
+        { key: "bootcamp-squad", format: "bootcamp", title: "Bootcamp", subtitle: "A team gaming zone", description: "Built for scrims, training, team sessions and longer competitive blocks inside a private environment.", price: "from 850 RUB / hour", duration: "2–6 hours", capacity: "5 players", image: "/images/cyberclub-team.jpg", features: ["Team seating", "High-end setups", "Ideal for squads"] },
+        { key: "bootcamp-event", format: "bootcamp", title: "Super VIP", subtitle: "The most elevated club format", description: "For guests who want a premium private experience with maximum comfort and control over the space.", price: "on request", duration: "Custom", capacity: "Small group", image: "/images/cyberclub-vip.jpg", features: ["Maximum comfort", "Premium presentation", "Top-tier room-based experience"] }
       ];
 }
 
 export function getContactOptions(locale: Locale): ContactOption[] {
   return locale === "ru"
     ? [
+        { label: "Бронь клуба", description: "Быстрый переход в бронирование игровых мест и комнат.", href: contactLinks.booking, goal: "contact_booking" },
         { label: "Telegram", description: "Самый быстрый контакт по клубу, ресторану и любым вопросам.", href: contactLinks.telegram, goal: "contact_telegram" },
         { label: "Позвонить", description: "Для срочных вопросов, навигации по локации и моментального контакта.", href: contactLinks.call, goal: "contact_call" }
       ]
     : [
+        { label: "Club booking", description: "Direct access to the booking page for gaming setups and private rooms.", href: contactLinks.booking, goal: "contact_booking" },
         { label: "Telegram", description: "The fastest channel for club, restaurant and general enquiries.", href: contactLinks.telegram, goal: "contact_telegram" },
         { label: "Call", description: "Best for urgent questions, directions and direct contact.", href: contactLinks.call, goal: "contact_call" }
       ];

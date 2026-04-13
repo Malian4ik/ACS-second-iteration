@@ -1,0 +1,82 @@
+{
+  "home": {
+    "heroSupport": "Собственный ресторан и бар. Открыты без перерывов.",
+    "heroStatusLine": "Прямая связь и мгновенная бронь через Telegram.",
+    "contactsOpenLine": "Открыты 24 часа в сутки, 7 дней в неделю",
+    "contactsParkingLine": "Бесплатная парковка рядом",
+    "promoTitle": "Спецпредложения",
+    "promoSubtitle": "Короткие актуальные офферы с быстрым переходом в Telegram.",
+    "promoCards": [
+      {
+        "id": "night-session",
+        "title": "Ночная сессия 24/7",
+        "description": "Подскажем свободную комнату на ночь.",
+        "ctaLabel": "Написать в Telegram",
+        "ctaHref": "https://t.me/AVULUSbot",
+        "imageUrl": "/images/club-room-red.webp"
+      },
+      {
+        "id": "private-duo",
+        "title": "Privat для двоих",
+        "description": "Приватная комната для пары или коопа.",
+        "ctaLabel": "Уточнить время",
+        "ctaHref": "https://t.me/AVULUSbot",
+        "imageUrl": "/images/cyberclub-vip.jpg"
+      },
+      {
+        "id": "bootcamp-team",
+        "title": "Bootcamp 5+",
+        "description": "Формат для команды и больших составов.",
+        "ctaLabel": "Собрать формат",
+        "ctaHref": "https://t.me/AVULUSbot",
+        "imageUrl": "/images/cyberclub-team.jpg"
+      },
+      {
+        "id": "restaurant-table",
+        "title": "Стол в ресторане 24/7",
+        "description": "Быстрый резерв стола через Telegram.",
+        "ctaLabel": "Забронировать стол",
+        "ctaHref": "https://t.me/AVULUSbot",
+        "imageUrl": "/images/restaurant-real-1.jpg"
+      }
+    ],
+    "primaryCtaLabel": "Написать в Telegram",
+    "secondaryCtaLabel": "Позвонить",
+    "tertiaryCtaLabel": "Открыть бронь"
+  },
+  "restaurant": {
+    "shortDescription": "Ресторан внутри Avulus. Открыто 24/7.",
+    "visualTitle": "Еда и бар",
+    "visualBody": "Еда, бар и быстрый контакт.",
+    "menuButtonLabel": "Смотреть меню",
+    "telegramCtaLabel": "Стол в Telegram",
+    "heroBadge": "Open 24/7",
+    "foodVisuals": [
+      {
+        "id": "food",
+        "title": "Еда",
+        "description": "Кухня на весь вечер.",
+        "imageUrl": "/images/dish-burger.jpg"
+      },
+      {
+        "id": "drinks",
+        "title": "Бар",
+        "description": "Коктейли и напитки 24/7.",
+        "imageUrl": "/images/dish-cocktail.jpg"
+      }
+    ]
+  },
+  "club": {
+    "heroSupport": "Клуб в центре Москвы. Открыты 24/7.",
+    "primaryCtaLabel": "Написать в Telegram",
+    "secondaryCtaLabel": "Позвонить"
+  },
+  "media": {
+    "homeClubCardImage": "/images/club-room-red.webp",
+    "homeRestaurantCardImage": "/images/restaurant-real-1.jpg",
+    "restaurantHeroImage": "/images/restaurant-real-1.jpg",
+    "restaurantSideImage": "/images/restaurant-real-2.jpg",
+    "clubHeroImage": "/images/club-room-green.webp",
+    "clubSideImage": "/images/club-room-red.webp"
+  }
+}

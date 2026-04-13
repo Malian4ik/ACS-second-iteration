@@ -3,6 +3,6 @@ import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata("ru", "restaurant");
 
-export default function Page() {
+export default async function Page() {
   return <RestaurantPage locale="ru" />;
 }

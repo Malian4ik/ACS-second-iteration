@@ -3,6 +3,6 @@ import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata("ru", "cyberclub");
 
-export default function Page() {
+export default async function Page() {
   return <CyberclubPage locale="ru" />;
 }
