@@ -73,10 +73,10 @@ export function PromoCarousel({ cards }: Props) {
               <TrackedLink
                 className="inline-flex w-fit items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.14)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.26)]"
                 goal={`promo_${card.id}`}
-                href={card.ctaHref}
+                href={card.cta.href}
                 target="_blank"
               >
-                {card.ctaLabel}
+                {card.cta.label}
               </TrackedLink>
             </div>
           </article>
