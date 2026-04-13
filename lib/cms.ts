@@ -5,13 +5,39 @@ import { get, put } from "@vercel/blob";
 import { unstable_noStore as noStore } from "next/cache";
 
 import { defaultCmsContent } from "@/lib/cms-default";
-import type { CmsContent } from "@/lib/cms-schema";
+import type { CmsContent, FoodVisualCard } from "@/lib/cms-schema";
 
 const CMS_BLOB_PATH = "cms/site-content.json";
 const LOCAL_CMS_FILE = path.join(process.cwd(), "content", "cms.local.json");
 
 function hasBlobToken() {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+}
+
+function normalizeFoodVisuals(input: Partial<CmsContent> | undefined): FoodVisualCard[] {
+  const source = input?.restaurant?.foodVisuals ?? [];
+  const defaults = defaultCmsContent.restaurant.foodVisuals;
+
+  const usedIds = new Set(source.map((item) => item.id));
+  const completed = [...source];
+
+  for (const fallback of defaults) {
+    if (completed.length >= 4) break;
+    if (!usedIds.has(fallback.id)) {
+      completed.push(fallback);
+      usedIds.add(fallback.id);
+    }
+  }
+
+  const byImage = new Set<string>();
+  const uniqueByImage = completed.filter((item) => {
+    if (!item.imageUrl) return false;
+    if (byImage.has(item.imageUrl)) return false;
+    byImage.add(item.imageUrl);
+    return true;
+  });
+
+  return uniqueByImage.slice(0, 4);
 }
 
 function mergeCmsContent(input: Partial<CmsContent> | undefined): CmsContent {
@@ -26,7 +52,7 @@ function mergeCmsContent(input: Partial<CmsContent> | undefined): CmsContent {
     restaurant: {
       ...defaultCmsContent.restaurant,
       ...input?.restaurant,
-      foodVisuals: input?.restaurant?.foodVisuals ?? defaultCmsContent.restaurant.foodVisuals
+      foodVisuals: normalizeFoodVisuals(input)
     },
     club: {
       ...defaultCmsContent.club,
