@@ -157,6 +157,53 @@ function Input({
   );
 }
 
+function StringListEditor({
+  label,
+  values,
+  onChange,
+  placeholder
+}: {
+  label: string;
+  values: string[];
+  onChange: (next: string[]) => void;
+  placeholder: string;
+}) {
+  return (
+    <div className="space-y-2 rounded-2xl border border-white/10 bg-black/25 p-3">
+      <div className="text-xs uppercase tracking-[0.2em] text-white/50">{label}</div>
+      <div className="flex flex-wrap gap-2">
+        {values.map((item, index) => (
+          <button
+            key={`${item}-${index}`}
+            className="rounded-full border border-white/16 px-3 py-1 text-xs text-white/85"
+            type="button"
+            onClick={() => onChange(values.filter((_, i) => i !== index))}
+          >
+            {item} ×
+          </button>
+        ))}
+      </div>
+      <input
+        className="w-full rounded-full border border-white/14 bg-black/30 px-3 py-2 text-sm text-white outline-none"
+        placeholder={placeholder}
+        onKeyDown={(event) => {
+          if (event.key !== "Enter") {
+            return;
+          }
+          event.preventDefault();
+          const input = event.currentTarget;
+          const value = input.value.trim();
+          if (!value) {
+            return;
+          }
+          onChange([...values, value]);
+          input.value = "";
+        }}
+      />
+    </div>
+  );
+}
+
 function blockLabel(type: BlockType) {
   if (type === "hero") return "Hero";
   if (type === "offers") return "Офферы";
@@ -341,6 +388,59 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                       <Input label="Заголовок" value={selectedBlock.title} onChange={(value) => setHero(selectedBlock.id, (block) => ({ ...block, title: value }))} />
                       <Input label="Подзаголовок" value={selectedBlock.subtitle} onChange={(value) => setHero(selectedBlock.id, (block) => ({ ...block, subtitle: value }))} />
                       <Input label="Описание" multiline value={selectedBlock.description} onChange={(value) => setHero(selectedBlock.id, (block) => ({ ...block, description: value }))} />
+                      <div className="grid gap-3 md:grid-cols-2">
+                        <Input
+                          label="CTA 1 (красная): текст"
+                          value={selectedBlock.primaryCta.label}
+                          onChange={(value) =>
+                            setHero(selectedBlock.id, (block) => ({
+                              ...block,
+                              primaryCta: { ...block.primaryCta, label: value }
+                            }))
+                          }
+                        />
+                        <Input
+                          label="CTA 1 (красная): ссылка"
+                          value={selectedBlock.primaryCta.href}
+                          onChange={(value) =>
+                            setHero(selectedBlock.id, (block) => ({
+                              ...block,
+                              primaryCta: { ...block.primaryCta, href: value }
+                            }))
+                          }
+                        />
+                        <Input
+                          label="CTA 2 (темная): текст"
+                          value={selectedBlock.secondaryCta.label}
+                          onChange={(value) =>
+                            setHero(selectedBlock.id, (block) => ({
+                              ...block,
+                              secondaryCta: { ...block.secondaryCta, label: value }
+                            }))
+                          }
+                        />
+                        <Input
+                          label="CTA 2 (темная): ссылка"
+                          value={selectedBlock.secondaryCta.href}
+                          onChange={(value) =>
+                            setHero(selectedBlock.id, (block) => ({
+                              ...block,
+                              secondaryCta: { ...block.secondaryCta, href: value }
+                            }))
+                          }
+                        />
+                      </div>
+                      <StringListEditor
+                        label="Бейджи Hero"
+                        values={selectedBlock.badges}
+                        placeholder="Введите бейдж и нажмите Enter"
+                        onChange={(values) =>
+                          setHero(selectedBlock.id, (block) => ({
+                            ...block,
+                            badges: values
+                          }))
+                        }
+                      />
                     </>
                   ) : null}
 
