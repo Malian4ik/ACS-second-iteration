@@ -360,14 +360,6 @@ export async function HomePage({ locale }: { locale: Locale }) {
               {isRu ? "Посмотреть меню" : "View menu"}
             </TrackedLink>
             <TrackedLink
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]"
-              goal="restaurant_tg"
-              href={contactLinks.telegram}
-              target="_blank"
-            >
-              {isRu ? "Забронировать стол в TG" : "Book a table on TG"}
-            </TrackedLink>
-            <TrackedLink
               className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/28 hover:text-white"
               goal="restaurant_call"
               href={contactLinks.call}
