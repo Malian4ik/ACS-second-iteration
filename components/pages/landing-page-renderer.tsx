@@ -525,48 +525,50 @@ export function LandingPageRenderer({
 
   return (
     <div className="pb-28 md:pb-0">
-      <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
-        <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
-          <a className="flex items-center gap-3" href="#top" onClick={(event) => previewMode && event.preventDefault()}>
-            <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
-              <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/images/avulus-logo-rgb.png" />
+      {!previewMode ? (
+        <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
+          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
+            <a className="flex items-center gap-3" href="#top" onClick={(event) => previewMode && event.preventDefault()}>
+              <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
+                <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/images/avulus-logo-rgb.png" />
+              </div>
+              <div className="hidden md:block">
+                <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">{content.site.projectName}</div>
+                <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{content.site.brandSubtitle}</div>
+              </div>
+            </a>
+
+            <div className="hidden items-center gap-4 md:flex">
+              {content.site.navigationItems.map((item) => (
+                <a key={item.id} className="text-sm font-medium text-white/68 transition hover:text-white" href={`#${item.blockId}`} onClick={(event) => previewMode && event.preventDefault()}>
+                  {item.label}
+                </a>
+              ))}
             </div>
-            <div className="hidden md:block">
-              <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">{content.site.projectName}</div>
-              <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{content.site.brandSubtitle}</div>
+
+            <ActionLink
+              className="hidden rounded-full bg-[#b11b36] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#c62744] md:inline-flex"
+              goal="nav_primary"
+              href={content.site.navCta.href}
+              label={content.site.navCta.label}
+              previewMode={previewMode}
+            />
+
+            <div className="flex flex-1 items-center justify-end gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:hidden">
+              {content.site.navigationItems.map((item) => (
+                <a
+                  key={item.id}
+                  className="whitespace-nowrap rounded-full border border-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70"
+                  href={`#${item.blockId}`}
+                  onClick={(event) => previewMode && event.preventDefault()}
+                >
+                  {item.label}
+                </a>
+              ))}
             </div>
-          </a>
-
-          <div className="hidden items-center gap-4 md:flex">
-            {content.site.navigationItems.map((item) => (
-              <a key={item.id} className="text-sm font-medium text-white/68 transition hover:text-white" href={`#${item.blockId}`} onClick={(event) => previewMode && event.preventDefault()}>
-                {item.label}
-              </a>
-            ))}
           </div>
-
-          <ActionLink
-            className="hidden rounded-full bg-[#b11b36] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#c62744] md:inline-flex"
-            goal="nav_primary"
-            href={content.site.navCta.href}
-            label={content.site.navCta.label}
-            previewMode={previewMode}
-          />
-
-          <div className="flex flex-1 items-center justify-end gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:hidden">
-            {content.site.navigationItems.map((item) => (
-              <a
-                key={item.id}
-                className="whitespace-nowrap rounded-full border border-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70"
-                href={`#${item.blockId}`}
-                onClick={(event) => previewMode && event.preventDefault()}
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </nav>
+        </nav>
+      ) : null}
 
       <main id="top">
         {visibleBlocks.map((block) =>
