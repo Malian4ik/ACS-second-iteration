@@ -1,6 +1,7 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
+import { useState, useEffect } from "react";
 
 import { TrackedLink } from "@/components/ui/tracked-link";
 import type {
@@ -522,52 +523,115 @@ export function LandingPageRenderer({
   onSelectItem
 }: LandingRendererProps) {
   const visibleBlocks = content.blocks.filter((block) => block.enabled);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  // Close on desktop resize
+  useEffect(() => {
+    function onResize() {
+      if (window.innerWidth >= 768) setMobileOpen(false);
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   return (
     <div className="pb-28 md:pb-0">
       {!previewMode ? (
-        <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
-          <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
-            <a className="flex items-center gap-3" href="#top" onClick={(event) => previewMode && event.preventDefault()}>
-              <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
-                <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/images/avulus-logo-rgb.png" />
-              </div>
-              <div className="hidden md:block">
-                <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">{content.site.projectName}</div>
-                <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{content.site.brandSubtitle}</div>
-              </div>
-            </a>
+        <>
+          {/* ── Nav bar ── */}
+          <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
+            <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
 
-            <div className="hidden items-center gap-4 md:flex">
-              {content.site.navigationItems.map((item) => (
-                <a key={item.id} className="text-sm font-medium text-white/68 transition hover:text-white" href={`#${item.blockId}`} onClick={(event) => previewMode && event.preventDefault()}>
-                  {item.label}
-                </a>
-              ))}
+              {/* Logo */}
+              <a className="flex items-center gap-3" href="#top">
+                <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
+                  <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/images/avulus-logo-rgb.png" />
+                </div>
+                <div className="hidden md:block">
+                  <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">{content.site.projectName}</div>
+                  <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{content.site.brandSubtitle}</div>
+                </div>
+              </a>
+
+              {/* Desktop nav links */}
+              <div className="hidden items-center gap-4 md:flex">
+                {content.site.navigationItems.map((item) => (
+                  <a key={item.id} className="text-sm font-medium text-white/68 transition hover:text-white" href={`#${item.blockId}`}>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+
+              {/* Desktop CTA */}
+              <ActionLink
+                className="hidden rounded-full bg-[#b11b36] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#c62744] md:inline-flex"
+                goal="nav_primary"
+                href={content.site.navCta.href}
+                label={content.site.navCta.label}
+                previewMode={previewMode}
+              />
+
+              {/* Mobile: hamburger button */}
+              <button
+                aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
+                aria-expanded={mobileOpen}
+                onClick={() => setMobileOpen((v) => !v)}
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 bg-white/6 transition hover:bg-white/12 md:hidden"
+              >
+                <span className="flex h-4 w-5 flex-col justify-between">
+                  <span className={`block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 origin-center ${mobileOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+                  <span className={`block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
+                  <span className={`block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 origin-center ${mobileOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+                </span>
+              </button>
+
             </div>
+          </nav>
 
-            <ActionLink
-              className="hidden rounded-full bg-[#b11b36] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#c62744] md:inline-flex"
-              goal="nav_primary"
-              href={content.site.navCta.href}
-              label={content.site.navCta.label}
-              previewMode={previewMode}
-            />
+          {/* ── Mobile backdrop ── */}
+          <div
+            aria-hidden="true"
+            className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+            onClick={() => setMobileOpen(false)}
+          />
 
-            <div className="flex flex-1 items-center justify-end gap-2 overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden md:hidden">
-              {content.site.navigationItems.map((item) => (
-                <a
-                  key={item.id}
-                  className="whitespace-nowrap rounded-full border border-white/10 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70"
-                  href={`#${item.blockId}`}
-                  onClick={(event) => previewMode && event.preventDefault()}
-                >
-                  {item.label}
-                </a>
-              ))}
+          {/* ── Mobile drawer ── */}
+          <div className={`fixed inset-x-0 top-0 z-40 transition-transform duration-300 ease-in-out md:hidden ${mobileOpen ? "translate-y-0" : "-translate-y-full"}`}>
+            <div className="h-20" />
+            <div className="mx-4 overflow-hidden rounded-[28px] border border-white/10 bg-[rgba(10,10,10,0.96)] shadow-2xl backdrop-blur-2xl">
+              <div className="flex flex-col divide-y divide-white/6">
+                {content.site.navigationItems.map((item, i) => (
+                  <a
+                    key={item.id}
+                    href={`#${item.blockId}`}
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center px-6 py-4 text-base font-medium text-white/68 transition hover:text-white"
+                  >
+                    <span className="mr-3 text-[10px] uppercase tracking-[0.3em] text-white/28">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {item.label}
+                  </a>
+                ))}
+              </div>
+              <div className="p-4">
+                <ActionLink
+                  className="flex w-full items-center justify-center rounded-full bg-[#b11b36] px-6 py-3.5 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[#c62744]"
+                  goal="nav_mobile_cta"
+                  href={content.site.navCta.href}
+                  label={content.site.navCta.label}
+                  previewMode={previewMode}
+                />
+              </div>
             </div>
           </div>
-        </nav>
+        </>
       ) : null}
 
       <main id="top">
