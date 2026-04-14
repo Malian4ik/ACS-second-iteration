@@ -21,7 +21,12 @@ export const metadata: Metadata = {
     default: "Avulus Cyber Space",
     template: "%s"
   },
-  description: "Премиальный киберклуб и ресторан 24/7 в центре Москвы."
+  description: "Премиальный киберклуб и ресторан 24/7 в центре Москвы.",
+  icons: {
+    icon: "/images/avulus-logo-rgb.png",
+    shortcut: "/images/avulus-logo-rgb.png",
+    apple: "/images/avulus-logo-rgb.png"
+  }
 };
 
 export default function RootLayout({
