@@ -111,6 +111,7 @@ function createBlock(type: BlockType): CmsBlock {
       subtitle: "Кухня, коктейли и румсервис в комнаты клуба. Открыты 24/7.",
       description: "Полноценный ресторан внутри Avulus.",
       photos: [],
+      menuEmbedUrl: "",
       menuCta: { label: "Посмотреть меню", href: "https://vk.me/avuluscyberspace" },
       telegramCta: { label: "Забронировать стол в TG", href: "https://t.me/AVULUSbot" },
       callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -646,6 +647,17 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                       <Input label="Заголовок" value={selectedBlock.title} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, title: value }))} />
                       <Input label="Подзаголовок" multiline value={selectedBlock.subtitle} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, subtitle: value }))} />
                       <Input label="Описание" multiline value={selectedBlock.description} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, description: value }))} />
+                      <Input label="Кнопка меню: текст" value={selectedBlock.menuCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, menuCta: { ...block.menuCta, label: value } }))} />
+                      <Input label="Кнопка меню: fallback-ссылка" value={selectedBlock.menuCta.href} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, menuCta: { ...block.menuCta, href: value } }))} />
+                      <Input
+                        label="Ссылка на встроенное меню (Google Doc/PDF)"
+                        value={selectedBlock.menuEmbedUrl}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, menuEmbedUrl: value }))}
+                      />
+                      <Input label="Telegram CTA: текст" value={selectedBlock.telegramCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, label: value } }))} />
+                      <Input label="Telegram CTA: ссылка" value={selectedBlock.telegramCta.href} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, href: value } }))} />
+                      <Input label="Звонок CTA: текст" value={selectedBlock.callCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, callCta: { ...block.callCta, label: value } }))} />
+                      <Input label="Звонок CTA: ссылка" value={selectedBlock.callCta.href} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, callCta: { ...block.callCta, href: value } }))} />
                       <button className="rounded-full border border-white/15 px-3 py-2 text-xs" type="button" onClick={() => setRestaurant(selectedBlock.id, (block) => ({ ...block, photos: [...block.photos, createPhoto()] }))}>+ Фото</button>
                       {selection.itemId ? (
                         <>

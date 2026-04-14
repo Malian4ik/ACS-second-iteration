@@ -176,6 +176,7 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         subtitle: asString(block.subtitle, defaults.subtitle),
         description: asString(block.description, defaults.description),
         photos: normalizeRestaurantPhotos(block.photos, defaults.photos),
+        menuEmbedUrl: asString(block.menuEmbedUrl, defaults.menuEmbedUrl),
         menuCta: normalizeCta(block.menuCta, defaults.menuCta),
         telegramCta: normalizeCta(block.telegramCta, defaults.telegramCta),
         callCta: normalizeCta(block.callCta, defaults.callCta)

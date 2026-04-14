@@ -86,6 +86,7 @@ export type RestaurantBlock = BaseBlock & {
   subtitle: string;
   description: string;
   photos: RestaurantPhoto[];
+  menuEmbedUrl: string;
   menuCta: CmsCta;
   telegramCta: CmsCta;
   callCta: CmsCta;

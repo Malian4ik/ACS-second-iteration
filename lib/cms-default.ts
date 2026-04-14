@@ -173,6 +173,7 @@ export const defaultCmsContent: CmsContent = {
         { id: "rest-photo-3", imageUrl: "/images/dish-ramen.jpg", alt: "Горячие блюда" },
         { id: "rest-photo-4", imageUrl: "/images/dish-snack.jpg", alt: "Зал и закуски" }
       ],
+      menuEmbedUrl: "",
       menuCta: {
         label: "Посмотреть меню",
         href: "https://vk.me/avuluscyberspace"

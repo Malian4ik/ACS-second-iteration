@@ -27,6 +27,25 @@ function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://") || href.startsWith("tel:") || href.startsWith("mailto:");
 }
 
+function normalizeMenuEmbedUrl(rawUrl: string) {
+  const value = rawUrl.trim();
+  if (!value) {
+    return "";
+  }
+
+  const googleDoc = value.match(/docs\.google\.com\/document\/d\/([^/]+)/i);
+  if (googleDoc?.[1]) {
+    return `https://docs.google.com/document/d/${googleDoc[1]}/preview`;
+  }
+
+  const googleDriveFile = value.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
+  if (googleDriveFile?.[1]) {
+    return `https://drive.google.com/file/d/${googleDriveFile[1]}/preview`;
+  }
+
+  return value;
+}
+
 function ActionLink({
   className,
   href,
@@ -337,7 +356,8 @@ function renderRestaurantBlock({
   selected,
   selectedItemId,
   onSelectBlock,
-  onSelectItem
+  onSelectItem,
+  onOpenMenu
 }: {
   block: RestaurantBlock;
   previewMode?: boolean;
@@ -345,7 +365,10 @@ function renderRestaurantBlock({
   selectedItemId?: string;
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
+  onOpenMenu?: (title: string, url: string) => void;
 }) {
+  const menuEmbedUrl = normalizeMenuEmbedUrl(block.menuEmbedUrl);
+
   return (
     <section
       className={`section-shell py-16 md:py-20 ${blockShellClass({ selected, previewMode })}`}
@@ -392,13 +415,29 @@ function renderRestaurantBlock({
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        <ActionLink
-          className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
-          goal="restaurant_menu"
-          href={block.menuCta.href}
-          label={block.menuCta.label}
-          previewMode={previewMode}
-        />
+        {menuEmbedUrl ? (
+          <button
+            className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
+            type="button"
+            onClick={(event) => {
+              if (previewMode) {
+                event.preventDefault();
+                return;
+              }
+              onOpenMenu?.(block.menuCta.label, menuEmbedUrl);
+            }}
+          >
+            {block.menuCta.label}
+          </button>
+        ) : (
+          <ActionLink
+            className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
+            goal="restaurant_menu"
+            href={block.menuCta.href}
+            label={block.menuCta.label}
+            previewMode={previewMode}
+          />
+        )}
         <ActionLink
           className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/28 hover:text-white"
           goal="restaurant_tg"
@@ -489,7 +528,8 @@ function renderBlock({
   selected,
   selectedItemId,
   onSelectBlock,
-  onSelectItem
+  onSelectItem,
+  onOpenMenu
 }: {
   block: CmsBlock;
   previewMode?: boolean;
@@ -497,6 +537,7 @@ function renderBlock({
   selectedItemId?: string;
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
+  onOpenMenu?: (title: string, url: string) => void;
 }) {
   switch (block.type) {
     case "hero":
@@ -506,7 +547,7 @@ function renderBlock({
     case "rooms":
       return renderRoomsBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem });
     case "restaurant":
-      return renderRestaurantBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem });
+      return renderRestaurantBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem, onOpenMenu });
     case "contacts":
       return renderContactsBlock({ block, previewMode, selected, onSelectBlock });
     default:
@@ -524,6 +565,7 @@ export function LandingPageRenderer({
 }: LandingRendererProps) {
   const visibleBlocks = content.blocks.filter((block) => block.enabled);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuModal, setMenuModal] = useState<{ title: string; url: string } | null>(null);
 
   // Close on desktop resize
   useEffect(() => {
@@ -642,10 +684,29 @@ export function LandingPageRenderer({
             selected: selectedBlockId === block.id,
             selectedItemId,
             onSelectBlock,
-            onSelectItem
+            onSelectItem,
+            onOpenMenu: (title, url) => setMenuModal({ title, url })
           })
         )}
       </main>
+
+      {menuModal && !previewMode ? (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/78 px-3 py-6 backdrop-blur-sm">
+          <div className="relative w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/12 bg-[#0b0e14] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
+            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+              <div className="text-sm font-semibold uppercase tracking-[0.16em] text-white/85">{menuModal.title}</div>
+              <button
+                className="rounded-full border border-white/16 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/80 transition hover:border-white/28 hover:text-white"
+                type="button"
+                onClick={() => setMenuModal(null)}
+              >
+                Закрыть
+              </button>
+            </div>
+            <iframe className="h-[78vh] w-full bg-white" src={menuModal.url} title={menuModal.title} />
+          </div>
+        </div>
+      ) : null}
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-2 py-2.5 backdrop-blur md:hidden">
         <div className="mx-auto flex max-w-xl gap-1.5 text-xs">
