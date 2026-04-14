@@ -115,6 +115,9 @@ function createBlock(type: BlockType): CmsBlock {
       foodMenuUrl: "",
       barMenuUrl: "",
       cocktailsMenuUrl: "",
+      foodMenuImages: [],
+      barMenuImages: [],
+      cocktailsMenuImages: [],
       menuCta: { label: "Посмотреть меню", href: "https://vk.me/avuluscyberspace" },
       telegramCta: { label: "Забронировать стол в TG", href: "https://t.me/AVULUSbot" },
       callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -415,6 +418,17 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
     }
   }
 
+  function splitLines(value: string) {
+    return value
+      .split(/\r?\n/)
+      .map((item) => item.trim())
+      .filter(Boolean);
+  }
+
+  function joinLines(values: string[]) {
+    return values.join("\n");
+  }
+
   return (
     <div className="min-h-screen bg-[#07090d] px-4 py-8 text-white">
       <div className="mx-auto max-w-[1640px] space-y-6">
@@ -697,6 +711,33 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                         value={selectedBlock.foodMenuUrl}
                         onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, foodMenuUrl: value }))}
                       />
+                      <Input
+                        label="Картинки меню кухни (по одной ссылке на строку)"
+                        multiline
+                        value={joinLines(selectedBlock.foodMenuImages)}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, foodMenuImages: splitLines(value) }))}
+                      />
+                      <div className="flex items-center gap-2">
+                        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files?.[0];
+                              if (!file) return;
+                              void handleImageUpload("restaurant-food-image", file, (url) =>
+                                setRestaurant(selectedBlock.id, (block) => ({ ...block, foodMenuImages: [...block.foodMenuImages, url] }))
+                              );
+                              event.currentTarget.value = "";
+                            }}
+                          />
+                          {uploadingByField["restaurant-food-image"] ? "Загрузка..." : "Загрузить картинку кухни"}
+                        </label>
+                        {uploadErrorByField["restaurant-food-image"] ? (
+                          <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-food-image"]}</span>
+                        ) : null}
+                      </div>
                       <div className="flex items-center gap-2">
                         <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
                           <input
@@ -723,6 +764,33 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                         value={selectedBlock.barMenuUrl}
                         onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, barMenuUrl: value }))}
                       />
+                      <Input
+                        label="Картинки меню бара (по одной ссылке на строку)"
+                        multiline
+                        value={joinLines(selectedBlock.barMenuImages)}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, barMenuImages: splitLines(value) }))}
+                      />
+                      <div className="flex items-center gap-2">
+                        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files?.[0];
+                              if (!file) return;
+                              void handleImageUpload("restaurant-bar-image", file, (url) =>
+                                setRestaurant(selectedBlock.id, (block) => ({ ...block, barMenuImages: [...block.barMenuImages, url] }))
+                              );
+                              event.currentTarget.value = "";
+                            }}
+                          />
+                          {uploadingByField["restaurant-bar-image"] ? "Загрузка..." : "Загрузить картинку бара"}
+                        </label>
+                        {uploadErrorByField["restaurant-bar-image"] ? (
+                          <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-bar-image"]}</span>
+                        ) : null}
+                      </div>
                       <div className="flex items-center gap-2">
                         <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
                           <input
@@ -749,6 +817,33 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                         value={selectedBlock.cocktailsMenuUrl}
                         onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, cocktailsMenuUrl: value }))}
                       />
+                      <Input
+                        label="Картинки меню коктейлей (по одной ссылке на строку)"
+                        multiline
+                        value={joinLines(selectedBlock.cocktailsMenuImages)}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, cocktailsMenuImages: splitLines(value) }))}
+                      />
+                      <div className="flex items-center gap-2">
+                        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept="image/*"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files?.[0];
+                              if (!file) return;
+                              void handleImageUpload("restaurant-cocktails-image", file, (url) =>
+                                setRestaurant(selectedBlock.id, (block) => ({ ...block, cocktailsMenuImages: [...block.cocktailsMenuImages, url] }))
+                              );
+                              event.currentTarget.value = "";
+                            }}
+                          />
+                          {uploadingByField["restaurant-cocktails-image"] ? "Загрузка..." : "Загрузить картинку коктейлей"}
+                        </label>
+                        {uploadErrorByField["restaurant-cocktails-image"] ? (
+                          <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-cocktails-image"]}</span>
+                        ) : null}
+                      </div>
                       <div className="flex items-center gap-2">
                         <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
                           <input

@@ -26,8 +26,10 @@ type LandingRendererProps = {
 type MenuDoc = {
   id: string;
   label: string;
+  kind: "images" | "embed";
   embedUrl: string;
   sourceUrl: string;
+  images?: string[];
 };
 
 function isExternalHref(href: string) {
@@ -384,31 +386,73 @@ function renderRestaurantBlock({
   onSelectItem?: (blockId: string, itemId: string) => void;
   onOpenMenu?: (title: string, docs: MenuDoc[]) => void;
 }) {
-  const menuDocs: MenuDoc[] = [
-    {
+  const foodImages = block.foodMenuImages.map((item) => item.trim()).filter(Boolean);
+  const barImages = block.barMenuImages.map((item) => item.trim()).filter(Boolean);
+  const cocktailsImages = block.cocktailsMenuImages.map((item) => item.trim()).filter(Boolean);
+
+  const menuDocs: MenuDoc[] = [];
+
+  if (foodImages.length > 0) {
+    menuDocs.push({
       id: "food",
       label: "Кухня",
+      kind: "images",
+      embedUrl: foodImages[0],
+      sourceUrl: foodImages[0],
+      images: foodImages
+    });
+  } else if (block.foodMenuUrl.trim()) {
+    menuDocs.push({
+      id: "food",
+      label: "Кухня",
+      kind: "embed",
       sourceUrl: block.foodMenuUrl.trim(),
       embedUrl: normalizeMenuEmbedUrl(block.foodMenuUrl)
-    },
-    {
+    });
+  }
+
+  if (barImages.length > 0) {
+    menuDocs.push({
       id: "bar",
       label: "Бар",
+      kind: "images",
+      embedUrl: barImages[0],
+      sourceUrl: barImages[0],
+      images: barImages
+    });
+  } else if (block.barMenuUrl.trim()) {
+    menuDocs.push({
+      id: "bar",
+      label: "Бар",
+      kind: "embed",
       sourceUrl: block.barMenuUrl.trim(),
       embedUrl: normalizeMenuEmbedUrl(block.barMenuUrl)
-    },
-    {
+    });
+  }
+
+  if (cocktailsImages.length > 0) {
+    menuDocs.push({
       id: "cocktails",
       label: "Коктейли",
+      kind: "images",
+      embedUrl: cocktailsImages[0],
+      sourceUrl: cocktailsImages[0],
+      images: cocktailsImages
+    });
+  } else if (block.cocktailsMenuUrl.trim()) {
+    menuDocs.push({
+      id: "cocktails",
+      label: "Коктейли",
+      kind: "embed",
       sourceUrl: block.cocktailsMenuUrl.trim(),
       embedUrl: normalizeMenuEmbedUrl(block.cocktailsMenuUrl)
-    }
-  ].filter((doc) => doc.embedUrl);
+    });
+  }
 
   if (menuDocs.length === 0) {
     const legacyMenu = normalizeMenuEmbedUrl(block.menuEmbedUrl);
     if (legacyMenu) {
-      menuDocs.push({ id: "menu", label: "Меню", sourceUrl: block.menuEmbedUrl.trim(), embedUrl: legacyMenu });
+      menuDocs.push({ id: "menu", label: "Меню", kind: "embed", sourceUrl: block.menuEmbedUrl.trim(), embedUrl: legacyMenu });
     }
   }
 
@@ -608,7 +652,7 @@ export function LandingPageRenderer({
 }: LandingRendererProps) {
   const visibleBlocks = content.blocks.filter((block) => block.enabled);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [menuModal, setMenuModal] = useState<{ title: string; docs: MenuDoc[]; activeId: string } | null>(null);
+  const [menuModal, setMenuModal] = useState<{ title: string; docs: MenuDoc[]; activeId: string; activeImageIndex: number } | null>(null);
 
   // Close on desktop resize
   useEffect(() => {
@@ -732,7 +776,8 @@ export function LandingPageRenderer({
               setMenuModal({
                 title,
                 docs,
-                activeId: docs[0]?.id ?? "menu"
+                activeId: docs[0]?.id ?? "menu",
+                activeImageIndex: 0
               })
           })
         )}
@@ -754,7 +799,7 @@ export function LandingPageRenderer({
                             : "border-white/16 text-white/80 hover:border-white/28 hover:text-white"
                         }`}
                         type="button"
-                        onClick={() => setMenuModal((current) => (current ? { ...current, activeId: doc.id } : current))}
+                        onClick={() => setMenuModal((current) => (current ? { ...current, activeId: doc.id, activeImageIndex: 0 } : current))}
                       >
                         {doc.label}
                       </button>
@@ -774,18 +819,79 @@ export function LandingPageRenderer({
               if (!activeDoc) {
                 return null;
               }
+
+              if (activeDoc.kind === "images" && activeDoc.images && activeDoc.images.length > 0) {
+                const imageIndex = Math.min(menuModal.activeImageIndex, activeDoc.images.length - 1);
+                const activeImage = activeDoc.images[imageIndex];
+                return (
+                  <div className="bg-[#0a0d13] p-4">
+                    <div className="relative mx-auto flex h-[70vh] items-center justify-center overflow-hidden rounded-[16px] border border-white/10 bg-black/35">
+                      <Image
+                        alt={`${menuModal.title} ${activeDoc.label}`}
+                        className="h-full w-full object-contain"
+                        fill
+                        sizes="100vw"
+                        src={activeImage}
+                      />
+                      {activeDoc.images.length > 1 ? (
+                        <>
+                          <button
+                            className="absolute left-3 rounded-full border border-white/20 bg-black/45 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white"
+                            type="button"
+                            onClick={() =>
+                              setMenuModal((current) =>
+                                current
+                                  ? {
+                                      ...current,
+                                      activeImageIndex: current.activeImageIndex > 0 ? current.activeImageIndex - 1 : activeDoc.images!.length - 1
+                                    }
+                                  : current
+                              )
+                            }
+                          >
+                            Назад
+                          </button>
+                          <button
+                            className="absolute right-3 rounded-full border border-white/20 bg-black/45 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white"
+                            type="button"
+                            onClick={() =>
+                              setMenuModal((current) =>
+                                current
+                                  ? {
+                                      ...current,
+                                      activeImageIndex: current.activeImageIndex < activeDoc.images!.length - 1 ? current.activeImageIndex + 1 : 0
+                                    }
+                                  : current
+                              )
+                            }
+                          >
+                            Вперед
+                          </button>
+                        </>
+                      ) : null}
+                    </div>
+                    {activeDoc.images.length > 1 ? (
+                      <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
+                        {activeDoc.images.map((imageUrl, index) => (
+                          <button
+                            key={imageUrl}
+                            className={`relative h-16 w-24 flex-none overflow-hidden rounded-lg border ${
+                              index === imageIndex ? "border-[var(--accent-green)]" : "border-white/20"
+                            }`}
+                            type="button"
+                            onClick={() => setMenuModal((current) => (current ? { ...current, activeImageIndex: index } : current))}
+                          >
+                            <Image alt={`${activeDoc.label} ${index + 1}`} className="object-cover" fill sizes="96px" src={imageUrl} />
+                          </button>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              }
+
               return (
                 <>
-                  <div className="border-b border-white/10 px-5 py-2 text-right">
-                    <a
-                      className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70 hover:text-white"
-                      href={activeDoc.sourceUrl || activeDoc.embedUrl}
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Открыть в новой вкладке
-                    </a>
-                  </div>
                   <iframe className="h-[74vh] w-full bg-white" src={activeDoc.embedUrl} title={`${menuModal.title} — ${activeDoc.label}`} />
                 </>
               );
