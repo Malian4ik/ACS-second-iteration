@@ -86,7 +86,10 @@ export type RestaurantBlock = BaseBlock & {
   subtitle: string;
   description: string;
   photos: RestaurantPhoto[];
+  // Legacy field kept for backward compatibility with old CMS payloads.
   menuEmbedUrl: string;
+  foodMenuUrl: string;
+  barMenuUrl: string;
   menuCta: CmsCta;
   telegramCta: CmsCta;
   callCta: CmsCta;

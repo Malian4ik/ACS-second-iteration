@@ -23,6 +23,12 @@ type LandingRendererProps = {
   onSelectItem?: (blockId: string, itemId: string) => void;
 };
 
+type MenuDoc = {
+  id: string;
+  label: string;
+  url: string;
+};
+
 function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://") || href.startsWith("tel:") || href.startsWith("mailto:");
 }
@@ -41,6 +47,16 @@ function normalizeMenuEmbedUrl(rawUrl: string) {
   const googleDriveFile = value.match(/drive\.google\.com\/file\/d\/([^/]+)/i);
   if (googleDriveFile?.[1]) {
     return `https://drive.google.com/file/d/${googleDriveFile[1]}/preview`;
+  }
+
+  const googleDriveOpenId = value.match(/[?&]id=([^&]+)/i);
+  if (value.includes("drive.google.com") && googleDriveOpenId?.[1]) {
+    return `https://drive.google.com/file/d/${googleDriveOpenId[1]}/preview`;
+  }
+
+  const googleDriveUcId = value.match(/drive\.google\.com\/uc\?(?:export=download&)?id=([^&]+)/i);
+  if (googleDriveUcId?.[1]) {
+    return `https://drive.google.com/file/d/${googleDriveUcId[1]}/preview`;
   }
 
   return value;
@@ -365,9 +381,19 @@ function renderRestaurantBlock({
   selectedItemId?: string;
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
-  onOpenMenu?: (title: string, url: string) => void;
+  onOpenMenu?: (title: string, docs: MenuDoc[]) => void;
 }) {
-  const menuEmbedUrl = normalizeMenuEmbedUrl(block.menuEmbedUrl);
+  const menuDocs: MenuDoc[] = [
+    { id: "food", label: "Кухня", url: normalizeMenuEmbedUrl(block.foodMenuUrl) },
+    { id: "bar", label: "Бар", url: normalizeMenuEmbedUrl(block.barMenuUrl) }
+  ].filter((doc) => doc.url);
+
+  if (menuDocs.length === 0) {
+    const legacyMenu = normalizeMenuEmbedUrl(block.menuEmbedUrl);
+    if (legacyMenu) {
+      menuDocs.push({ id: "menu", label: "Меню", url: legacyMenu });
+    }
+  }
 
   return (
     <section
@@ -415,7 +441,7 @@ function renderRestaurantBlock({
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        {menuEmbedUrl ? (
+        {menuDocs.length > 0 ? (
           <button
             className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
             type="button"
@@ -424,7 +450,7 @@ function renderRestaurantBlock({
                 event.preventDefault();
                 return;
               }
-              onOpenMenu?.(block.menuCta.label, menuEmbedUrl);
+              onOpenMenu?.(block.menuCta.label, menuDocs);
             }}
           >
             {block.menuCta.label}
@@ -537,7 +563,7 @@ function renderBlock({
   selectedItemId?: string;
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
-  onOpenMenu?: (title: string, url: string) => void;
+  onOpenMenu?: (title: string, docs: MenuDoc[]) => void;
 }) {
   switch (block.type) {
     case "hero":
@@ -565,7 +591,7 @@ export function LandingPageRenderer({
 }: LandingRendererProps) {
   const visibleBlocks = content.blocks.filter((block) => block.enabled);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [menuModal, setMenuModal] = useState<{ title: string; url: string } | null>(null);
+  const [menuModal, setMenuModal] = useState<{ title: string; docs: MenuDoc[]; activeId: string } | null>(null);
 
   // Close on desktop resize
   useEffect(() => {
@@ -685,7 +711,12 @@ export function LandingPageRenderer({
             selectedItemId,
             onSelectBlock,
             onSelectItem,
-            onOpenMenu: (title, url) => setMenuModal({ title, url })
+            onOpenMenu: (title, docs) =>
+              setMenuModal({
+                title,
+                docs,
+                activeId: docs[0]?.id ?? "menu"
+              })
           })
         )}
       </main>
@@ -694,7 +725,25 @@ export function LandingPageRenderer({
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/78 px-3 py-6 backdrop-blur-sm">
           <div className="relative w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/12 bg-[#0b0e14] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
             <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-              <div className="text-sm font-semibold uppercase tracking-[0.16em] text-white/85">{menuModal.title}</div>
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="text-sm font-semibold uppercase tracking-[0.16em] text-white/85">{menuModal.title}</div>
+                {menuModal.docs.length > 1
+                  ? menuModal.docs.map((doc) => (
+                      <button
+                        key={doc.id}
+                        className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
+                          doc.id === menuModal.activeId
+                            ? "border-[rgba(26,90,73,0.8)] bg-[rgba(26,90,73,0.25)] text-white"
+                            : "border-white/16 text-white/80 hover:border-white/28 hover:text-white"
+                        }`}
+                        type="button"
+                        onClick={() => setMenuModal((current) => (current ? { ...current, activeId: doc.id } : current))}
+                      >
+                        {doc.label}
+                      </button>
+                    ))
+                  : null}
+              </div>
               <button
                 className="rounded-full border border-white/16 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/80 transition hover:border-white/28 hover:text-white"
                 type="button"
@@ -703,7 +752,27 @@ export function LandingPageRenderer({
                 Закрыть
               </button>
             </div>
-            <iframe className="h-[78vh] w-full bg-white" src={menuModal.url} title={menuModal.title} />
+            {(() => {
+              const activeDoc = menuModal.docs.find((doc) => doc.id === menuModal.activeId) ?? menuModal.docs[0];
+              if (!activeDoc) {
+                return null;
+              }
+              return (
+                <>
+                  <div className="border-b border-white/10 px-5 py-2 text-right">
+                    <a
+                      className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70 hover:text-white"
+                      href={activeDoc.url}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Открыть в новой вкладке
+                    </a>
+                  </div>
+                  <iframe className="h-[74vh] w-full bg-white" src={activeDoc.url} title={`${menuModal.title} — ${activeDoc.label}`} />
+                </>
+              );
+            })()}
           </div>
         </div>
       ) : null}

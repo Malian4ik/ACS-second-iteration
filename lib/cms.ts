@@ -168,6 +168,11 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         cards: normalizeRoomCards(block.cards, defaults.cards)
       };
     case "restaurant":
+      {
+        const legacyMenuEmbedUrl = asString(block.menuEmbedUrl, defaults.menuEmbedUrl);
+        const foodMenuUrl = asString(block.foodMenuUrl, legacyMenuEmbedUrl || defaults.foodMenuUrl);
+        const barMenuUrl = asString(block.barMenuUrl, defaults.barMenuUrl);
+
       return {
         ...defaults,
         id,
@@ -176,11 +181,14 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         subtitle: asString(block.subtitle, defaults.subtitle),
         description: asString(block.description, defaults.description),
         photos: normalizeRestaurantPhotos(block.photos, defaults.photos),
-        menuEmbedUrl: asString(block.menuEmbedUrl, defaults.menuEmbedUrl),
+        menuEmbedUrl: legacyMenuEmbedUrl,
+        foodMenuUrl,
+        barMenuUrl,
         menuCta: normalizeCta(block.menuCta, defaults.menuCta),
         telegramCta: normalizeCta(block.telegramCta, defaults.telegramCta),
         callCta: normalizeCta(block.callCta, defaults.callCta)
       };
+      }
     case "contacts":
       return {
         ...defaults,

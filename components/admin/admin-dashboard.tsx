@@ -112,6 +112,8 @@ function createBlock(type: BlockType): CmsBlock {
       description: "Полноценный ресторан внутри Avulus.",
       photos: [],
       menuEmbedUrl: "",
+      foodMenuUrl: "",
+      barMenuUrl: "",
       menuCta: { label: "Посмотреть меню", href: "https://vk.me/avuluscyberspace" },
       telegramCta: { label: "Забронировать стол в TG", href: "https://t.me/AVULUSbot" },
       callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -653,6 +655,16 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                         label="Ссылка на встроенное меню (Google Doc/PDF)"
                         value={selectedBlock.menuEmbedUrl}
                         onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, menuEmbedUrl: value }))}
+                      />
+                      <Input
+                        label="Ссылка на меню кухни (PDF/Google Drive)"
+                        value={selectedBlock.foodMenuUrl}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, foodMenuUrl: value }))}
+                      />
+                      <Input
+                        label="Ссылка на меню бара (PDF/Google Drive)"
+                        value={selectedBlock.barMenuUrl}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, barMenuUrl: value }))}
                       />
                       <Input label="Telegram CTA: текст" value={selectedBlock.telegramCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, label: value } }))} />
                       <Input label="Telegram CTA: ссылка" value={selectedBlock.telegramCta.href} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, href: value } }))} />
