@@ -114,6 +114,7 @@ function createBlock(type: BlockType): CmsBlock {
       menuEmbedUrl: "",
       foodMenuUrl: "",
       barMenuUrl: "",
+      cocktailsMenuUrl: "",
       menuCta: { label: "Посмотреть меню", href: "https://vk.me/avuluscyberspace" },
       telegramCta: { label: "Забронировать стол в TG", href: "https://t.me/AVULUSbot" },
       callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -741,6 +742,32 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                         </label>
                         {uploadErrorByField["restaurant-bar-pdf"] ? (
                           <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-bar-pdf"]}</span>
+                        ) : null}
+                      </div>
+                      <Input
+                        label="Ссылка на меню авторских коктейлей (PDF/Google Drive)"
+                        value={selectedBlock.cocktailsMenuUrl}
+                        onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, cocktailsMenuUrl: value }))}
+                      />
+                      <div className="flex items-center gap-2">
+                        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept="application/pdf"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files?.[0];
+                              if (!file) return;
+                              void handleFileUpload("restaurant-cocktails-pdf", file, (url) =>
+                                setRestaurant(selectedBlock.id, (block) => ({ ...block, cocktailsMenuUrl: url }))
+                              );
+                              event.currentTarget.value = "";
+                            }}
+                          />
+                          {uploadingByField["restaurant-cocktails-pdf"] ? "Загрузка..." : "Загрузить PDF коктейлей"}
+                        </label>
+                        {uploadErrorByField["restaurant-cocktails-pdf"] ? (
+                          <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-cocktails-pdf"]}</span>
                         ) : null}
                       </div>
                       <Input label="Telegram CTA: текст" value={selectedBlock.telegramCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, label: value } }))} />

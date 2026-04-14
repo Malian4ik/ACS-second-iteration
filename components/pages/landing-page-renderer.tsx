@@ -401,6 +401,12 @@ function renderRestaurantBlock({
       label: "Бар",
       sourceUrl: block.barMenuUrl.trim(),
       embedUrl: normalizeMenuEmbedUrl(block.barMenuUrl)
+    },
+    {
+      id: "cocktails",
+      label: "Коктейли",
+      sourceUrl: block.cocktailsMenuUrl.trim(),
+      embedUrl: normalizeMenuEmbedUrl(block.cocktailsMenuUrl)
     }
   ].filter((doc) => doc.embedUrl);
 

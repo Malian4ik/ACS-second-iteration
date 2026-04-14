@@ -176,6 +176,7 @@ export const defaultCmsContent: CmsContent = {
       menuEmbedUrl: "",
       foodMenuUrl: "",
       barMenuUrl: "",
+      cocktailsMenuUrl: "",
       menuCta: {
         label: "Посмотреть меню",
         href: "https://vk.me/avuluscyberspace"

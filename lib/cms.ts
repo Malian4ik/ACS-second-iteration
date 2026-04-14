@@ -172,6 +172,7 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         const legacyMenuEmbedUrl = asString(block.menuEmbedUrl, defaults.menuEmbedUrl);
         const foodMenuUrl = asString(block.foodMenuUrl, legacyMenuEmbedUrl || defaults.foodMenuUrl);
         const barMenuUrl = asString(block.barMenuUrl, defaults.barMenuUrl);
+        const cocktailsMenuUrl = asString(block.cocktailsMenuUrl, defaults.cocktailsMenuUrl);
 
       return {
         ...defaults,
@@ -184,6 +185,7 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         menuEmbedUrl: legacyMenuEmbedUrl,
         foodMenuUrl,
         barMenuUrl,
+        cocktailsMenuUrl,
         menuCta: normalizeCta(block.menuCta, defaults.menuCta),
         telegramCta: normalizeCta(block.telegramCta, defaults.telegramCta),
         callCta: normalizeCta(block.callCta, defaults.callCta)

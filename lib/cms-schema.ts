@@ -90,6 +90,7 @@ export type RestaurantBlock = BaseBlock & {
   menuEmbedUrl: string;
   foodMenuUrl: string;
   barMenuUrl: string;
+  cocktailsMenuUrl: string;
   menuCta: CmsCta;
   telegramCta: CmsCta;
   callCta: CmsCta;
