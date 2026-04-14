@@ -12,15 +12,19 @@ type TrackedLinkProps = {
   children: ReactNode;
   target?: string;
   label?: string;
+  onClick?: () => void;
 };
 
 function isExternalHref(href: string) {
   return href.startsWith("http://") || href.startsWith("https://") || href.startsWith("tel:") || href.startsWith("mailto:");
 }
 
-export function TrackedLink({ href, goal, className, children, target, label }: TrackedLinkProps) {
+export function TrackedLink({ href, goal, className, children, target, label, onClick: onClickProp }: TrackedLinkProps) {
   const rel = target === "_blank" ? "noreferrer" : undefined;
-  const onClick = () => trackGoal(goal, { label: label ?? href });
+  const onClick = () => {
+    trackGoal(goal, { label: label ?? href });
+    onClickProp?.();
+  };
 
   if (isExternalHref(href)) {
     return (
