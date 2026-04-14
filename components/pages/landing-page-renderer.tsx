@@ -26,7 +26,8 @@ type LandingRendererProps = {
 type MenuDoc = {
   id: string;
   label: string;
-  url: string;
+  embedUrl: string;
+  sourceUrl: string;
 };
 
 function isExternalHref(href: string) {
@@ -57,6 +58,11 @@ function normalizeMenuEmbedUrl(rawUrl: string) {
   const googleDriveUcId = value.match(/drive\.google\.com\/uc\?(?:export=download&)?id=([^&]+)/i);
   if (googleDriveUcId?.[1]) {
     return `https://drive.google.com/file/d/${googleDriveUcId[1]}/preview`;
+  }
+
+  const isPdf = /\.pdf(\?|#|$)/i.test(value);
+  if (isPdf) {
+    return `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(value)}`;
   }
 
   return value;
@@ -384,14 +390,24 @@ function renderRestaurantBlock({
   onOpenMenu?: (title: string, docs: MenuDoc[]) => void;
 }) {
   const menuDocs: MenuDoc[] = [
-    { id: "food", label: "Кухня", url: normalizeMenuEmbedUrl(block.foodMenuUrl) },
-    { id: "bar", label: "Бар", url: normalizeMenuEmbedUrl(block.barMenuUrl) }
-  ].filter((doc) => doc.url);
+    {
+      id: "food",
+      label: "Кухня",
+      sourceUrl: block.foodMenuUrl.trim(),
+      embedUrl: normalizeMenuEmbedUrl(block.foodMenuUrl)
+    },
+    {
+      id: "bar",
+      label: "Бар",
+      sourceUrl: block.barMenuUrl.trim(),
+      embedUrl: normalizeMenuEmbedUrl(block.barMenuUrl)
+    }
+  ].filter((doc) => doc.embedUrl);
 
   if (menuDocs.length === 0) {
     const legacyMenu = normalizeMenuEmbedUrl(block.menuEmbedUrl);
     if (legacyMenu) {
-      menuDocs.push({ id: "menu", label: "Меню", url: legacyMenu });
+      menuDocs.push({ id: "menu", label: "Меню", sourceUrl: block.menuEmbedUrl.trim(), embedUrl: legacyMenu });
     }
   }
 
@@ -762,14 +778,14 @@ export function LandingPageRenderer({
                   <div className="border-b border-white/10 px-5 py-2 text-right">
                     <a
                       className="text-xs font-semibold uppercase tracking-[0.14em] text-white/70 hover:text-white"
-                      href={activeDoc.url}
+                      href={activeDoc.sourceUrl || activeDoc.embedUrl}
                       rel="noreferrer"
                       target="_blank"
                     >
                       Открыть в новой вкладке
                     </a>
                   </div>
-                  <iframe className="h-[74vh] w-full bg-white" src={activeDoc.url} title={`${menuModal.title} — ${activeDoc.label}`} />
+                  <iframe className="h-[74vh] w-full bg-white" src={activeDoc.embedUrl} title={`${menuModal.title} — ${activeDoc.label}`} />
                 </>
               );
             })()}

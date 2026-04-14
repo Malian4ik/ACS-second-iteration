@@ -379,6 +379,41 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
     }
   }
 
+  async function handleFileUpload(fieldKey: string, file: File, onUploaded: (url: string) => void) {
+    if (file.size > 20 * 1024 * 1024) {
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: "Файл слишком большой. Максимум 20MB." }));
+      return;
+    }
+
+    setUploadingByField((current) => ({ ...current, [fieldKey]: true }));
+    setUploadErrorByField((current) => ({ ...current, [fieldKey]: "" }));
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/admin/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      const payload = (await response.json().catch(() => null)) as { url?: string; error?: string } | null;
+
+      if (!response.ok || !payload?.url) {
+        const message = payload?.error ? `Ошибка загрузки: ${payload.error}` : "Не удалось загрузить файл.";
+        throw new Error(message);
+      }
+
+      onUploaded(payload.url);
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: "" }));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Не удалось загрузить файл.";
+      setUploadErrorByField((current) => ({ ...current, [fieldKey]: message }));
+    } finally {
+      setUploadingByField((current) => ({ ...current, [fieldKey]: false }));
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[#07090d] px-4 py-8 text-white">
       <div className="mx-auto max-w-[1640px] space-y-6">
@@ -661,11 +696,53 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                         value={selectedBlock.foodMenuUrl}
                         onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, foodMenuUrl: value }))}
                       />
+                      <div className="flex items-center gap-2">
+                        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept="application/pdf"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files?.[0];
+                              if (!file) return;
+                              void handleFileUpload("restaurant-food-pdf", file, (url) =>
+                                setRestaurant(selectedBlock.id, (block) => ({ ...block, foodMenuUrl: url }))
+                              );
+                              event.currentTarget.value = "";
+                            }}
+                          />
+                          {uploadingByField["restaurant-food-pdf"] ? "Загрузка..." : "Загрузить PDF кухни"}
+                        </label>
+                        {uploadErrorByField["restaurant-food-pdf"] ? (
+                          <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-food-pdf"]}</span>
+                        ) : null}
+                      </div>
                       <Input
                         label="Ссылка на меню бара (PDF/Google Drive)"
                         value={selectedBlock.barMenuUrl}
                         onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, barMenuUrl: value }))}
                       />
+                      <div className="flex items-center gap-2">
+                        <label className="inline-flex cursor-pointer items-center rounded-full border border-white/15 px-3 py-1.5 text-xs font-semibold text-white/90">
+                          <input
+                            className="hidden"
+                            type="file"
+                            accept="application/pdf"
+                            onChange={(event) => {
+                              const file = event.currentTarget.files?.[0];
+                              if (!file) return;
+                              void handleFileUpload("restaurant-bar-pdf", file, (url) =>
+                                setRestaurant(selectedBlock.id, (block) => ({ ...block, barMenuUrl: url }))
+                              );
+                              event.currentTarget.value = "";
+                            }}
+                          />
+                          {uploadingByField["restaurant-bar-pdf"] ? "Загрузка..." : "Загрузить PDF бара"}
+                        </label>
+                        {uploadErrorByField["restaurant-bar-pdf"] ? (
+                          <span className="text-xs text-[#ff9a9a]">{uploadErrorByField["restaurant-bar-pdf"]}</span>
+                        ) : null}
+                      </div>
                       <Input label="Telegram CTA: текст" value={selectedBlock.telegramCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, label: value } }))} />
                       <Input label="Telegram CTA: ссылка" value={selectedBlock.telegramCta.href} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, telegramCta: { ...block.telegramCta, href: value } }))} />
                       <Input label="Звонок CTA: текст" value={selectedBlock.callCta.label} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, callCta: { ...block.callCta, label: value } }))} />
