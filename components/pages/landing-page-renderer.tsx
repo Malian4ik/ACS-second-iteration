@@ -60,11 +60,6 @@ function normalizeMenuEmbedUrl(rawUrl: string) {
     return `https://drive.google.com/file/d/${googleDriveUcId[1]}/preview`;
   }
 
-  const isPdf = /\.pdf(\?|#|$)/i.test(value);
-  if (isPdf) {
-    return `https://docs.google.com/gview?embedded=1&url=${encodeURIComponent(value)}`;
-  }
-
   return value;
 }
 
