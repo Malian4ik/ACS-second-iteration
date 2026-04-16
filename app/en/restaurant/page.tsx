@@ -1,8 +1,5 @@
-import { RestaurantPage } from "@/components/pages/restaurant-page";
-import { buildPageMetadata } from "@/lib/seo";
-
-export const metadata = buildPageMetadata("en", "restaurant");
+import { redirect } from "next/navigation";
 
 export default function Page() {
-  return <RestaurantPage locale="en" />;
+  redirect("/");
 }

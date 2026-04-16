@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { Manrope, Oswald } from "next/font/google";
+import type { ReactNode } from "react";
 
 import { YandexMetrika } from "@/components/analytics/yandex-metrika";
 
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     default: "Avulus Cyber Space",
     template: "%s"
   },
-  description: "Премиальный киберклуб и ресторан 24/7 в центре Москвы."
+  description: "Клуб и ресторан 24/7 в центре Москвы."
 };
 
 export default function RootLayout({

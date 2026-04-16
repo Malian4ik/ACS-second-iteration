@@ -5,6 +5,7 @@ import { get, put } from "@vercel/blob";
 import { unstable_noStore as noStore } from "next/cache";
 
 import { defaultCmsContent } from "@/lib/cms-default";
+import { RESTAURANT_IMAGES } from "@/lib/landing-data";
 import type { CmsContent } from "@/lib/cms-schema";
 
 const CMS_BLOB_PATH = "cms/site-content.json";
@@ -14,10 +15,29 @@ function hasBlobToken() {
   return Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 }
 
+function normalizeRestaurantImages(input: Partial<CmsContent> | undefined) {
+  const fromLanding = input?.landing?.restaurantImages?.filter(Boolean) ?? [];
+  const fromFoodVisuals =
+    input?.restaurant?.foodVisuals?.map((item) => item.imageUrl).filter(Boolean) ?? [];
+
+  const deduped = [...fromLanding, ...fromFoodVisuals, ...RESTAURANT_IMAGES].filter(
+    (value, index, array) => array.indexOf(value) === index
+  );
+
+  return deduped.slice(0, 4);
+}
+
 function mergeCmsContent(input: Partial<CmsContent> | undefined): CmsContent {
   return {
     ...defaultCmsContent,
     ...input,
+    landing: {
+      ...defaultCmsContent.landing,
+      ...input?.landing,
+      heroBadges: input?.landing?.heroBadges ?? defaultCmsContent.landing.heroBadges,
+      restaurantImages: normalizeRestaurantImages(input),
+      contactsBadges: input?.landing?.contactsBadges ?? defaultCmsContent.landing.contactsBadges
+    },
     home: {
       ...defaultCmsContent.home,
       ...input?.home,

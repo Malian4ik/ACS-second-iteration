@@ -1,4 +1,4 @@
-export type NavItem = {
+﻿export type NavItem = {
   label: string;
   href: string;
   active?: boolean;
@@ -88,7 +88,7 @@ export const homeNav: NavItem[] = [
 export const roomsNav: NavItem[] = [
   { label: "Главная", href: "/" },
   { label: "Комнаты", href: "/rooms", active: true },
-  { label: "Контакты", href: "#contact-options" }
+  { label: "Как попасть", href: "#contact-options" }
 ];
 
 export const heroStats = [
@@ -107,7 +107,7 @@ export const formats: FormatCard[] = [
     audience: "Подходит для соло-игроков, создателей контента и гостей, которым нужен отдельный ритм.",
     image: "/images/cyberclub-card.jpg",
     href: "/rooms?format=solo",
-    priceFrom: "от 290 ₽/час"
+    priceFrom: "Уточнить условия в Telegram"
   },
   {
     key: "duo",
@@ -118,7 +118,7 @@ export const formats: FormatCard[] = [
     audience: "Лучший формат для пары, друзей и гостей, которым важна приватность и комфорт.",
     image: "/images/cyberclub-vip.jpg",
     href: "/rooms?format=duo",
-    priceFrom: "от 490 ₽/час"
+    priceFrom: "Подобрать формат в Telegram"
   },
   {
     key: "bootcamp",
@@ -129,7 +129,7 @@ export const formats: FormatCard[] = [
     audience: "Подходит для сквадов, мероприятий и всех, кто хочет лучший формат клуба в Москве.",
     image: "/images/cyberclub-team.jpg",
     href: "/rooms?format=bootcamp",
-    priceFrom: "от 850 ₽/час"
+    priceFrom: "Уточнить условия в Telegram"
   }
 ];
 
@@ -253,7 +253,7 @@ export const roomCards: RoomCard[] = [
     title: "Stream Room",
     subtitle: "Соло-комната под личный режим",
     description: "Для стрима, спокойной игры и длинной сессии без общего шума и лишних отвлекающих факторов.",
-    price: "от 290 ₽ / час",
+    price: "Уточнить условия в Telegram",
     duration: "1-4 часа",
     capacity: "1 игрок",
     image: "/images/cyberclub-card.jpg",
@@ -265,7 +265,7 @@ export const roomCards: RoomCard[] = [
     title: "Solo Night",
     subtitle: "Ночной режим на длинную дистанцию",
     description: "Для игроков, которые заходят в клуб не на час, а на полноценный вечер или ночной блок.",
-    price: "от 980 ₽ / блок",
+    price: "Уточнить условия в Telegram",
     duration: "4 часа",
     capacity: "1 игрок",
     image: "/images/dish-snack.jpg",
@@ -277,7 +277,7 @@ export const roomCards: RoomCard[] = [
     title: "Privat",
     subtitle: "Комната для двоих",
     description: "Подходит для кооператива, пары, друзей и всех, кто хочет клуб без ощущения общего зала.",
-    price: "от 490 ₽ / час",
+    price: "Подобрать формат в Telegram",
     duration: "1-4 часа",
     capacity: "2 игрока",
     image: "/images/cyberclub-vip.jpg",
@@ -289,7 +289,7 @@ export const roomCards: RoomCard[] = [
     title: "Privat+ / VIP",
     subtitle: "Усиленный приватный опыт",
     description: "Для тех, кто хочет более высокий уровень комфорта, атмосферы и приватности внутри клуба.",
-    price: "от 890 ₽ / час",
+    price: "Уточнить условия в Telegram",
     duration: "4 часа",
     capacity: "2-4 игрока",
     image: "/images/restaurant-card.jpg",
@@ -301,7 +301,7 @@ export const roomCards: RoomCard[] = [
     title: "Bootcamp",
     subtitle: "Командная игровая зона",
     description: "Формат под скримы, тренировку, командные вечера и большие игровые блоки в приватной среде.",
-    price: "от 850 ₽ / час",
+    price: "Уточнить условия в Telegram",
     duration: "2-6 часов",
     capacity: "5 игроков",
     image: "/images/cyberclub-team.jpg",
@@ -359,3 +359,4 @@ export const howItWorks = [
     body: "Avulus должен ощущаться не как одна услуга, а как место, где можно провести целую ночь."
   }
 ];
+

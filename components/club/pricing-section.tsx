@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 
@@ -122,8 +122,8 @@ function findCard(periodKey: string, title: string) {
   return period?.cards.find((card) => normalizeTitle(card.title) === normalizeTitle(title));
 }
 
-function formatPrice(price: string, locale: Locale) {
-  return locale === "ru" ? `${price} ₽` : `${price} RUB`;
+function formatPrice(_price: string, locale: Locale) {
+  return locale === "ru" ? "Уточнить в Telegram" : "Check in Telegram";
 }
 
 function renderPriceRows(entries: PricingEntry[], locale: Locale, accent: string, emphasize = false) {
@@ -313,3 +313,4 @@ export function PricingSection({ locale }: { locale: Locale }) {
     </section>
   );
 }
+

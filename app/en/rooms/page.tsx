@@ -1,15 +1,5 @@
-import { RoomsPage } from "@/components/pages/rooms-page";
-import { buildPageMetadata } from "@/lib/seo";
+import { redirect } from "next/navigation";
 
-export const metadata = buildPageMetadata("en", "rooms");
-
-type Props = {
-  searchParams?: Promise<{
-    format?: string;
-  }>;
-};
-
-export default async function Page({ searchParams }: Props) {
-  const resolved = await searchParams;
-  return <RoomsPage locale="en" searchParams={resolved} />;
+export default function Page() {
+  redirect("/");
 }

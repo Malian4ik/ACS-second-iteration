@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -20,6 +20,10 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 110px;
 }
 
 body {
@@ -110,3 +114,6 @@ button {
     transform: translate3d(0, -12px, 0) scale(1.06);
   }
 }
+
+
+

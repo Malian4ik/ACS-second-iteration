@@ -15,6 +15,31 @@ export type FoodVisualCard = {
 };
 
 export type CmsContent = {
+  landing: {
+    heroTitle: string;
+    heroSubtitle: string;
+    heroDescription: string;
+    heroBadges: string[];
+    offersTitle: string;
+    offersSubtitle: string;
+    roomsTitle: string;
+    roomsSubtitle: string;
+    restaurantTitle: string;
+    restaurantSubtitle: string;
+    restaurantBody: string;
+    restaurantMenuUrl: string;
+    restaurantMenuLabel: string;
+    restaurantTelegramLabel: string;
+    restaurantCallLabel: string;
+    restaurantImages: string[];
+    contactsTitle: string;
+    contactsAddress: string;
+    contactsBadges: string[];
+    contactsTelegramLabel: string;
+    contactsVkLabel: string;
+    contactsPhoneLabel: string;
+    contactsMapUrl: string;
+  };
   home: {
     heroSupport: string;
     heroStatusLine: string;

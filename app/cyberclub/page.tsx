@@ -1,8 +1,5 @@
-import { CyberclubPage } from "@/components/pages/cyberclub-page";
-import { buildPageMetadata } from "@/lib/seo";
+import { redirect } from "next/navigation";
 
-export const metadata = buildPageMetadata("ru", "cyberclub");
-
-export default async function Page() {
-  return <CyberclubPage locale="ru" />;
+export default function Page() {
+  redirect("/");
 }

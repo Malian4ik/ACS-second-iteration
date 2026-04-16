@@ -8,13 +8,7 @@ import type { CmsContent } from "@/lib/cms-schema";
 
 function revalidateSite() {
   revalidatePath("/");
-  revalidatePath("/restaurant");
-  revalidatePath("/rooms");
-  revalidatePath("/cyberclub");
-  revalidatePath("/en");
-  revalidatePath("/en/restaurant");
-  revalidatePath("/en/rooms");
-  revalidatePath("/en/cyberclub");
+  revalidatePath("/sitemap.xml");
 }
 
 export async function GET() {
