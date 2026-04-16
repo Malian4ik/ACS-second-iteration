@@ -39,7 +39,7 @@ export function AvulusNav({
 
   return (
     <>
-      <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
+      <nav className="hidden md:block fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
         <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
 
           {/* Logo */}
