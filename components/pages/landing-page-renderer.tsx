@@ -161,7 +161,7 @@ function renderHeroBlock({
               label={block.primaryCta.label}
               previewMode={previewMode}
             />
-            <span className="absolute -bottom-6 left-0 right-0 text-center text-[11px] tracking-wide text-white/38">отвечаем за 1–2 минуты</span>
+            <span className="absolute -bottom-6 left-0 right-0 hidden text-center text-[11px] tracking-wide text-white/38 sm:block">отвечаем за 1–2 минуты</span>
           </div>
           <div className="flex flex-1 flex-col">
             <ActionLink
@@ -745,10 +745,17 @@ export function LandingPageRenderer({
         <>
           {/* ── Nav bar ── */}
           <nav className={`fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6 transition-transform duration-300 ${navVisible ? "translate-y-0" : "-translate-y-full"}`}>
-            <div className="relative mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
+            <div className="relative mx-auto flex max-w-7xl items-center justify-between md:rounded-full md:border md:border-white/10 md:bg-[rgba(10,10,10,0.88)] md:px-6 md:py-3 md:backdrop-blur-xl">
 
-              {/* Logo */}
-              <a className="flex items-center gap-3" href="#top">
+              {/* Mobile logo (clickable to open menu) */}
+              <button className="flex items-center md:hidden" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Открыть меню">
+                <div className="relative h-11 w-11 overflow-hidden rounded-full border border-white/10 bg-white shadow-[0_4px_24px_rgba(0,0,0,0.8)] backdrop-blur transition active:scale-95">
+                  <Image alt="Avulus logo" className="object-contain p-1.5" fill sizes="44px" src="/Sublogo/Avulus-Sublogo-Red-CMYK.gif" />
+                </div>
+              </button>
+
+              {/* Desktop Logo */}
+              <a className="hidden md:flex flex-1 items-center gap-3" href="#top">
                 <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
                   <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/Sublogo/Avulus-Sublogo-Red-CMYK.gif" />
                 </div>
@@ -759,7 +766,7 @@ export function LandingPageRenderer({
               </a>
 
               {/* Desktop nav links */}
-              <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex">
+              <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex md:flex-1 justify-center">
                 {content.site.navigationItems.map((item) => (
                   <a key={item.id} className="text-sm font-medium text-white/68 transition hover:text-white" href={`#${item.blockId}`}>
                     {item.label}
@@ -768,27 +775,15 @@ export function LandingPageRenderer({
               </div>
 
               {/* Desktop CTA */}
-              <ActionLink
-                className="hidden rounded-full bg-[#b11b36] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#c62744] md:inline-flex"
-                goal="nav_primary"
-                href={content.site.navCta.href}
-                label={content.site.navCta.label}
-                previewMode={previewMode}
-              />
-
-              {/* Mobile: hamburger button */}
-              <button
-                aria-label={mobileOpen ? "Закрыть меню" : "Открыть меню"}
-                aria-expanded={mobileOpen}
-                onClick={() => setMobileOpen((v) => !v)}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/12 bg-white/6 transition hover:bg-white/12 md:hidden"
-              >
-                <span className="flex h-4 w-5 flex-col justify-between">
-                  <span className={`block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 origin-center ${mobileOpen ? "translate-y-[7px] rotate-45" : ""}`} />
-                  <span className={`block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 ${mobileOpen ? "opacity-0 scale-x-0" : ""}`} />
-                  <span className={`block h-[1.5px] w-full rounded-full bg-white transition-all duration-300 origin-center ${mobileOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
-                </span>
-              </button>
+              <div className="hidden items-center justify-end md:flex md:flex-1">
+                <ActionLink
+                  className="rounded-full bg-[#b11b36] px-5 py-2 text-sm font-semibold text-white transition hover:bg-[#c62744] inline-flex"
+                  goal="nav_primary"
+                  href={content.site.navCta.href}
+                  label={content.site.navCta.label}
+                  previewMode={previewMode}
+                />
+              </div>
 
             </div>
           </nav>

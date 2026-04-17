@@ -76,7 +76,7 @@ export function AvulusNav({
             </div>
             <div className="hidden xl:block">
               <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">
-                Avulus
+                {c.projectName}
               </div>
               <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{c.brandSubtitle}</div>
             </div>
