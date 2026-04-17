@@ -9,7 +9,7 @@ export const defaultCmsContent: CmsContent = {
       { id: "nav-offers", label: "Предложения", blockId: "offers-main" },
       { id: "nav-rooms", label: "Форматы", blockId: "rooms-main" },
       { id: "nav-restaurant", label: "Ресторан", blockId: "restaurant-main" },
-      { id: "nav-contacts", label: "Как добраться", blockId: "contacts-main" }
+      { id: "nav-contacts", label: "Как попасть", blockId: "contacts-main" }
     ],
     navCta: {
       label: "Написать в Telegram",
@@ -197,7 +197,7 @@ export const defaultCmsContent: CmsContent = {
       id: "contacts-main",
       type: "contacts",
       enabled: true,
-      title: "Как добраться",
+      title: "Как попасть",
       subtitle: "Приезжайте в Avulus — ответим быстро и поможем с бронью.",
       address: "Москва, Серебрянический переулок, 12с1",
       mapEmbedUrl:
