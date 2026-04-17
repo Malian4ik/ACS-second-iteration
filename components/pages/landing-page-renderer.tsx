@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback, Fragment } from "react";
 
 import { TrackedLink } from "@/components/ui/tracked-link";
 import type {
@@ -140,31 +140,38 @@ function renderHeroBlock({
             fill
             priority
             sizes="128px"
-            src="/images/avulus-logo-rgb.png"
+            src="/sublogo/Avulus-Sublogo-Red-CMYK.gif"
           />
         </div>
 
-        <h1 className="mt-6 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.92] text-white md:text-7xl">
+        {/* Brand kicker — small text above the main headline */}
+        <p className="mt-6 text-[11px] uppercase tracking-[0.32em] text-white/40 md:text-xs">{block.subtitle}</p>
+
+        <h1 className="mt-4 font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.94] text-white md:text-6xl lg:text-7xl">
           {block.title}
         </h1>
-        <p className="mt-4 text-sm uppercase tracking-[0.26em] text-[#d7d1c4] md:text-base">{block.subtitle}</p>
-        <p className="mt-3 max-w-xl text-sm leading-7 text-white/60 md:text-base">{block.description}</p>
+        <p className="mt-5 max-w-xl text-sm leading-7 text-white/60 md:text-base">{block.description}</p>
 
-        <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:flex-row">
-          <ActionLink
-            className="inline-flex flex-1 items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[var(--accent-red-strong)]"
-            goal="hero_primary"
-            href={block.primaryCta.href}
-            label={block.primaryCta.label}
-            previewMode={previewMode}
-          />
-          <ActionLink
-            className="inline-flex flex-1 items-center justify-center rounded-full border border-[rgba(255,244,224,0.18)] bg-transparent px-6 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]"
-            goal="hero_secondary"
-            href={block.secondaryCta.href}
-            label={block.secondaryCta.label}
-            previewMode={previewMode}
-          />
+        <div className="mt-8 flex w-full max-w-[34rem] flex-col items-stretch gap-3 sm:flex-row pb-6">
+          <div className="relative flex flex-1 flex-col">
+            <ActionLink
+              className="inline-flex h-full w-full items-center justify-center rounded-[32px] bg-[var(--accent-red)] px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[var(--accent-red-strong)]"
+              goal="hero_primary"
+              href={block.primaryCta.href}
+              label={block.primaryCta.label}
+              previewMode={previewMode}
+            />
+            <span className="absolute -bottom-6 left-0 right-0 text-center text-[11px] tracking-wide text-white/38">отвечаем за 1–2 минуты</span>
+          </div>
+          <div className="flex flex-1 flex-col">
+            <ActionLink
+              className="inline-flex h-full w-full items-center justify-center rounded-[32px] border border-[rgba(255,244,224,0.18)] bg-transparent px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]"
+              goal="hero_secondary"
+              href={block.secondaryCta.href}
+              label={block.secondaryCta.label}
+              previewMode={previewMode}
+            />
+          </div>
         </div>
 
         <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -205,7 +212,7 @@ function renderOffersBlock({
     >
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="eyebrow">Актуальные офферы</div>
+          <div className="eyebrow">Предложения</div>
           <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">
             {block.title}
           </h2>
@@ -288,7 +295,7 @@ function renderRoomsBlock({
       onClick={previewMode ? () => onSelectBlock?.(block.id) : undefined}
     >
       <div className="mb-10">
-        <div className="eyebrow">Комнаты</div>
+        <div className="eyebrow">Игровые комнаты</div>
         <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">{block.title}</h2>
         <p className="mt-3 max-w-xl text-sm leading-7 text-white/58">{block.subtitle}</p>
       </div>
@@ -319,12 +326,12 @@ function renderRoomsBlock({
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.05),rgba(9,9,9,0.42),rgba(9,9,9,0.94))]" />
 
-              <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/48 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#e8dcc7]">
+              <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/48 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#e8dcc7] shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
                 {room.capacity}
               </div>
 
               <div className="absolute bottom-4 left-4 right-4">
-                <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.94] text-white">{room.title}</div>
+                <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.94] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">{room.title}</div>
               </div>
             </div>
 
@@ -464,7 +471,7 @@ function renderRestaurantBlock({
     >
       <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="eyebrow">Ресторан</div>
+          <div className="eyebrow">Клуб + бар</div>
           <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">{block.title}</h2>
           <p className="mt-3 max-w-lg text-sm leading-7 text-white/55">{block.subtitle}</p>
         </div>
@@ -496,7 +503,6 @@ function renderRestaurantBlock({
               src={photo.imageUrl}
             />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_55%,rgba(6,6,6,0.72))]" />
-            <div className="absolute bottom-3 left-3 text-[11px] uppercase tracking-[0.22em] text-white/72">{photo.alt}</div>
           </div>
         ))}
       </div>
@@ -540,6 +546,37 @@ function renderRestaurantBlock({
           previewMode={previewMode}
         />
       </div>
+
+      {/* PDF menu downloads */}
+      <div className="mt-5 flex flex-wrap gap-2">
+        <a
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
+          href="/menu/N_A4_300gr_4+4_matlam 1+1_50 sht.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
+          Меню кухни (PDF)
+        </a>
+        <a
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
+          href="/menu/N_А4_4+4_300gr_matlam 1+1_50 sht.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
+          Меню бара (PDF)
+        </a>
+        <a
+          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
+          href="/menu/N_A4_100x210mm_300gr_4+4_matlam 1+1_50 sht.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
+          Коктейльная карта (PDF)
+        </a>
+      </div>
     </section>
   );
 }
@@ -565,7 +602,7 @@ function renderContactsBlock({
         <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div className="flex flex-col gap-7">
             <div>
-              <div className="eyebrow">Контакты</div>
+              <div className="eyebrow">Как попасть</div>
               <h2 className="mt-4 font-[family:var(--font-oswald)] text-5xl uppercase leading-[0.92] text-white md:text-6xl">{block.title}</h2>
               <p className="mt-3 text-sm leading-7 text-white/62">{block.subtitle}</p>
             </div>
@@ -581,16 +618,22 @@ function renderContactsBlock({
             </div>
 
             <div className="flex flex-wrap gap-3">
-              {block.links.map((link) => (
-                <ActionLink
-                  key={link.id}
-                  className="inline-flex items-center justify-center rounded-full border border-white/16 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/30 hover:text-white"
-                  goal={`contact_${link.id}`}
-                  href={link.href}
-                  label={link.label}
-                  previewMode={previewMode}
-                />
-              ))}
+              {block.links.map((link) => {
+                const isTelegram = link.id === "contact-telegram" || link.href.includes("t.me");
+                return (
+                  <ActionLink
+                    key={link.id}
+                    className={isTelegram
+                      ? "inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-8 py-3.5 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)] shadow-[0_4px_20px_rgba(159,35,57,0.35)]"
+                      : "inline-flex items-center justify-center rounded-full border border-white/16 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/30 hover:text-white"
+                    }
+                    goal={`contact_${link.id}`}
+                    href={link.href}
+                    label={link.label}
+                    previewMode={previewMode}
+                  />
+                );
+              })}
             </div>
           </div>
 
@@ -653,6 +696,33 @@ export function LandingPageRenderer({
   const visibleBlocks = content.blocks.filter((block) => block.enabled);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuModal, setMenuModal] = useState<{ title: string; docs: MenuDoc[]; activeId: string; activeImageIndex: number } | null>(null);
+  const [navVisible, setNavVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
+
+  // Scroll direction tracking — hide nav on scroll down, show on scroll up
+  const handleScroll = useCallback(() => {
+    if (ticking.current) return;
+    ticking.current = true;
+    requestAnimationFrame(() => {
+      const currentY = window.scrollY;
+      if (currentY < 80) {
+        setNavVisible(true);
+      } else if (currentY > lastScrollY.current + 8) {
+        setNavVisible(false);
+        setMobileOpen(false);
+      } else if (currentY < lastScrollY.current - 8) {
+        setNavVisible(true);
+      }
+      lastScrollY.current = currentY;
+      ticking.current = false;
+    });
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   // Close on desktop resize
   useEffect(() => {
@@ -670,26 +740,26 @@ export function LandingPageRenderer({
   }, [mobileOpen]);
 
   return (
-    <div className="pb-28 md:pb-0">
+    <div className="pb-16 md:pb-0">
       {!previewMode ? (
         <>
           {/* ── Nav bar ── */}
-          <nav className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6">
-            <div className="mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
+          <nav className={`fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-6 transition-transform duration-300 ${navVisible ? "translate-y-0" : "-translate-y-full"}`}>
+            <div className="relative mx-auto flex max-w-7xl items-center justify-between rounded-full border border-white/10 bg-[rgba(10,10,10,0.88)] px-4 py-3 backdrop-blur-xl md:px-6">
 
               {/* Logo */}
               <a className="flex items-center gap-3" href="#top">
                 <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
-                  <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/images/avulus-logo-rgb.png" />
+                  <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/sublogo/Avulus-Sublogo-Red-CMYK.gif" />
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden xl:block">
                   <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">{content.site.projectName}</div>
                   <div className="text-[10px] uppercase tracking-[0.28em] text-white/45">{content.site.brandSubtitle}</div>
                 </div>
               </a>
 
               {/* Desktop nav links */}
-              <div className="hidden items-center gap-4 md:flex">
+              <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 md:flex">
                 {content.site.navigationItems.map((item) => (
                   <a key={item.id} className="text-sm font-medium text-white/68 transition hover:text-white" href={`#${item.blockId}`}>
                     {item.label}
@@ -764,23 +834,25 @@ export function LandingPageRenderer({
       ) : null}
 
       <main id="top">
-        {visibleBlocks.map((block) =>
-          renderBlock({
-            block,
-            previewMode,
-            selected: selectedBlockId === block.id,
-            selectedItemId,
-            onSelectBlock,
-            onSelectItem,
-            onOpenMenu: (title, docs) =>
-              setMenuModal({
-                title,
-                docs,
-                activeId: docs[0]?.id ?? "menu",
-                activeImageIndex: 0
-              })
-          })
-        )}
+        {visibleBlocks.map((block) => (
+          <Fragment key={block.id}>
+            {renderBlock({
+              block,
+              previewMode,
+              selected: selectedBlockId === block.id,
+              selectedItemId,
+              onSelectBlock,
+              onSelectItem,
+              onOpenMenu: (title, docs) =>
+                setMenuModal({
+                  title,
+                  docs,
+                  activeId: docs[0]?.id ?? "menu",
+                  activeImageIndex: 0
+                })
+            })}
+          </Fragment>
+        ))}
       </main>
 
       {menuModal && !previewMode ? (
@@ -900,7 +972,7 @@ export function LandingPageRenderer({
         </div>
       ) : null}
 
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-2 py-2.5 backdrop-blur md:hidden">
+      <div className={`fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-2 py-2.5 backdrop-blur transition-transform duration-300 md:hidden ${navVisible ? "translate-y-0" : "translate-y-full"}`}>
         <div className="mx-auto flex max-w-xl gap-1.5 text-xs">
           <ActionLink
             className="flex-1 rounded-full bg-[var(--accent-red)] px-2 py-2 text-center font-semibold uppercase tracking-wider text-white"

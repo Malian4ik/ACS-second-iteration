@@ -504,10 +504,10 @@ export function getSharedContent(locale: Locale) {
 export function getHomeNav(locale: Locale): NavItem[] {
   const isRu = locale === "ru";
   return [
-    { label: isRu ? "Офферы" : "Offers", href: "#offers" },
-    { label: isRu ? "Комнаты" : "Rooms", href: "#rooms" },
+    { label: isRu ? "Предложения" : "Offers", href: "#offers" },
+    { label: isRu ? "Форматы" : "Rooms", href: "#rooms" },
     { label: isRu ? "Ресторан" : "Restaurant", href: "#restaurant" },
-    { label: isRu ? "Контакты" : "Contacts", href: "#contact" }
+    { label: isRu ? "Как попасть" : "How to get here", href: "#contact" }
   ];
 }
 

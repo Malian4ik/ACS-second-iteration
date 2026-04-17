@@ -1,4 +1,4 @@
-﻿import type { CmsContent } from "@/lib/cms-schema";
+import type { CmsContent } from "@/lib/cms-schema";
 
 export const defaultCmsContent: CmsContent = {
   version: 2,
@@ -6,10 +6,10 @@ export const defaultCmsContent: CmsContent = {
     projectName: "Avulus Cyber Space",
     brandSubtitle: "Клуб + ресторан",
     navigationItems: [
-      { id: "nav-offers", label: "Офферы", blockId: "offers-main" },
-      { id: "nav-rooms", label: "Комнаты", blockId: "rooms-main" },
+      { id: "nav-offers", label: "Предложения", blockId: "offers-main" },
+      { id: "nav-rooms", label: "Форматы", blockId: "rooms-main" },
       { id: "nav-restaurant", label: "Ресторан", blockId: "restaurant-main" },
-      { id: "nav-contacts", label: "Контакты", blockId: "contacts-main" }
+      { id: "nav-contacts", label: "Как попасть", blockId: "contacts-main" }
     ],
     navCta: {
       label: "Написать в Telegram",
@@ -29,12 +29,12 @@ export const defaultCmsContent: CmsContent = {
       id: "hero-main",
       type: "hero",
       enabled: true,
-      title: "Avulus Cyber Space",
-      subtitle: "Клуб и ресторан 24/7 в центре Москвы",
-      description: "Приватные игровые комнаты, кухня и бар — круглосуточно.",
-      badges: ["24/7", "Центр Москвы", "Бесплатная парковка"],
+      title: "Приватные игровые комнаты в центре Москвы",
+      subtitle: "Avulus Cyber Space",
+      description: "Играй один, вдвоём или командой. Без шума и посторонних — можно стримить, отдыхать или провести ночь. Еду и напитки принесём прямо в комнату.",
+      badges: ["Соло / Вдвоём / Командой", "24/7", "Центр Москвы", "Своя парковка"],
       primaryCta: {
-        label: "Написать в Telegram",
+        label: "Забронировать в Telegram",
         href: "https://t.me/AVULUSbot"
       },
       secondaryCta: {
@@ -46,15 +46,15 @@ export const defaultCmsContent: CmsContent = {
       id: "offers-main",
       type: "offers",
       enabled: true,
-      title: "Офферы",
-      subtitle: "Короткие актуальные предложения. Нажимаете и сразу пишете нам в Telegram.",
-      emptyStateTitle: "Офферы скоро добавим",
+      title: "Готовые форматы под тебя",
+      subtitle: "Выбери формат и пиши в TG, забронируем за минуту",
+      emptyStateTitle: "Форматы скоро добавим",
       emptyStateDescription: "Сейчас можно написать в Telegram и уточнить актуальные предложения.",
       cards: [
         {
           id: "offer-night",
-          title: "Ночная сессия",
-          description: "Подскажем свободную комнату на ночь и забронируем за пару минут.",
+          title: "Ночь без перерывов",
+          description: "Отдельная комната только для тебя или твоей компании на всю ночь.",
           imageUrl: "/images/club-room-red.webp",
           cta: {
             label: "Написать в Telegram",
@@ -63,8 +63,8 @@ export const defaultCmsContent: CmsContent = {
         },
         {
           id: "offer-privat",
-          title: "Privat для двоих",
-          description: "Тихая отдельная комната на двоих: TV, диван и комфортная посадка.",
+          title: "Комната для двоих",
+          description: "Приватное пространство для игры и отдыха вдвоём.",
           imageUrl: "/images/cyberclub-vip.jpg",
           cta: {
             label: "Написать в Telegram",
@@ -73,8 +73,8 @@ export const defaultCmsContent: CmsContent = {
         },
         {
           id: "offer-bootcamp",
-          title: "Bootcamp 5+",
-          description: "Командный формат для тренировок, совместных сессий и турниров.",
+          title: "Комната для команды",
+          description: "Подходит для тренировок и разборов большой компанией.",
           imageUrl: "/images/cyberclub-team.jpg",
           cta: {
             label: "Написать в Telegram",
@@ -87,39 +87,39 @@ export const defaultCmsContent: CmsContent = {
       id: "rooms-main",
       type: "rooms",
       enabled: true,
-      title: "Комнаты",
+      title: "Игровые комнаты",
       subtitle: "Выбирайте формат, пишите в Telegram — забронируем.",
       pricingHint: "Подробный прайс уточняйте в Telegram.",
       cards: [
         {
           id: "room-stream",
-          title: "Stream",
+          title: "Stream Room",
           capacity: "1 чел",
           dayPrice: "от 290 ₽/час",
           nightPrice: "от 330 ₽/час",
-          description: "Одно место, свой монитор, тишина. Для игры или стрима.",
+          description: "Готовый стримерский сетап, осталось только запустить поток.",
           imageUrl: "/images/club-room-green.webp",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
         {
           id: "room-privat",
-          title: "Privat",
+          title: "Private",
           capacity: "2 чел",
           dayPrice: "от 490 ₽/час",
           nightPrice: "от 590 ₽/час",
-          description: "Отдельная комната на двоих. TV, диван, тихо.",
+          description: "Базовый игровой сетап для стабильной игры в соло или вдвоём.",
           imageUrl: "/images/cyberclub-card.jpg",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
         {
           id: "room-privat-plus",
-          title: "Privat+",
+          title: "Private+",
           capacity: "2 чел",
           dayPrice: "от 690 ₽/час",
           nightPrice: "от 790 ₽/час",
-          description: "Больше пространства для длинного вечера вдвоем. Диван, минибар.",
+          description: "Усиленный сетап с запасом по мощности.",
           imageUrl: "/images/cyberclub-vip.jpg",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -130,7 +130,7 @@ export const defaultCmsContent: CmsContent = {
           capacity: "2-4 чел",
           dayPrice: "от 890 ₽/час",
           nightPrice: "от 990 ₽/час",
-          description: "Большая приватная комната. Диван, минибар, румсервис из ресторана.",
+          description: "Отдельная комната с продвинутым игровым сетапом и зоной отдыха.",
           imageUrl: "/images/club-room-red.webp",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -141,7 +141,7 @@ export const defaultCmsContent: CmsContent = {
           capacity: "2-4 чел",
           dayPrice: "По запросу",
           nightPrice: "По запросу",
-          description: "Максимум приватности и места. Свой вход, полный сервис, тишина.",
+          description: "Мощнейшее железо и максимальный уровень приватности с большой зоной отдыха и отдельным входом.",
           imageUrl: "/images/cyberclub-vip.jpg",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
@@ -163,10 +163,10 @@ export const defaultCmsContent: CmsContent = {
       id: "restaurant-main",
       type: "restaurant",
       enabled: true,
-      title: "Ресторан и бар",
-      subtitle: "Кухня, коктейли и румсервис в комнаты клуба. Открыты 24/7.",
+      title: "Ресторан и бар 24/7",
+      subtitle: "Любое блюдо или напиток можно заказать прямо в комнату.",
       description:
-        "Полноценный ресторан внутри Avulus. Можно зайти отдельно или заказать еду прямо в комнату.",
+        "Можно просто зайти в ресторан и вкусно провести время. Это полноценная зона, где можно отдохнуть между делами, пообедать или провести встречу.",
       photos: [
         { id: "rest-photo-1", imageUrl: "/images/dish-burger.jpg", alt: "Блюда ресторана" },
         { id: "rest-photo-2", imageUrl: "/images/dish-cocktail.jpg", alt: "Коктейли" },
@@ -197,7 +197,7 @@ export const defaultCmsContent: CmsContent = {
       id: "contacts-main",
       type: "contacts",
       enabled: true,
-      title: "Контакты",
+      title: "Как попасть",
       subtitle: "Приезжайте в Avulus — ответим быстро и поможем с бронью.",
       address: "Москва, Серебрянический переулок, 12с1",
       mapEmbedUrl:
