@@ -23,9 +23,9 @@ export const metadata: Metadata = {
   },
   description: "Премиальный киберклуб и ресторан 24/7 в центре Москвы.",
   icons: {
-    icon: "/sublogo/Avulus-Sublogo-Red-CMYK.gif",
-    shortcut: "/sublogo/Avulus-Sublogo-Red-CMYK.gif",
-    apple: "/sublogo/Avulus-Sublogo-Red-CMYK.gif"
+    icon: "/Sublogo/Avulus-Sublogo-Red-CMYK.gif",
+    shortcut: "/Sublogo/Avulus-Sublogo-Red-CMYK.gif",
+    apple: "/Sublogo/Avulus-Sublogo-Red-CMYK.gif"
   }
 };
 

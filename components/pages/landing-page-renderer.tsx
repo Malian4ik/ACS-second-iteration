@@ -140,7 +140,7 @@ function renderHeroBlock({
             fill
             priority
             sizes="128px"
-            src="/sublogo/Avulus-Sublogo-Red-CMYK.gif"
+            src="/Sublogo/Avulus-Sublogo-Red-CMYK.gif"
           />
         </div>
 
@@ -750,7 +750,7 @@ export function LandingPageRenderer({
               {/* Logo */}
               <a className="flex items-center gap-3" href="#top">
                 <div className="relative h-9 w-9 overflow-hidden rounded-full border border-white/10 bg-white">
-                  <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/sublogo/Avulus-Sublogo-Red-CMYK.gif" />
+                  <Image alt="Avulus logo" className="object-contain p-1" fill sizes="36px" src="/Sublogo/Avulus-Sublogo-Red-CMYK.gif" />
                 </div>
                 <div className="hidden xl:block">
                   <div className="font-[family:var(--font-oswald)] text-2xl uppercase leading-none tracking-[0.16em] text-white">{content.site.projectName}</div>

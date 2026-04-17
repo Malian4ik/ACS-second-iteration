@@ -507,7 +507,7 @@ export function getHomeNav(locale: Locale): NavItem[] {
     { label: isRu ? "Предложения" : "Offers", href: "#offers" },
     { label: isRu ? "Форматы" : "Rooms", href: "#rooms" },
     { label: isRu ? "Ресторан" : "Restaurant", href: "#restaurant" },
-    { label: isRu ? "Как попасть" : "How to get here", href: "#contact" }
+    { label: isRu ? "Как добраться" : "How to get here", href: "#contact" }
   ];
 }
 
