@@ -551,7 +551,7 @@ function renderRestaurantBlock({
       <div className="mt-5 flex flex-wrap gap-2">
         <a
           className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
-          href="/menu/N_A4_300gr_4+4_matlam 1+1_50 sht.pdf"
+          href="/menu/menu_kitchen.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -560,7 +560,7 @@ function renderRestaurantBlock({
         </a>
         <a
           className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
-          href="/menu/N_А4_4+4_300gr_matlam 1+1_50 sht.pdf"
+          href="/menu/menu_bar.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -569,7 +569,7 @@ function renderRestaurantBlock({
         </a>
         <a
           className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
-          href="/menu/N_A4_100x210mm_300gr_4+4_matlam 1+1_50 sht.pdf"
+          href="/menu/menu_cocktails.pdf"
           target="_blank"
           rel="noopener noreferrer"
         >
