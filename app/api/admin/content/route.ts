@@ -59,22 +59,13 @@ export async function DELETE() {
     return NextResponse.json({ error: "UNAUTHORIZED" }, { status: 401 });
   }
 
-  // Import locally to avoid modifying the whole cms.ts
-  const { del } = await import("@vercel/blob");
-  const fs = await import("fs/promises");
-  const path = await import("path");
-
-  const CMS_BLOB_PATH = "cms/site-content.json";
-  const LOCAL_CMS_FILE = path.join(process.cwd(), "content", "cms.local.json");
-
   try {
-    if (process.env.BLOB_READ_WRITE_TOKEN) {
-      await del(CMS_BLOB_PATH);
-    } else {
-      await fs.unlink(LOCAL_CMS_FILE).catch(() => {});
-    }
+    const { defaultCmsContent } = await import("@/lib/cms-default");
+    const { saveCmsContent } = await import("@/lib/cms");
+    await saveCmsContent(defaultCmsContent);
   } catch (err) {
     console.error("Failed to reset CMS:", err);
+    return NextResponse.json({ error: "RESET_FAILED" }, { status: 500 });
   }
 
   revalidateSite();
