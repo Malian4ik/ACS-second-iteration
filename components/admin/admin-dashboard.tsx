@@ -440,6 +440,24 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
               <p className="mt-3 text-sm text-white/65">Блочная CMS с live preview. Хранилище: {storageMode === "blob" ? "Vercel Blob" : "local fallback"}.</p>
             </div>
             <div className="flex flex-wrap gap-2">
+              <button
+                className="rounded-full border border-[var(--accent-red)] px-5 py-2 text-sm font-semibold text-[var(--accent-red)] transition hover:bg-[var(--accent-red)] hover:text-white"
+                type="button"
+                disabled={isSaving}
+                onClick={async () => {
+                  if (!confirm("Вы уверены, что хотите сбросить настройки базы данных до значений из кода?")) return;
+                  setIsSaving(true);
+                  const res = await fetch("/api/admin/content", { method: "DELETE" });
+                  if (res.ok) {
+                    window.location.reload();
+                  } else {
+                    setStatus("Ошибка сброса");
+                    setIsSaving(false);
+                  }
+                }}
+              >
+                Сбросить БД (Код)
+              </button>
               <button className="rounded-full bg-[var(--accent-red)] px-5 py-2 text-sm font-semibold" type="button" disabled={isSaving} onClick={() => void handleSave()}>
                 {isSaving ? "Сохраняем..." : "Сохранить"}
               </button>
