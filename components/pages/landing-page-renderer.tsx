@@ -361,7 +361,7 @@ function renderRoomsBlock({
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.05),rgba(9,9,9,0.42),rgba(9,9,9,0.94))]" />
 
-              <div className="absolute left-4 top-4 rounded-full border border-white/10 bg-black/48 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#e8dcc7] shadow-[0_4px_16px_rgba(0,0,0,0.5)]">
+              <div className="absolute left-4 top-4 rounded-full border border-white/18 bg-black/68 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#f5ead3] shadow-[0_10px_28px_rgba(0,0,0,0.78),0_0_18px_rgba(159,35,57,0.45)] backdrop-blur-md">
                 {room.capacity}
               </div>
 
