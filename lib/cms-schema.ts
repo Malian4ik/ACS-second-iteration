@@ -14,6 +14,19 @@ export type FoodVisualCard = {
   imageUrl: string;
 };
 
+export type CtaButtonSize = "compact" | "standard" | "large";
+export type CtaAlignment = "left" | "center" | "right";
+export type CtaGap = "tight" | "normal" | "wide";
+export type SecondaryCtaTone = "outline" | "quiet";
+
+export type HeroCtaSettings = {
+  alignment: CtaAlignment;
+  primarySize: CtaButtonSize;
+  secondarySize: CtaButtonSize;
+  secondaryTone: SecondaryCtaTone;
+  gap: CtaGap;
+};
+
 export type CmsContent = {
   landing: {
     heroTitle: string;
@@ -51,6 +64,7 @@ export type CmsContent = {
     primaryCtaLabel: string;
     secondaryCtaLabel: string;
     tertiaryCtaLabel: string;
+    heroCta: HeroCtaSettings;
   };
   restaurant: {
     shortDescription: string;

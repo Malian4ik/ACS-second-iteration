@@ -4,8 +4,37 @@ import { PromoCarousel } from "@/components/home/promo-carousel";
 import { LandingHeader } from "@/components/layout/landing-header";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { getCmsContent } from "@/lib/cms";
-import type { PromoCard } from "@/lib/cms-schema";
+import type { CtaAlignment, CtaButtonSize, CtaGap, PromoCard, SecondaryCtaTone } from "@/lib/cms-schema";
 import { CONTACTS, OFFERS_FALLBACK, RESTAURANT_IMAGES, ROOM_CARDS } from "@/lib/landing-data";
+
+const ctaAlignmentClasses: Record<CtaAlignment, string> = {
+  left: "sm:justify-start",
+  center: "sm:justify-center",
+  right: "sm:justify-end"
+};
+
+const ctaGapClasses: Record<CtaGap, string> = {
+  tight: "gap-2",
+  normal: "gap-3",
+  wide: "gap-4"
+};
+
+const primaryCtaSizeClasses: Record<CtaButtonSize, string> = {
+  compact: "px-6 py-3 text-xs tracking-[0.14em]",
+  standard: "px-7 py-4 text-sm tracking-[0.16em]",
+  large: "px-8 py-5 text-sm tracking-[0.18em] shadow-[0_22px_54px_rgba(186,34,45,0.34)] md:px-9"
+};
+
+const secondaryCtaSizeClasses: Record<CtaButtonSize, string> = {
+  compact: "px-5 py-3 text-xs tracking-[0.12em]",
+  standard: "px-6 py-3.5 text-xs tracking-[0.14em]",
+  large: "px-7 py-4 text-sm tracking-[0.16em]"
+};
+
+const secondaryCtaToneClasses: Record<SecondaryCtaTone, string> = {
+  outline: "border border-white/16 text-white hover:border-[var(--accent-green)]",
+  quiet: "border border-white/10 bg-white/[0.03] text-white/72 hover:border-white/22 hover:text-white"
+};
 
 function normalizeOfferCards(cards: PromoCard[]): PromoCard[] {
   return cards.map((card) => {
@@ -30,6 +59,7 @@ export async function HomePage() {
     .slice(0, 4);
 
   const menuLink = landing.restaurantMenuUrl || process.env.NEXT_PUBLIC_MENU_URL || CONTACTS.menuFallback;
+  const heroCta = cms.home.heroCta;
 
   return (
     <div className="pb-24 md:pb-0">
@@ -51,21 +81,21 @@ export async function HomePage() {
               {landing.heroDescription}
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <div className={`mt-8 flex flex-col ${ctaGapClasses[heroCta.gap]} sm:flex-row ${ctaAlignmentClasses[heroCta.alignment]}`}>
               <TrackedLink
-                className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-7 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)]"
+                className={`inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] font-semibold uppercase text-white transition hover:bg-[var(--accent-red-strong)] ${primaryCtaSizeClasses[heroCta.primarySize]}`}
                 goal="hero_tg"
                 href={CONTACTS.telegram}
                 target="_blank"
               >
-                Написать в Telegram
+                {cms.home.primaryCtaLabel}
               </TrackedLink>
               <TrackedLink
-                className="inline-flex items-center justify-center rounded-full border border-white/16 px-7 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)]"
+                className={`inline-flex items-center justify-center rounded-full font-semibold uppercase transition ${secondaryCtaSizeClasses[heroCta.secondarySize]} ${secondaryCtaToneClasses[heroCta.secondaryTone]}`}
                 goal="hero_call"
                 href={CONTACTS.phone}
               >
-                Позвонить
+                {cms.home.secondaryCtaLabel}
               </TrackedLink>
             </div>
 

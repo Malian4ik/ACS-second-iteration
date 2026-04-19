@@ -68,7 +68,14 @@ export const defaultCmsContent: CmsContent = {
     ],
     primaryCtaLabel: "Написать в Telegram",
     secondaryCtaLabel: "Позвонить",
-    tertiaryCtaLabel: "Открыть бронь клуба"
+    tertiaryCtaLabel: "Открыть бронь клуба",
+    heroCta: {
+      alignment: "center",
+      primarySize: "large",
+      secondarySize: "compact",
+      secondaryTone: "quiet",
+      gap: "normal"
+    }
   },
   restaurant: {
     shortDescription: "Ресторан и бар AVULUS работают круглосуточно.",

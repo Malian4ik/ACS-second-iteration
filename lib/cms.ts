@@ -41,7 +41,11 @@ function mergeCmsContent(input: Partial<CmsContent> | undefined): CmsContent {
     home: {
       ...defaultCmsContent.home,
       ...input?.home,
-      promoCards: input?.home?.promoCards ?? defaultCmsContent.home.promoCards
+      promoCards: input?.home?.promoCards ?? defaultCmsContent.home.promoCards,
+      heroCta: {
+        ...defaultCmsContent.home.heroCta,
+        ...input?.home?.heroCta
+      }
     },
     restaurant: {
       ...defaultCmsContent.restaurant,
