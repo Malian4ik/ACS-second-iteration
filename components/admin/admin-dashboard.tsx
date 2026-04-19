@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import type { CmsContent, CtaAlignment, CtaButtonSize, CtaGap, PromoCard, SecondaryCtaTone } from "@/lib/cms-schema";
+import type { CmsContent, PromoCard } from "@/lib/cms-schema";
 
 type Props = {
   initialContent: CmsContent;
@@ -41,35 +41,6 @@ function TextInput({
       ) : (
         <input className={className} value={value} onChange={(event) => onChange(event.target.value)} />
       )}
-    </label>
-  );
-}
-
-function SelectInput({
-  label,
-  value,
-  options,
-  onChange
-}: {
-  label: string;
-  value: string;
-  options: Array<{ value: string; label: string }>;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <label className="block">
-      <span className="mb-2 block text-xs uppercase tracking-[0.22em] text-white/50">{label}</span>
-      <select
-        className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none transition focus:border-[var(--accent-green)]"
-        value={value}
-        onChange={(event) => onChange(event.target.value)}
-      >
-        {options.map((option) => (
-          <option key={option.value} value={option.value} className="bg-[#0b0f15] text-white">
-            {option.label}
-          </option>
-        ))}
-      </select>
     </label>
   );
 }
@@ -163,19 +134,6 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
   const [isSaving, setIsSaving] = useState(false);
 
   const promoCards = useMemo(() => content.home.promoCards, [content.home.promoCards]);
-
-  function updateHeroCta(patch: Partial<CmsContent["home"]["heroCta"]>) {
-    setContent((current) => ({
-      ...current,
-      home: {
-        ...current.home,
-        heroCta: {
-          ...current.home.heroCta,
-          ...patch
-        }
-      }
-    }));
-  }
 
   function updatePromoCard(id: string, patch: Partial<PromoCard>) {
     setContent((current) => ({
@@ -287,67 +245,6 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
             <TextInput label="Подзаголовок" value={content.landing.heroSubtitle} onChange={(value) => setContent((current) => ({ ...current, landing: { ...current.landing, heroSubtitle: value } }))} />
             <TextInput label="Описание" multiline value={content.landing.heroDescription} onChange={(value) => setContent((current) => ({ ...current, landing: { ...current.landing, heroDescription: value } }))} />
             <ArrayEditor label="Бейджи (3 значения)" values={content.landing.heroBadges} onChange={(next) => setContent((current) => ({ ...current, landing: { ...current.landing, heroBadges: next } }))} />
-          </div>
-          <div className="rounded-[28px] border border-[var(--accent-green)]/20 bg-[var(--accent-green)]/5 p-5">
-            <div className="mb-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--accent-sand)]">CTA первого экрана</p>
-              <p className="mt-2 text-sm leading-6 text-white/58">
-                Пресеты держат кнопки ровно: главная красная CTA остается первой по весу, вторичная не перетягивает внимание.
-              </p>
-            </div>
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              <TextInput label="Основная CTA" value={content.home.primaryCtaLabel} onChange={(value) => setContent((current) => ({ ...current, home: { ...current.home, primaryCtaLabel: value } }))} />
-              <TextInput label="Вторичная CTA" value={content.home.secondaryCtaLabel} onChange={(value) => setContent((current) => ({ ...current, home: { ...current.home, secondaryCtaLabel: value } }))} />
-              <SelectInput
-                label="Выравнивание группы"
-                value={content.home.heroCta.alignment}
-                onChange={(value) => updateHeroCta({ alignment: value as CtaAlignment })}
-                options={[
-                  { value: "center", label: "По центру" },
-                  { value: "left", label: "Слева" },
-                  { value: "right", label: "Справа" }
-                ]}
-              />
-              <SelectInput
-                label="Размер основной CTA"
-                value={content.home.heroCta.primarySize}
-                onChange={(value) => updateHeroCta({ primarySize: value as CtaButtonSize })}
-                options={[
-                  { value: "large", label: "Крупная" },
-                  { value: "standard", label: "Стандартная" },
-                  { value: "compact", label: "Компактная" }
-                ]}
-              />
-              <SelectInput
-                label="Размер вторичной CTA"
-                value={content.home.heroCta.secondarySize}
-                onChange={(value) => updateHeroCta({ secondarySize: value as CtaButtonSize })}
-                options={[
-                  { value: "compact", label: "Компактная" },
-                  { value: "standard", label: "Стандартная" },
-                  { value: "large", label: "Крупная" }
-                ]}
-              />
-              <SelectInput
-                label="Стиль вторичной CTA"
-                value={content.home.heroCta.secondaryTone}
-                onChange={(value) => updateHeroCta({ secondaryTone: value as SecondaryCtaTone })}
-                options={[
-                  { value: "quiet", label: "Тихая" },
-                  { value: "outline", label: "Контурная" }
-                ]}
-              />
-              <SelectInput
-                label="Отступ между CTA"
-                value={content.home.heroCta.gap}
-                onChange={(value) => updateHeroCta({ gap: value as CtaGap })}
-                options={[
-                  { value: "normal", label: "Нормальный" },
-                  { value: "tight", label: "Плотный" },
-                  { value: "wide", label: "Широкий" }
-                ]}
-              />
-            </div>
           </div>
         </section>
 
