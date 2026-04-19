@@ -96,6 +96,7 @@ export type RoomsBlock = BaseBlock & {
 
 export type RestaurantBlock = BaseBlock & {
   type: "restaurant";
+  eyebrow: string;
   title: string;
   subtitle: string;
   description: string;

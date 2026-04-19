@@ -125,6 +125,7 @@ function createBlock(type: BlockType): CmsBlock {
       id: uid("restaurant"),
       type: "restaurant",
       enabled: true,
+      eyebrow: "Клуб + бар",
       title: "Ресторан и бар",
       subtitle: "Кухня, коктейли и румсервис в комнаты клуба. Открыты 24/7.",
       description: "Полноценный ресторан внутри Avulus.",
@@ -845,6 +846,7 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
 
                   {selectedBlock.type === "restaurant" ? (
                     <>
+                      <Input label="Маленькая надпись над заголовком" value={selectedBlock.eyebrow} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, eyebrow: value }))} />
                       <Input label="Заголовок" value={selectedBlock.title} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, title: value }))} />
                       <Input label="Подзаголовок" multiline value={selectedBlock.subtitle} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, subtitle: value }))} />
                       <Input label="Описание" multiline value={selectedBlock.description} onChange={(value) => setRestaurant(selectedBlock.id, (block) => ({ ...block, description: value }))} />

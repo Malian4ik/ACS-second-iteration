@@ -170,6 +170,7 @@ export const defaultCmsContent: CmsContent = {
       id: "restaurant-main",
       type: "restaurant",
       enabled: true,
+      eyebrow: "Клуб + бар",
       title: "Ресторан и бар 24/7",
       subtitle: "Любое блюдо или напиток можно заказать прямо в комнату.",
       description:

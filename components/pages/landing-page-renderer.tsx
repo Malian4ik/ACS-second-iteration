@@ -506,7 +506,7 @@ function renderRestaurantBlock({
     >
       <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <div>
-          <div className="eyebrow">Клуб + бар</div>
+          <div className="eyebrow">{block.eyebrow}</div>
           <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">{block.title}</h2>
           <p className="mt-3 max-w-lg text-sm leading-7 text-white/55">{block.subtitle}</p>
         </div>

@@ -203,6 +203,7 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         ...defaults,
         id,
         enabled,
+        eyebrow: asString(block.eyebrow, defaults.eyebrow),
         title: asString(block.title, defaults.title),
         subtitle: asString(block.subtitle, defaults.subtitle),
         description: asString(block.description, defaults.description),
