@@ -40,6 +40,13 @@ export const defaultCmsContent: CmsContent = {
       secondaryCta: {
         label: "Позвонить",
         href: "tel:+74959212221"
+      },
+      ctaLayout: {
+        alignment: "center",
+        primarySize: "large",
+        secondarySize: "compact",
+        secondaryTone: "quiet",
+        gap: "normal"
       }
     },
     {

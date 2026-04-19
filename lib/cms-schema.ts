@@ -5,6 +5,19 @@ export type CmsCta = {
   href: string;
 };
 
+export type CtaButtonSize = "compact" | "standard" | "large";
+export type CtaAlignment = "left" | "center" | "right";
+export type CtaGap = "tight" | "normal" | "wide";
+export type SecondaryCtaTone = "outline" | "quiet";
+
+export type HeroCtaLayout = {
+  alignment: CtaAlignment;
+  primarySize: CtaButtonSize;
+  secondarySize: CtaButtonSize;
+  secondaryTone: SecondaryCtaTone;
+  gap: CtaGap;
+};
+
 export type CmsNavigationItem = {
   id: string;
   label: string;
@@ -61,6 +74,7 @@ export type HeroBlock = BaseBlock & {
   badges: string[];
   primaryCta: CmsCta;
   secondaryCta: CmsCta;
+  ctaLayout: HeroCtaLayout;
 };
 
 export type OffersBlock = BaseBlock & {

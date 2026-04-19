@@ -6,12 +6,17 @@ import { unstable_noStore as noStore } from "next/cache";
 
 import { defaultCmsContent } from "@/lib/cms-default";
 import type {
+  CtaAlignment,
+  CtaButtonSize,
+  CtaGap,
   CmsBlock,
   CmsContent,
+  HeroCtaLayout,
   LegacyCmsContent,
   OfferCard,
   RestaurantPhoto,
-  RoomCard
+  RoomCard,
+  SecondaryCtaTone
 } from "@/lib/cms-schema";
 
 const CMS_BLOB_PATH = "cms/site-content.json";
@@ -46,6 +51,22 @@ function normalizeStringArray(value: unknown, fallback: string[]) {
   }
 
   return value.map((item) => asString(item)).filter(Boolean);
+}
+
+function pickOption<T extends string>(value: unknown, fallback: T, allowed: readonly T[]) {
+  return typeof value === "string" && allowed.includes(value as T) ? (value as T) : fallback;
+}
+
+function normalizeHeroCtaLayout(value: unknown, fallback: HeroCtaLayout): HeroCtaLayout {
+  const input = isObject(value) ? value : {};
+
+  return {
+    alignment: pickOption<CtaAlignment>(input.alignment, fallback.alignment, ["left", "center", "right"]),
+    primarySize: pickOption<CtaButtonSize>(input.primarySize, fallback.primarySize, ["compact", "standard", "large"]),
+    secondarySize: pickOption<CtaButtonSize>(input.secondarySize, fallback.secondarySize, ["compact", "standard", "large"]),
+    secondaryTone: pickOption<SecondaryCtaTone>(input.secondaryTone, fallback.secondaryTone, ["outline", "quiet"]),
+    gap: pickOption<CtaGap>(input.gap, fallback.gap, ["tight", "normal", "wide"])
+  };
 }
 
 function normalizeOfferCards(value: unknown, fallback: OfferCard[]) {
@@ -144,7 +165,8 @@ function normalizeBlock(block: unknown, defaults: CmsBlock): CmsBlock {
         description: asString(block.description, defaults.description),
         badges: normalizeStringArray(block.badges, defaults.badges),
         primaryCta: normalizeCta(block.primaryCta, defaults.primaryCta),
-        secondaryCta: normalizeCta(block.secondaryCta, defaults.secondaryCta)
+        secondaryCta: normalizeCta(block.secondaryCta, defaults.secondaryCta),
+        ctaLayout: normalizeHeroCtaLayout(block.ctaLayout, defaults.ctaLayout)
       };
     case "offers":
       return {

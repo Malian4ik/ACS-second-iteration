@@ -4,7 +4,18 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { LandingPageRenderer } from "@/components/pages/landing-page-renderer";
-import type { BlockType, CmsBlock, CmsContent, OfferCard, RestaurantPhoto, RoomCard } from "@/lib/cms-schema";
+import type {
+  BlockType,
+  CmsBlock,
+  CmsContent,
+  CtaAlignment,
+  CtaButtonSize,
+  CtaGap,
+  OfferCard,
+  RestaurantPhoto,
+  RoomCard,
+  SecondaryCtaTone
+} from "@/lib/cms-schema";
 
 type Props = {
   initialContent: CmsContent;
@@ -76,7 +87,14 @@ function createBlock(type: BlockType): CmsBlock {
       description: "Приватные игровые комнаты, кухня и бар — круглосуточно.",
       badges: ["24/7", "Центр Москвы", "Бесплатная парковка"],
       primaryCta: { label: "Написать в Telegram", href: "https://t.me/AVULUSbot" },
-      secondaryCta: { label: "Позвонить", href: "tel:+74959212221" }
+      secondaryCta: { label: "Позвонить", href: "tel:+74959212221" },
+      ctaLayout: {
+        alignment: "center",
+        primarySize: "large",
+        secondarySize: "compact",
+        secondaryTone: "quiet",
+        gap: "normal"
+      }
     };
   }
   if (type === "offers") {
@@ -160,6 +178,35 @@ function Input({
       ) : (
         <input className={className} value={value} onChange={(event) => onChange(event.target.value)} />
       )}
+    </label>
+  );
+}
+
+function Select({
+  label,
+  value,
+  options,
+  onChange
+}: {
+  label: string;
+  value: string;
+  options: Array<{ value: string; label: string }>;
+  onChange: (next: string) => void;
+}) {
+  return (
+    <label className="block space-y-2">
+      <span className="text-xs uppercase tracking-[0.2em] text-white/50">{label}</span>
+      <select
+        className="w-full rounded-2xl border border-white/10 bg-black/30 px-4 py-3 text-sm text-white outline-none"
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+      >
+        {options.map((option) => (
+          <option key={option.value} value={option.value} className="bg-[#0b0f15] text-white">
+            {option.label}
+          </option>
+        ))}
+      </select>
     </label>
   );
 }
@@ -584,6 +631,90 @@ export function AdminDashboard({ initialContent, storageMode }: Props) {
                             }))
                           }
                         />
+                      </div>
+                      <div className="space-y-4 rounded-2xl border border-[var(--accent-green)]/20 bg-[var(--accent-green)]/5 p-4">
+                        <div>
+                          <div className="text-xs uppercase tracking-[0.2em] text-[var(--accent-sand)]">CTA layout</div>
+                          <p className="mt-2 text-xs leading-5 text-white/55">
+                            Безопасные пресеты: красная CTA остается главной, вторичная не спорит с ней и не ломает мобильную версию.
+                          </p>
+                        </div>
+                        <div className="grid gap-3 md:grid-cols-2">
+                          <Select
+                            label="Позиция CTA"
+                            value={selectedBlock.ctaLayout.alignment}
+                            onChange={(value) =>
+                              setHero(selectedBlock.id, (block) => ({
+                                ...block,
+                                ctaLayout: { ...block.ctaLayout, alignment: value as CtaAlignment }
+                              }))
+                            }
+                            options={[
+                              { value: "center", label: "По центру" },
+                              { value: "left", label: "Слева" },
+                              { value: "right", label: "Справа" }
+                            ]}
+                          />
+                          <Select
+                            label="Отступ между CTA"
+                            value={selectedBlock.ctaLayout.gap}
+                            onChange={(value) =>
+                              setHero(selectedBlock.id, (block) => ({
+                                ...block,
+                                ctaLayout: { ...block.ctaLayout, gap: value as CtaGap }
+                              }))
+                            }
+                            options={[
+                              { value: "normal", label: "Нормальный" },
+                              { value: "tight", label: "Плотный" },
+                              { value: "wide", label: "Широкий" }
+                            ]}
+                          />
+                          <Select
+                            label="Размер красной CTA"
+                            value={selectedBlock.ctaLayout.primarySize}
+                            onChange={(value) =>
+                              setHero(selectedBlock.id, (block) => ({
+                                ...block,
+                                ctaLayout: { ...block.ctaLayout, primarySize: value as CtaButtonSize }
+                              }))
+                            }
+                            options={[
+                              { value: "large", label: "Крупная" },
+                              { value: "standard", label: "Стандартная" },
+                              { value: "compact", label: "Компактная" }
+                            ]}
+                          />
+                          <Select
+                            label="Размер второй CTA"
+                            value={selectedBlock.ctaLayout.secondarySize}
+                            onChange={(value) =>
+                              setHero(selectedBlock.id, (block) => ({
+                                ...block,
+                                ctaLayout: { ...block.ctaLayout, secondarySize: value as CtaButtonSize }
+                              }))
+                            }
+                            options={[
+                              { value: "compact", label: "Компактная" },
+                              { value: "standard", label: "Стандартная" },
+                              { value: "large", label: "Крупная" }
+                            ]}
+                          />
+                          <Select
+                            label="Стиль второй CTA"
+                            value={selectedBlock.ctaLayout.secondaryTone}
+                            onChange={(value) =>
+                              setHero(selectedBlock.id, (block) => ({
+                                ...block,
+                                ctaLayout: { ...block.ctaLayout, secondaryTone: value as SecondaryCtaTone }
+                              }))
+                            }
+                            options={[
+                              { value: "quiet", label: "Тихая" },
+                              { value: "outline", label: "Контурная" }
+                            ]}
+                          />
+                        </div>
                       </div>
                       <StringListEditor
                         label="Бейджи Hero"

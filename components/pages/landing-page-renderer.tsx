@@ -8,10 +8,14 @@ import type {
   CmsBlock,
   CmsContent,
   ContactsBlock,
+  CtaAlignment,
+  CtaButtonSize,
+  CtaGap,
   HeroBlock,
   OffersBlock,
   RestaurantBlock,
-  RoomsBlock
+  RoomsBlock,
+  SecondaryCtaTone
 } from "@/lib/cms-schema";
 
 type LandingRendererProps = {
@@ -112,6 +116,35 @@ function blockShellClass({ selected, previewMode }: { selected: boolean; preview
     : "ring-1 ring-transparent hover:ring-white/25";
 }
 
+const ctaAlignmentClasses: Record<CtaAlignment, string> = {
+  left: "sm:self-start sm:justify-start",
+  center: "sm:self-center sm:justify-center",
+  right: "sm:self-end sm:justify-end"
+};
+
+const ctaGapClasses: Record<CtaGap, string> = {
+  tight: "gap-2",
+  normal: "gap-3",
+  wide: "gap-4"
+};
+
+const primaryCtaSizeClasses: Record<CtaButtonSize, string> = {
+  compact: "px-5 py-3 text-xs tracking-[0.14em] sm:min-w-[11rem]",
+  standard: "px-6 py-4 text-sm tracking-[0.16em] sm:min-w-[14rem]",
+  large: "px-7 py-4.5 text-sm tracking-[0.18em] shadow-[0_20px_54px_rgba(177,27,54,0.36)] sm:min-w-[17rem]"
+};
+
+const secondaryCtaSizeClasses: Record<CtaButtonSize, string> = {
+  compact: "px-5 py-3 text-xs tracking-[0.12em] sm:min-w-[9rem]",
+  standard: "px-6 py-3.5 text-xs tracking-[0.14em] sm:min-w-[12rem]",
+  large: "px-6 py-4 text-sm tracking-[0.16em] sm:min-w-[14rem]"
+};
+
+const secondaryCtaToneClasses: Record<SecondaryCtaTone, string> = {
+  outline: "border-[rgba(255,244,224,0.18)] bg-transparent text-white hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]",
+  quiet: "border-white/10 bg-white/[0.03] text-white/70 hover:border-white/24 hover:text-white"
+};
+
 function renderHeroBlock({
   block,
   previewMode,
@@ -123,6 +156,8 @@ function renderHeroBlock({
   selected: boolean;
   onSelectBlock?: (blockId: string) => void;
 }) {
+  const ctaLayout = block.ctaLayout;
+
   return (
     <section
       className={`section-shell relative pt-28 pb-16 md:pt-36 md:pb-20 ${blockShellClass({ selected, previewMode })}`}
@@ -152,10 +187,10 @@ function renderHeroBlock({
         </h1>
         <p className="mt-5 max-w-xl text-sm leading-7 text-white/60 md:text-base">{block.description}</p>
 
-        <div className="mt-8 flex w-full max-w-[34rem] flex-col items-stretch gap-3 sm:flex-row pb-6">
-          <div className="relative flex flex-1 flex-col">
+        <div className={`mt-8 flex w-full max-w-[38rem] flex-col items-stretch ${ctaGapClasses[ctaLayout.gap]} pb-6 sm:w-auto sm:flex-row ${ctaAlignmentClasses[ctaLayout.alignment]}`}>
+          <div className="relative flex flex-col">
             <ActionLink
-              className="inline-flex h-full w-full items-center justify-center rounded-[32px] bg-[var(--accent-red)] px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[var(--accent-red-strong)]"
+              className={`inline-flex h-full w-full items-center justify-center rounded-[32px] bg-[var(--accent-red)] text-center font-semibold uppercase text-white transition hover:bg-[var(--accent-red-strong)] ${primaryCtaSizeClasses[ctaLayout.primarySize]}`}
               goal="hero_primary"
               href={block.primaryCta.href}
               label={block.primaryCta.label}
@@ -163,9 +198,9 @@ function renderHeroBlock({
             />
             <span className="absolute -bottom-6 left-0 right-0 hidden text-center text-[11px] tracking-wide text-white/38 sm:block">отвечаем за 1–2 минуты</span>
           </div>
-          <div className="flex flex-1 flex-col">
+          <div className="flex flex-col">
             <ActionLink
-              className="inline-flex h-full w-full items-center justify-center rounded-[32px] border border-[rgba(255,244,224,0.18)] bg-transparent px-6 py-4 text-center text-sm font-semibold uppercase tracking-[0.18em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]"
+              className={`inline-flex h-full w-full items-center justify-center rounded-[32px] border text-center font-semibold uppercase transition ${secondaryCtaSizeClasses[ctaLayout.secondarySize]} ${secondaryCtaToneClasses[ctaLayout.secondaryTone]}`}
               goal="hero_secondary"
               href={block.secondaryCta.href}
               label={block.secondaryCta.label}
