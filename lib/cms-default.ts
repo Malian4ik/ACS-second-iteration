@@ -177,7 +177,9 @@ export const defaultCmsContent: CmsContent = {
         "Можно просто зайти в ресторан и вкусно провести время. Это полноценная зона, где можно отдохнуть между делами, пообедать или провести встречу.",
       photos: [
         { id: "rest-photo-1", imageUrl: "/images/restaurant-real-1.jpg", alt: "Ресторан" },
-        { id: "rest-photo-2", imageUrl: "/images/restaurant-real-2.jpg", alt: "Барная стойка" }
+        { id: "rest-photo-2", imageUrl: "/images/restaurant-real-2.jpg", alt: "Барная стойка" },
+        { id: "rest-photo-3", imageUrl: "/images/restaurant-real-1.jpg", alt: "Ресторан" },
+        { id: "rest-photo-4", imageUrl: "/images/restaurant-real-2.jpg", alt: "Барная стойка" }
       ],
       menuEmbedUrl: "",
       foodMenuUrl: "",

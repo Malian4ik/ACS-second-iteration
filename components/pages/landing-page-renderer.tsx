@@ -133,7 +133,7 @@ const ctaGapClasses: Record<CtaGap, string> = {
 const primaryCtaSizeClasses: Record<CtaButtonSize, string> = {
   compact: "px-5 py-3 text-xs tracking-[0.14em] sm:min-w-[11rem]",
   standard: "px-6 py-4 text-sm tracking-[0.16em] sm:min-w-[14rem]",
-  large: "px-7 py-4.5 text-sm tracking-[0.18em] shadow-[0_20px_54px_rgba(177,27,54,0.36)] sm:min-w-[17rem]"
+  large: "px-5 py-3 text-xs sm:px-7 sm:py-5 sm:text-sm tracking-[0.18em] shadow-[0_20px_54px_rgba(177,27,54,0.36)] sm:min-w-[17rem]"
 };
 
 const secondaryCtaSizeClasses: Record<CtaButtonSize, string> = {

@@ -95,11 +95,21 @@ function findCard(periodKey: string, catalogTitle: string): PricingCard | undefi
 
 /* ─── Price Row ─── */
 
-function PriceRow({ label, price }: { label: string; price: string }) {
+function PriceRow({ label, timeRange, price, accent }: { label: string; timeRange?: string; price: string; accent?: string }) {
   return (
-    <div className="grid grid-cols-[1fr_auto] items-center gap-3 py-2.5">
-      <span className="font-[family:var(--font-oswald)] text-lg uppercase text-white/80 md:text-xl">{label}</span>
-      <span className="font-[family:var(--font-oswald)] text-lg uppercase text-[#f5ead3] md:text-xl">
+    <div className="grid grid-cols-[1.2fr_2fr_0.8fr] items-center gap-4 py-3 md:py-3.5">
+      <span className="font-[family:var(--font-oswald)] text-lg uppercase text-white/90 md:text-xl">
+        {label}
+      </span>
+      {timeRange && (
+        <span className="font-[family:var(--font-oswald)] text-[13px] tracking-widest text-white/40 text-center md:text-[15px]">
+          {timeRange}
+        </span>
+      )}
+      <span 
+        className="font-[family:var(--font-oswald)] text-lg uppercase text-right md:text-xl"
+        style={{ color: accent || "#f5ead3" }}
+      >
         {price}
       </span>
     </div>
@@ -131,50 +141,56 @@ function PeriodPanel({
         {label}
       </div>
 
-      <div className="bg-[#0c0c0e] p-4 md:p-5">
+      <div className="bg-[#0c0c0e] p-4 md:p-6">
         {dayCard && dayCard.entries.length > 0 ? (
-          <div className="mb-5">
-            <div className="mb-1 flex items-baseline justify-between">
+          <div className="mb-6">
+            <div className="mb-2">
               <span className="text-[11px] uppercase tracking-[0.24em] text-white/45">День</span>
-              <span className="text-[10px] uppercase tracking-[0.14em] text-white/30">04:00 – 17:00</span>
             </div>
             <div className="divide-y divide-white/6">
               {dayCard.entries.map((entry) => (
-                <PriceRow key={`day-${t("ru" as const, entry.label)}`} label={t("ru" as const, entry.label)} price={entry.price} />
+                <PriceRow 
+                  key={`day-${t("ru" as const, entry.label)}`} 
+                  label={t("ru" as const, entry.label)} 
+                  timeRange="04:00 – 17:00"
+                  price={entry.price} 
+                />
               ))}
             </div>
           </div>
         ) : null}
 
         {nightCard && nightCard.entries.length > 0 ? (
-          <div className="mb-5">
-            <div className="mb-1 flex items-baseline justify-between">
+          <div className="mb-6">
+            <div className="mb-2">
               <span className="text-[11px] uppercase tracking-[0.24em] text-white/45">Вечер</span>
-              <span className="text-[10px] uppercase tracking-[0.14em] text-white/30">17:00 – 04:00</span>
             </div>
             <div className="divide-y divide-white/6">
               {nightCard.entries.map((entry) => (
-                <PriceRow key={`night-${t("ru" as const, entry.label)}`} label={t("ru" as const, entry.label)} price={entry.price} />
+                <PriceRow 
+                  key={`night-${t("ru" as const, entry.label)}`} 
+                  label={t("ru" as const, entry.label)} 
+                  timeRange="17:00 – 04:00"
+                  price={entry.price} 
+                />
               ))}
             </div>
           </div>
         ) : null}
 
         {nightCard?.packages && nightCard.packages.length > 0 ? (
-          <div className="border-t border-white/8 pt-3">
-            <div className="mb-1 flex items-baseline justify-between">
+          <div className="border-t border-white/8 pt-5">
+            <div className="mb-2">
               <span className="text-[11px] uppercase tracking-[0.24em] text-white/45">Ночь</span>
-              <span className="text-[10px] uppercase tracking-[0.14em] text-white/30">23:00 – 11:00</span>
             </div>
             {nightCard.packages.map((pack) => (
-              <div key={`pack-${t("ru" as const, pack.label)}`} className="grid grid-cols-[1fr_auto] items-center gap-3 py-2.5">
-                <span className="font-[family:var(--font-oswald)] text-base uppercase text-white/70 md:text-lg">
-                  {t("ru" as const, pack.label)}
-                </span>
-                <span className="font-[family:var(--font-oswald)] text-base uppercase md:text-lg" style={{ color: accent }}>
-                  {pack.price}
-                </span>
-              </div>
+              <PriceRow 
+                key={`pack-${t("ru" as const, pack.label)}`} 
+                label={t("ru" as const, pack.label)} 
+                timeRange="23:00 – 11:00"
+                accent={accent}
+                price={pack.price} 
+              />
             ))}
           </div>
         ) : null}
@@ -185,73 +201,43 @@ function PeriodPanel({
 
 /* ─── Details Panel (expandable: photo + specs) ─── */
 
-function DetailsPanel({ category, open, onToggle }: { category: RoomCategory; open: boolean; onToggle: () => void }) {
+function DetailsPanel({ category }: { category: RoomCategory }) {
   return (
     <div className="mb-6">
-      <button
-        className="group flex w-full items-center gap-3 rounded-xl border border-white/8 bg-white/[0.03] px-5 py-3.5 text-left transition hover:border-white/14 hover:bg-white/[0.05]"
-        onClick={onToggle}
-        type="button"
-      >
-        <svg
-          className={`h-4 w-4 flex-none text-white/50 transition-transform duration-300 ${open ? "rotate-90" : ""}`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-        </svg>
-        <span className="font-[family:var(--font-oswald)] text-lg uppercase tracking-[0.08em] text-white/70 transition group-hover:text-white">
-          Подробнее
-        </span>
-        <span className="ml-auto text-[11px] uppercase tracking-[0.14em] text-white/30">
-          Фото и характеристики
-        </span>
-      </button>
+      <div className="flex flex-col gap-5 rounded-xl border border-white/8 bg-white/[0.02] p-5 md:flex-row md:gap-6">
+        {/* Room photo */}
+        <div className="relative h-[220px] w-full overflow-hidden rounded-lg md:h-[260px] md:w-[380px] md:flex-none">
+          <Image
+            alt={category.title}
+            className="object-cover"
+            fill
+            sizes="(max-width: 768px) 100vw, 380px"
+            src={category.imageUrl}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+          <div className="absolute bottom-3 left-4 font-[family:var(--font-oswald)] text-2xl uppercase text-white/80">
+            {category.title}
+          </div>
+          <div className="absolute top-3 left-4 rounded-full border border-white/20 bg-black/40 px-3 py-1 font-[family:var(--font-oswald)] text-[11px] uppercase tracking-wider text-white backdrop-blur-sm">
+            {category.capacity}
+          </div>
+        </div>
 
-      <div
-        className={`grid transition-all duration-400 ease-in-out ${
-          open ? "grid-rows-[1fr] opacity-100 mt-4" : "grid-rows-[0fr] opacity-0"
-        }`}
-      >
-        <div className="overflow-hidden">
-          <div className="flex flex-col gap-5 rounded-xl border border-white/8 bg-white/[0.02] p-5 md:flex-row md:gap-6">
-            {/* Room photo */}
-            <div className="relative h-[220px] w-full overflow-hidden rounded-lg md:h-[260px] md:w-[380px] md:flex-none">
-              <Image
-                alt={category.title}
-                className="object-cover"
-                fill
-                sizes="(max-width: 768px) 100vw, 380px"
-                src={category.imageUrl}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-              <div className="absolute bottom-3 left-4 font-[family:var(--font-oswald)] text-2xl uppercase text-white/80">
-                {category.title}
-              </div>
-              <div className="absolute top-3 left-4 rounded-full border border-white/20 bg-black/40 px-3 py-1 font-[family:var(--font-oswald)] text-[11px] uppercase tracking-wider text-white backdrop-blur-sm">
-                {category.capacity}
-              </div>
+        {/* Specs */}
+        <div className="flex flex-1 flex-col justify-center gap-4">
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.24em] text-white/40 mb-2">Характеристики ПК</div>
+            <div
+              className="font-[family:var(--font-oswald)] text-lg uppercase leading-snug md:text-xl"
+              style={{ color: category.accent }}
+            >
+              {category.spec}
             </div>
-
-            {/* Specs */}
-            <div className="flex flex-1 flex-col justify-center gap-4">
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.24em] text-white/40 mb-2">Характеристики ПК</div>
-                <div
-                  className="font-[family:var(--font-oswald)] text-lg uppercase leading-snug md:text-xl"
-                  style={{ color: category.accent }}
-                >
-                  {category.spec}
-                </div>
-              </div>
-              <div>
-                <div className="text-[11px] uppercase tracking-[0.24em] text-white/40 mb-2">Периферия</div>
-                <div className="text-sm leading-6 text-white/60">
-                  {category.peripherals}
-                </div>
-              </div>
+          </div>
+          <div>
+            <div className="text-[11px] uppercase tracking-[0.24em] text-white/40 mb-2">Периферия</div>
+            <div className="text-sm leading-6 text-white/60">
+              {category.peripherals}
             </div>
           </div>
         </div>
@@ -278,7 +264,6 @@ function RoomContentBlock({
   baseCategory: RoomCategory;
   cmsCards?: RoomCard[];
 }) {
-  const [detailsOpen, setDetailsOpen] = useState(false);
 
   const activeCmsId = categoryToRoomId[baseCategory.key];
   const activeCmsCard = cmsCards.find(c => c.id === activeCmsId);
@@ -310,9 +295,6 @@ function RoomContentBlock({
           <h3 className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">
             {active.title}
           </h3>
-          <div className="mt-2 inline-flex rounded-full border border-white/20 bg-white/5 px-3 py-1 font-[family:var(--font-oswald)] text-[11px] uppercase tracking-wider text-white">
-            {active.capacity}
-          </div>
         </div>
         <div className="flex gap-3">
           <a
@@ -332,12 +314,8 @@ function RoomContentBlock({
         </div>
       </div>
 
-      {/* Expandable details panel (photo + specs) */}
-      <DetailsPanel
-        category={active}
-        open={detailsOpen}
-        onToggle={() => setDetailsOpen(!detailsOpen)}
-      />
+      {/* Details panel (photo + specs) */}
+      <DetailsPanel category={active} />
 
       {/* Pricing panels - More compact layout */}
       <div className="flex flex-col gap-4 lg:flex-row mt-2">

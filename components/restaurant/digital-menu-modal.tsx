@@ -13,6 +13,56 @@ export function DigitalMenuModal({
   images: string[];
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+
+  // Reset zoom when index or open state changes
+  useEffect(() => {
+    setIsZoomed(false);
+    setPosition({ x: 0, y: 0 });
+  }, [currentIndex, isOpen]);
+
+  const handleZoomToggle = () => {
+    setIsZoomed(!isZoomed);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!isZoomed) return;
+    setIsDragging(true);
+    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !isZoomed) return;
+    setPosition({
+      x: e.clientX - dragStart.x,
+      y: e.clientY - dragStart.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  // Touch handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (!isZoomed) return;
+    setIsDragging(true);
+    const touch = e.touches[0];
+    setDragStart({ x: touch.clientX - position.x, y: touch.clientY - position.y });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || !isZoomed) return;
+    const touch = e.touches[0];
+    setPosition({
+      x: touch.clientX - dragStart.x,
+      y: touch.clientY - dragStart.y
+    });
+  };
 
   // Reset index when opening
   useEffect(() => {
@@ -77,19 +127,50 @@ export function DigitalMenuModal({
               style={{
                 opacity: currentIndex === idx ? 1 : 0,
                 transform: `translateX(${(idx - currentIndex) * 10}%) scale(${currentIndex === idx ? 1 : 0.95})`,
-                pointerEvents: currentIndex === idx ? "auto" : "none"
+                pointerEvents: currentIndex === idx ? "auto" : "none",
+                zIndex: currentIndex === idx ? 10 : 0
               }}
             >
-              <div className="relative h-full w-full max-w-[600px] overflow-hidden rounded-lg shadow-[0_0_40px_rgba(0,0,0,0.5)]">
+              <div 
+                className={`relative h-full w-full max-w-[1100px] transition-transform duration-300 ease-out rounded-lg shadow-[0_0_40px_rgba(0,0,0,0.5)] ${isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
+                onClick={(e) => {
+                  if (!isDragging || Math.abs(position.x) + Math.abs(position.y) < 5) {
+                    handleZoomToggle();
+                  }
+                }}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleMouseUp}
+                style={{
+                  transform: isZoomed 
+                    ? `scale(2.5) translate(${position.x / 2.5}px, ${position.y / 2.5}px)` 
+                    : "scale(1) translate(0,0)",
+                  touchAction: isZoomed ? "none" : "auto"
+                }}
+              >
                 <Image
                   src={src}
                   alt={`Menu page ${idx + 1}`}
                   fill
                   className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 600px"
+                  sizes="(max-width: 768px) 100vw, 1100px"
                   priority={idx === 0 || idx === 1}
+                  draggable={false}
                 />
               </div>
+              
+              {!isZoomed && idx === currentIndex && (
+                <div className="absolute bottom-10 left-1/2 -translate-x-1/2 pointer-events-none bg-black/60 backdrop-blur-xl px-4 py-2 rounded-full border border-white/10 text-white/70 text-xs uppercase tracking-widest flex items-center gap-2 animate-bounce">
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                  </svg>
+                  Нажмите, чтобы увеличить
+                </div>
+              )}
             </div>
           ))}
         </div>

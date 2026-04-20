@@ -44,49 +44,49 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PRIVATE",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "290" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "730" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1170" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "290" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "730" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1170" }
         ]
       },
       {
         title: "PRIVATE+",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "410" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1020" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1620" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "410" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1020" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1620" }
         ]
       },
       {
         title: "VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "680" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1700" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2720" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "680" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1700" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2720" }
         ]
       },
       {
         title: "STREAM",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "525" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1315" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2100" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "525" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1315" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2100" }
         ]
       },
       {
         title: "PS5",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "750" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1875" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2625" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "750" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1875" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2625" }
         ]
       },
       {
         title: "SUPER VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "12500" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "31250" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "43750" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "12500" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "31250" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "43750" }
         ]
       }
     ]
@@ -99,9 +99,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PRIVATE",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "330" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "840" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1340" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "330" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "840" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1340" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "2010" },
@@ -111,9 +111,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PRIVATE +",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "470" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1170" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1860" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "470" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1170" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1860" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "2830" },
@@ -123,18 +123,18 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "800" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1950" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "3130" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "800" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1950" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "3130" }
         ],
         packages: [{ label: { ru: "Пакет ночь", en: "Night pack" }, price: "4800" }]
       },
       {
         title: "STREAM",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "615" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1510" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2410" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "615" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1510" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2410" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "3690" },
@@ -144,9 +144,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PS5",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "900" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "2250" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "3150" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "900" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "2250" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "3150" }
         ],
         packages: [
           { label: { ru: "Пакет день", en: "Day pack" }, price: "3200" },
@@ -156,9 +156,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "SUPER VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "15000" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "37500" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "52500" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "15000" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "37500" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "52500" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "82500" },
@@ -175,49 +175,49 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PRIVATE",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "350" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "870" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1390" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "350" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "870" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1390" }
         ]
       },
       {
         title: "PRIVATE+",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "480" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1210" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1930" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "480" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1210" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1930" }
         ]
       },
       {
         title: "VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "820" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "2050" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "3280" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "820" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "2050" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "3280" }
         ]
       },
       {
         title: "STREAM",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "630" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1575" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2520" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "630" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1575" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2520" }
         ]
       },
       {
         title: "PS5",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "950" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "2375" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "3325" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "950" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "2375" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "3325" }
         ]
       },
       {
         title: "SUPER VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "17500" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "43750" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "61250" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "17500" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "43750" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "61250" }
         ]
       }
     ]
@@ -230,9 +230,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PRIVATE",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "390" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1000" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "1590" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "390" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1000" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "1590" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "2400" },
@@ -242,9 +242,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PRIVATE +",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "560" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1390" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2210" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "560" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1390" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2210" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "3410" },
@@ -254,18 +254,18 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "900" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "2350" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "3760" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "900" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "2350" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "3760" }
         ],
         packages: [{ label: { ru: "Пакет ночь", en: "Night pack" }, price: "5400" }]
       },
       {
         title: "STREAM",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "705" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "1810" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "2900" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "705" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "1810" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "2900" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "4230" },
@@ -275,9 +275,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "PS5",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "1100" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "2750" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "3850" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "1100" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "2750" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "3850" }
         ],
         packages: [
           { label: { ru: "Пакет день", en: "Day pack" }, price: "3900" },
@@ -287,9 +287,9 @@ export const pricingPeriods: PricingPeriod[] = [
       {
         title: "SUPER VIP",
         entries: [
-          { label: { ru: "1 ч", en: "1 h" }, price: "20000" },
-          { label: { ru: "3 ч", en: "3 h" }, price: "50000" },
-          { label: { ru: "5 ч", en: "5 h" }, price: "70000" }
+          { label: { ru: "1 ЧАС", en: "1 HOUR" }, price: "20000" },
+          { label: { ru: "3 ЧАС", en: "3 HOUR" }, price: "50000" },
+          { label: { ru: "5 ЧАС", en: "5 HOUR" }, price: "70000" }
         ],
         packages: [
           { label: { ru: "Пакет ночь", en: "Night pack" }, price: "110000" },
