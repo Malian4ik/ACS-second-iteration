@@ -176,18 +176,20 @@ export const defaultCmsContent: CmsContent = {
       description:
         "Можно просто зайти в ресторан и вкусно провести время. Это полноценная зона, где можно отдохнуть между делами, пообедать или провести встречу.",
       photos: [
-        { id: "rest-photo-1", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606761566--2026-04-19-165226383.png", alt: "Блюда ресторана" },
-        { id: "rest-photo-2", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607034947--2026-04-19-165708814.png", alt: "Меню ресторана" },
-        { id: "rest-photo-3", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607114269--2026-04-19-165830179.png", alt: "Поке" },
-        { id: "rest-photo-4", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607156294--2026-04-19-165914319.png", alt: "Бургер" },
-        { id: "rest-photo-5", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607217463--2026-04-19-170008842.png", alt: "Закуски" },
-        { id: "rest-photo-6", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607259187--2026-04-19-170054987.png", alt: "Блюда" }
+        { id: "rest-photo-1", imageUrl: "/images/restaurant-real-1.jpg", alt: "Ресторан" },
+        { id: "rest-photo-2", imageUrl: "/images/restaurant-real-2.jpg", alt: "Барная стойка" }
       ],
       menuEmbedUrl: "",
       foodMenuUrl: "",
       barMenuUrl: "",
       cocktailsMenuUrl: "",
-      foodMenuImages: [],
+      foodMenuImages: [
+        "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776169257320--2026-04-14-152053539.png",
+        "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776169381391--2026-04-14-152253707.png",
+        "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776169517292--2026-04-14-152508457.png",
+        "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776169562781--2026-04-14-152551124.png",
+        "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776169609322--2026-04-14-152647497.png"
+      ],
       barMenuImages: [],
       cocktailsMenuImages: [],
       menuCta: {

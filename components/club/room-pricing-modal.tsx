@@ -1,6 +1,4 @@
-"use client";
-
-import { useState } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 
 import { pricingPeriods, t, type PricingCard } from "@/lib/catalog";
@@ -262,8 +260,6 @@ function DetailsPanel({ category, open, onToggle }: { category: RoomCategory; op
   );
 }
 
-/* ─── Inline Pricing Section ─── */
-
 const categoryToRoomId: Record<string, string> = {
   "stream": "room-stream",
   "private": "room-privat",
@@ -273,120 +269,141 @@ const categoryToRoomId: Record<string, string> = {
   "bootcamp": "room-bootcamp"
 };
 
-export function InlineRoomPricing({ cmsCards = [] }: { cmsCards?: RoomCard[] }) {
-  const [activeKey, setActiveKey] = useState(roomCategories[0].key);
+/* ─── Shared Room Content Block ─── */
+
+function RoomContentBlock({ 
+  baseCategory, 
+  cmsCards = [] 
+}: { 
+  baseCategory: RoomCategory;
+  cmsCards?: RoomCard[];
+}) {
   const [detailsOpen, setDetailsOpen] = useState(false);
-  
-  // Find active category
-  const activeBase = roomCategories.find((c) => c.key === activeKey) ?? roomCategories[0];
-  
-  // Overwrite image and capacity with CMS data if available
-  const activeCmsId = categoryToRoomId[activeBase.key];
+
+  const activeCmsId = categoryToRoomId[baseCategory.key];
   const activeCmsCard = cmsCards.find(c => c.id === activeCmsId);
-  const active = {
-    ...activeBase,
-    capacity: activeCmsCard?.capacity || activeBase.capacity,
-    imageUrl: activeCmsCard?.imageUrl || activeBase.imageUrl
+  
+  const active = useMemo(() => {
+    return {
+      ...baseCategory,
+      capacity: activeCmsCard?.capacity || baseCategory.capacity,
+      imageUrl: activeCmsCard?.imageUrl || baseCategory.imageUrl
+    };
+  }, [baseCategory, activeCmsCard]);
+
+  // Pricing lookup helper using catalog.ts data
+  const findPeriodCard = (periodKey: string) => {
+    const period = pricingPeriods.find(p => p.key === periodKey);
+    return period?.cards.find(c => normalizeTitle(c.title) === normalizeTitle(active.catalogTitle));
   };
 
-  // Close details when switching tabs
-  function selectCategory(key: string) {
-    setActiveKey(key);
-    setDetailsOpen(false);
-  }
-
-  const weekdayDay = findCard("weekday-day", active.catalogTitle);
-  const weekdayNight = findCard("weekday-night", active.catalogTitle);
-  const weekendDay = findCard("weekend-day", active.catalogTitle);
-  const weekendNight = findCard("weekend-night", active.catalogTitle);
+  const weekdayDay = findPeriodCard("weekday-day");
+  const weekdayNight = findPeriodCard("weekday-night");
+  const weekendDay = findPeriodCard("weekend-day");
+  const weekendNight = findPeriodCard("weekend-night");
 
   return (
-    <div className="mt-8 grid gap-0 xl:grid-cols-[240px_minmax(0,1fr)] xl:items-start">
-      {/* ── Left: Vertical tabs (desktop) ── */}
-      <div className="hidden xl:block">
-        <div className="space-y-1.5">
-          {roomCategories.map((cat) => {
-            const isActive = cat.key === activeKey;
-            return (
-              <button
-                key={cat.key}
-                className="block w-full px-5 py-4 text-left font-[family:var(--font-oswald)] text-xl uppercase leading-none transition-all duration-200 xl:text-2xl"
-                onClick={() => selectCategory(cat.key)}
-                style={{
-                  background: isActive ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.03)",
-                  color: isActive ? "#fff" : "rgba(255,255,255,0.5)",
-                  borderLeft: isActive ? `3px solid ${cat.accent}` : "3px solid transparent",
-                  transform: isActive ? "skewX(-2deg)" : "none"
-                }}
-                type="button"
-              >
-                {cat.title}
-              </button>
-            );
-          })}
+    <div className="flex flex-col mb-16 xl:mb-0">
+      {/* Room title + action buttons */}
+      <div className="mb-6 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div>
+          <h3 className="font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">
+            {active.title}
+          </h3>
+          <div className="mt-2 inline-flex rounded-full border border-white/20 bg-white/5 px-3 py-1 font-[family:var(--font-oswald)] text-[11px] uppercase tracking-wider text-white">
+            {active.capacity}
+          </div>
+        </div>
+        <div className="flex gap-3">
+          <a
+            className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)] shadow-[0_2px_16px_rgba(159,35,57,0.3)]"
+            href="https://t.me/AVULUSbot"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Забронировать
+          </a>
+          <a
+            className="inline-flex items-center justify-center rounded-full border border-white/14 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/70 transition hover:border-white/30 hover:text-white"
+            href="tel:+74959212221"
+          >
+            Позвонить
+          </a>
         </div>
       </div>
 
-      {/* ── Mobile: Horizontal scroll tabs ── */}
-      <div className="mb-4 flex gap-2 overflow-x-auto pb-1 xl:hidden [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {roomCategories.map((cat) => {
-          const isActive = cat.key === activeKey;
-          return (
-            <button
-              key={cat.key}
-              className="flex-none px-4 py-2.5 font-[family:var(--font-oswald)] text-base uppercase leading-none transition"
-              onClick={() => selectCategory(cat.key)}
-              style={{
-                background: isActive ? cat.accent : "rgba(255,255,255,0.06)",
-                color: isActive ? "#fff" : "rgba(255,255,255,0.55)",
-                transform: isActive ? "skewX(-2deg)" : "none"
-              }}
-              type="button"
-            >
-              {cat.title}
-            </button>
-          );
-        })}
+      {/* Expandable details panel (photo + specs) */}
+      <DetailsPanel
+        category={active}
+        open={detailsOpen}
+        onToggle={() => setDetailsOpen(!detailsOpen)}
+      />
+
+      {/* Pricing panels - More compact layout */}
+      <div className="flex flex-col gap-4 lg:flex-row mt-2">
+        <PeriodPanel accent={active.accent} dayCard={weekdayDay} label="Будни" nightCard={weekdayNight} />
+        <PeriodPanel accent={active.accent} dayCard={weekendDay} label="Выходные" nightCard={weekendNight} />
+      </div>
+    </div>
+  );
+}
+
+/* ─── Inline Pricing Section (Main Page) ─── */
+
+export function InlineRoomPricing({ cmsCards = [] }: { cmsCards?: RoomCard[] }) {
+  const [activeKey, setActiveKey] = useState(roomCategories[0].key);
+  
+  const selectCategory = useCallback((key: string) => {
+    setActiveKey(key);
+  }, []);
+
+  const activeBase = roomCategories.find((c) => c.key === activeKey) ?? roomCategories[0];
+
+  return (
+    <>
+      {/* ── Mobile: Vertical Stack of all rooms ── */}
+      <div className="mt-8 flex flex-col gap-12 xl:hidden">
+        {roomCategories.map((cat) => (
+          <RoomContentBlock key={cat.key} baseCategory={cat} cmsCards={cmsCards} />
+        ))}
       </div>
 
-      {/* ── Right: Content area ── */}
-      <div>
-        {/* Room title + action buttons */}
-        <div className="mb-5 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <h3 className="font-[family:var(--font-oswald)] text-5xl uppercase leading-none text-white md:text-7xl">
-            {active.title}
-          </h3>
-          <div className="flex gap-3">
-            <a
-              className="inline-flex items-center justify-center rounded-full bg-[var(--accent-red)] px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[var(--accent-red-strong)] shadow-[0_2px_16px_rgba(159,35,57,0.3)]"
-              href="https://t.me/AVULUSbot"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Забронировать
-            </a>
-            <a
-              className="inline-flex items-center justify-center rounded-full border border-white/14 px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/70 transition hover:border-white/30 hover:text-white"
-              href="tel:+74959212221"
-            >
-              Позвонить
-            </a>
+      {/* ── Desktop: Vertical tabs ── */}
+      <div className="mt-10 hidden xl:grid gap-12 xl:grid-cols-[300px_minmax(0,1fr)] xl:items-start">
+        {/* Large selection tabs */}
+        <div className="sticky top-24">
+          <div className="flex flex-col gap-3">
+            {roomCategories.map((cat) => {
+              const isActive = cat.key === activeKey;
+              return (
+                <button
+                  key={cat.key}
+                  className="group relative flex w-full items-center justify-between px-8 py-8 text-left font-[family:var(--font-oswald)] text-2xl uppercase transition-all duration-300 xl:py-10 xl:text-3xl font-bold tracking-wide"
+                  onClick={() => selectCategory(cat.key)}
+                  style={{
+                    background: isActive ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.02)",
+                    color: isActive ? "#fff" : "rgba(255,255,255,0.35)",
+                    borderLeft: isActive ? `10px solid ${cat.accent}` : "4px solid transparent",
+                    transform: isActive ? "translateX(12px) skewX(-2deg)" : "none",
+                    boxShadow: isActive ? `0 0 30px ${cat.accent}15` : "none"
+                  }}
+                  type="button"
+                >
+                  <span>{cat.title}</span>
+                  {isActive && (
+                    <div className="h-2 w-2 rounded-full" style={{ backgroundColor: cat.accent }} />
+                  )}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        {/* Expandable details panel (photo + specs) */}
-        <DetailsPanel
-          category={active}
-          open={detailsOpen}
-          onToggle={() => setDetailsOpen(!detailsOpen)}
-        />
-
-        {/* Pricing panels */}
-        <div className="flex flex-col gap-4 lg:flex-row">
-          <PeriodPanel accent={active.accent} dayCard={weekdayDay} label="Будни" nightCard={weekdayNight} />
-          <PeriodPanel accent={active.accent} dayCard={weekendDay} label="Выходные" nightCard={weekendNight} />
+        {/* Selected Room Content */}
+        <div className="min-h-[500px]">
+          <RoomContentBlock baseCategory={activeBase} cmsCards={cmsCards} />
         </div>
       </div>
-    </div>
+    </>
   );
 }

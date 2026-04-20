@@ -5,6 +5,7 @@ import { useState, useEffect, useRef, useCallback, Fragment } from "react";
 
 import { InlineRoomPricing } from "@/components/club/room-pricing-modal";
 import { TrackedLink } from "@/components/ui/tracked-link";
+import { DigitalMenuModal } from "@/components/restaurant/digital-menu-modal";
 import type {
   CmsBlock,
   CmsContent,
@@ -512,34 +513,25 @@ function renderRestaurantBlock({
       </div>
 
       {/* PDF menu downloads */}
-      <div className="mt-5 flex flex-wrap gap-2">
-        <a
-          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
-          href="/menu/menu_kitchen.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
-          Меню кухни (PDF)
-        </a>
-        <a
-          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
-          href="/menu/menu_bar.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
-          Меню бара (PDF)
-        </a>
-        <a
-          className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/4 px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-white/65 transition hover:border-white/22 hover:text-white"
-          href="/menu/menu_cocktails.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" /></svg>
-          Коктейльная карта (PDF)
-        </a>
+      <div className="mt-8 flex flex-wrap gap-3">
+        {[
+          { label: "Меню кухни (PDF)", href: "/menu/menu_kitchen.pdf" },
+          { label: "Меню бара (PDF)", href: "/menu/menu_bar.pdf" },
+          { label: "Коктейльная карта (PDF)", href: "/menu/menu_cocktails.pdf" }
+        ].map((pdf) => (
+          <a
+            key={pdf.href}
+            className="group inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50 transition hover:border-white/20 hover:bg-white/5 hover:text-white"
+            href={pdf.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg className="h-3.5 w-3.5 transition group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" />
+            </svg>
+            <span>{pdf.label}</span>
+          </a>
+        ))}
       </div>
     </section>
   );
@@ -659,7 +651,7 @@ export function LandingPageRenderer({
 }: LandingRendererProps) {
   const visibleBlocks = content.blocks.filter((block) => block.enabled);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [menuModal, setMenuModal] = useState<{ title: string; docs: MenuDoc[]; activeId: string; activeImageIndex: number } | null>(null);
+  const [digitalMenuImages, setDigitalMenuImages] = useState<string[] | null>(null);
   const [navVisible, setNavVisible] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -802,134 +794,36 @@ export function LandingPageRenderer({
               selectedItemId,
               onSelectBlock,
               onSelectItem,
-              onOpenMenu: (title, docs) =>
-                setMenuModal({
-                  title,
-                  docs,
-                  activeId: docs[0]?.id ?? "menu",
-                  activeImageIndex: 0
-                })
+              onOpenMenu: (title, docs) => {
+                // Flatten all images from docs into a single array for the carousel
+                const allImages = docs.reduce<string[]>((acc, doc) => {
+                  if (doc.kind === "images" && doc.images) {
+                    return [...acc, ...doc.images];
+                  }
+                  return acc;
+                }, []);
+                
+                if (allImages.length > 0) {
+                  setDigitalMenuImages(allImages);
+                } else {
+                  // Fallback to opening the link if no images are available
+                  const fallbackDoc = docs[0];
+                  if (fallbackDoc) {
+                    window.open(fallbackDoc.embedUrl || fallbackDoc.sourceUrl, "_blank");
+                  }
+                }
+              }
             })}
           </Fragment>
         ))}
       </main>
 
-      {menuModal && !previewMode ? (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/78 px-3 py-6 backdrop-blur-sm">
-          <div className="relative w-full max-w-6xl overflow-hidden rounded-[24px] border border-white/12 bg-[#0b0e14] shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="text-sm font-semibold uppercase tracking-[0.16em] text-white/85">{menuModal.title}</div>
-                {menuModal.docs.length > 1
-                  ? menuModal.docs.map((doc) => (
-                      <button
-                        key={doc.id}
-                        className={`rounded-full border px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] transition ${
-                          doc.id === menuModal.activeId
-                            ? "border-[rgba(26,90,73,0.8)] bg-[rgba(26,90,73,0.25)] text-white"
-                            : "border-white/16 text-white/80 hover:border-white/28 hover:text-white"
-                        }`}
-                        type="button"
-                        onClick={() => setMenuModal((current) => (current ? { ...current, activeId: doc.id, activeImageIndex: 0 } : current))}
-                      >
-                        {doc.label}
-                      </button>
-                    ))
-                  : null}
-              </div>
-              <button
-                className="rounded-full border border-white/16 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white/80 transition hover:border-white/28 hover:text-white"
-                type="button"
-                onClick={() => setMenuModal(null)}
-              >
-                Закрыть
-              </button>
-            </div>
-            {(() => {
-              const activeDoc = menuModal.docs.find((doc) => doc.id === menuModal.activeId) ?? menuModal.docs[0];
-              if (!activeDoc) {
-                return null;
-              }
-
-              if (activeDoc.kind === "images" && activeDoc.images && activeDoc.images.length > 0) {
-                const imageIndex = Math.min(menuModal.activeImageIndex, activeDoc.images.length - 1);
-                const activeImage = activeDoc.images[imageIndex];
-                return (
-                  <div className="bg-[#0a0d13] p-4">
-                    <div className="relative mx-auto flex h-[70vh] items-center justify-center overflow-hidden rounded-[16px] border border-white/10 bg-black/35">
-                      <Image
-                        alt={`${menuModal.title} ${activeDoc.label}`}
-                        className="h-full w-full object-contain"
-                        fill
-                        sizes="100vw"
-                        src={activeImage}
-                      />
-                      {activeDoc.images.length > 1 ? (
-                        <>
-                          <button
-                            className="absolute left-3 rounded-full border border-white/20 bg-black/45 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white"
-                            type="button"
-                            onClick={() =>
-                              setMenuModal((current) =>
-                                current
-                                  ? {
-                                      ...current,
-                                      activeImageIndex: current.activeImageIndex > 0 ? current.activeImageIndex - 1 : activeDoc.images!.length - 1
-                                    }
-                                  : current
-                              )
-                            }
-                          >
-                            Назад
-                          </button>
-                          <button
-                            className="absolute right-3 rounded-full border border-white/20 bg-black/45 px-3 py-2 text-xs font-semibold uppercase tracking-[0.12em] text-white"
-                            type="button"
-                            onClick={() =>
-                              setMenuModal((current) =>
-                                current
-                                  ? {
-                                      ...current,
-                                      activeImageIndex: current.activeImageIndex < activeDoc.images!.length - 1 ? current.activeImageIndex + 1 : 0
-                                    }
-                                  : current
-                              )
-                            }
-                          >
-                            Вперед
-                          </button>
-                        </>
-                      ) : null}
-                    </div>
-                    {activeDoc.images.length > 1 ? (
-                      <div className="mt-3 flex gap-2 overflow-x-auto pb-1">
-                        {activeDoc.images.map((imageUrl, index) => (
-                          <button
-                            key={imageUrl}
-                            className={`relative h-16 w-24 flex-none overflow-hidden rounded-lg border ${
-                              index === imageIndex ? "border-[var(--accent-green)]" : "border-white/20"
-                            }`}
-                            type="button"
-                            onClick={() => setMenuModal((current) => (current ? { ...current, activeImageIndex: index } : current))}
-                          >
-                            <Image alt={`${activeDoc.label} ${index + 1}`} className="object-cover" fill sizes="96px" src={imageUrl} />
-                          </button>
-                        ))}
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              }
-
-              return (
-                <>
-                  <iframe className="h-[74vh] w-full bg-white" src={activeDoc.embedUrl} title={`${menuModal.title} — ${activeDoc.label}`} />
-                </>
-              );
-            })()}
-          </div>
-        </div>
-      ) : null}
+      {/* Modern Digital Menu Modal Overlay */}
+      <DigitalMenuModal 
+        isOpen={Boolean(digitalMenuImages && !previewMode)} 
+        images={digitalMenuImages || []} 
+        onClose={() => setDigitalMenuImages(null)} 
+      />
 
       <div className={`fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-black/92 px-2 py-2.5 backdrop-blur transition-transform duration-300 md:hidden ${navVisible ? "translate-y-0" : "translate-y-full"}`}>
         <div className="mx-auto flex max-w-xl gap-1.5 text-xs">
