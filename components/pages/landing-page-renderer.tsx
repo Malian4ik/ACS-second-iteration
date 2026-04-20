@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback, Fragment } from "react";
 
+import { InlineRoomPricing } from "@/components/club/room-pricing-modal";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import type {
   CmsBlock,
@@ -312,9 +313,7 @@ function renderRoomsBlock({
   block,
   previewMode,
   selected,
-  selectedItemId,
-  onSelectBlock,
-  onSelectItem
+  onSelectBlock
 }: {
   block: RoomsBlock;
   previewMode?: boolean;
@@ -322,6 +321,7 @@ function renderRoomsBlock({
   selectedItemId?: string;
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
+  onOpenPricing?: (categoryKey: string) => void;
 }) {
   return (
     <section
@@ -329,84 +329,13 @@ function renderRoomsBlock({
       id={block.id}
       onClick={previewMode ? () => onSelectBlock?.(block.id) : undefined}
     >
-      <div className="mb-10">
+      <div className="mb-6">
         <div className="eyebrow">Игровые комнаты</div>
         <h2 className="mt-3 font-[family:var(--font-oswald)] text-4xl uppercase leading-none text-white md:text-6xl">{block.title}</h2>
         <p className="mt-3 max-w-xl text-sm leading-7 text-white/58">{block.subtitle}</p>
       </div>
 
-      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {block.cards.map((room) => (
-          <article
-            key={room.id}
-            className={`brand-card group overflow-hidden rounded-[30px] ${
-              previewMode && selectedItemId === room.id ? "ring-2 ring-[var(--accent-green)]" : ""
-            }`}
-            onClick={
-              previewMode
-                ? (event) => {
-                    event.stopPropagation();
-                    onSelectItem?.(block.id, room.id);
-                  }
-                : undefined
-            }
-          >
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <Image
-                alt={room.title}
-                className="object-cover transition duration-700 group-hover:scale-105"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                src={room.imageUrl}
-              />
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(9,9,9,0.05),rgba(9,9,9,0.42),rgba(9,9,9,0.94))]" />
-
-              <div className="absolute left-4 top-4 rounded-full border border-white/18 bg-black/68 px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-[#f5ead3] shadow-[0_10px_28px_rgba(0,0,0,0.78),0_0_18px_rgba(159,35,57,0.45)] backdrop-blur-md">
-                {room.capacity}
-              </div>
-
-              <div className="absolute bottom-4 left-4 right-4">
-                <div className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.94] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.6)]">{room.title}</div>
-              </div>
-            </div>
-
-            <div className="space-y-4 p-5">
-              <p className="text-sm leading-6 text-white/62">{room.description}</p>
-
-              <div className="flex gap-4 text-xs">
-                <div className="flex flex-col gap-0.5">
-                  <span className="uppercase tracking-[0.2em] text-white/40">День</span>
-                  <span className="font-semibold text-[var(--accent-sand)]">{room.dayPrice}</span>
-                </div>
-                <div className="w-px bg-white/10" />
-                <div className="flex flex-col gap-0.5">
-                  <span className="uppercase tracking-[0.2em] text-white/40">Ночь</span>
-                  <span className="font-semibold text-[var(--accent-sand)]">{room.nightPrice}</span>
-                </div>
-              </div>
-
-              <div className="flex gap-2 pt-1">
-                <ActionLink
-                  className="inline-flex flex-1 items-center justify-center rounded-full bg-[rgba(159,35,57,0.18)] border border-[rgba(159,35,57,0.40)] px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(159,35,57,0.30)]"
-                  goal={`room_tg_${room.id}`}
-                  href={room.telegramCta.href}
-                  label={room.telegramCta.label}
-                  previewMode={previewMode}
-                />
-                <ActionLink
-                  className="inline-flex flex-1 items-center justify-center rounded-full border border-white/12 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/28 hover:text-white"
-                  goal={`room_call_${room.id}`}
-                  href={room.callCta.href}
-                  label={room.callCta.label}
-                  previewMode={previewMode}
-                />
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      <p className="mt-6 text-center text-xs text-white/38">{block.pricingHint}</p>
+      <InlineRoomPricing cmsCards={block.cards} />
     </section>
   );
 }
@@ -710,7 +639,7 @@ function renderBlock({
     case "offers":
       return renderOffersBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem });
     case "rooms":
-      return renderRoomsBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem });
+      return renderRoomsBlock({ block, previewMode, selected, onSelectBlock });
     case "restaurant":
       return renderRestaurantBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem, onOpenMenu });
     case "contacts":

@@ -62,7 +62,7 @@ export const defaultCmsContent: CmsContent = {
           id: "offer-night",
           title: "Ночь без перерывов",
           description: "Отдельная комната только для тебя или твоей компании на всю ночь.",
-          imageUrl: "/images/club-room-red.webp",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606594027--2026-04-19-164948844.png",
           cta: {
             label: "Написать в Telegram",
             href: "https://t.me/AVULUSbot"
@@ -105,7 +105,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "от 290 ₽/час",
           nightPrice: "от 330 ₽/час",
           description: "Готовый стримерский сетап, осталось только запустить поток.",
-          imageUrl: "/images/club-room-green.webp",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605139142--2026-04-19-162507381.png",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
@@ -116,7 +116,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "от 490 ₽/час",
           nightPrice: "от 590 ₽/час",
           description: "Базовый игровой сетап для стабильной игры в соло или вдвоём.",
-          imageUrl: "/images/cyberclub-card.jpg",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776604578515--2026-04-19-161543667.png",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
@@ -127,7 +127,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "от 690 ₽/час",
           nightPrice: "от 790 ₽/час",
           description: "Усиленный сетап с запасом по мощности.",
-          imageUrl: "/images/cyberclub-vip.jpg",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605367623--2026-04-19-162924458.png",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
@@ -138,7 +138,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "от 890 ₽/час",
           nightPrice: "от 990 ₽/час",
           description: "Отдельная комната с продвинутым игровым сетапом и зоной отдыха.",
-          imageUrl: "/images/club-room-red.webp",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605693268--2026-04-19-163442606.png",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
@@ -149,7 +149,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "По запросу",
           nightPrice: "По запросу",
           description: "Мощнейшее железо и максимальный уровень приватности с большой зоной отдыха и отдельным входом.",
-          imageUrl: "/images/cyberclub-vip.jpg",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605609687--2026-04-19-163322052.png",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
@@ -160,7 +160,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "от 850 ₽/час",
           nightPrice: "от 850 ₽/час",
           description: "Комната для команды. 5+ мест за одним столом.",
-          imageUrl: "/images/cyberclub-team.jpg",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606434405--2026-04-19-164708526.png",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         }
@@ -176,10 +176,12 @@ export const defaultCmsContent: CmsContent = {
       description:
         "Можно просто зайти в ресторан и вкусно провести время. Это полноценная зона, где можно отдохнуть между делами, пообедать или провести встречу.",
       photos: [
-        { id: "rest-photo-1", imageUrl: "/images/dish-burger.jpg", alt: "Блюда ресторана" },
-        { id: "rest-photo-2", imageUrl: "/images/dish-cocktail.jpg", alt: "Коктейли" },
-        { id: "rest-photo-3", imageUrl: "/images/dish-ramen.jpg", alt: "Горячие блюда" },
-        { id: "rest-photo-4", imageUrl: "/images/dish-snack.jpg", alt: "Зал и закуски" }
+        { id: "rest-photo-1", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606761566--2026-04-19-165226383.png", alt: "Блюда ресторана" },
+        { id: "rest-photo-2", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607034947--2026-04-19-165708814.png", alt: "Меню ресторана" },
+        { id: "rest-photo-3", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607114269--2026-04-19-165830179.png", alt: "Поке" },
+        { id: "rest-photo-4", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607156294--2026-04-19-165914319.png", alt: "Бургер" },
+        { id: "rest-photo-5", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607217463--2026-04-19-170008842.png", alt: "Закуски" },
+        { id: "rest-photo-6", imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776607259187--2026-04-19-170054987.png", alt: "Блюда" }
       ],
       menuEmbedUrl: "",
       foodMenuUrl: "",
@@ -209,7 +211,7 @@ export const defaultCmsContent: CmsContent = {
       subtitle: "Приезжайте в Avulus — ответим быстро и поможем с бронью.",
       address: "Москва, Серебрянический переулок, 12с1",
       mapEmbedUrl:
-        "https://yandex.ru/map-widget/v1/?ll=37.648335%2C55.750049&mode=search&oid=244165336383&ol=biz&z=16",
+        "https://yandex.ru/map-widget/v1/?ll=37.648259%2C55.750145&mode=search&oid=71331203438&ol=biz&z=17",
       badges: ["24/7", "Бесплатная парковка"],
       links: [
         { id: "contact-telegram", label: "Telegram", href: "https://t.me/AVULUSbot" },
