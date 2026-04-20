@@ -361,11 +361,39 @@ export function InlineRoomPricing({ cmsCards = [] }: { cmsCards?: RoomCard[] }) 
 
   return (
     <>
-      {/* ── Mobile: Vertical Stack of all rooms ── */}
-      <div className="mt-8 flex flex-col gap-12 xl:hidden">
-        {roomCategories.map((cat) => (
-          <RoomContentBlock key={cat.key} baseCategory={cat} cmsCards={cmsCards} />
-        ))}
+      {/* ── Mobile: 2x3 Grid Selection ── */}
+      <div className="mt-8 flex flex-col gap-8 xl:hidden">
+        {/* Grid buttons */}
+        <div className="grid grid-cols-3 gap-2">
+          {roomCategories.map((cat) => {
+            const isActive = cat.key === activeKey;
+            return (
+              <button
+                key={cat.key}
+                className="flex flex-col items-center justify-center rounded-lg border border-white/10 p-3 text-center transition-all duration-300"
+                onClick={() => selectCategory(cat.key)}
+                style={{
+                  background: isActive ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.03)",
+                  borderColor: isActive ? cat.accent : "rgba(255,255,255,0.1)",
+                  color: isActive ? "#fff" : "rgba(255,255,255,0.4)"
+                }}
+                type="button"
+              >
+                <span className="font-[family:var(--font-oswald)] text-[10px] uppercase leading-none tracking-wider mb-1 opacity-50">
+                   Формат
+                </span>
+                <span className="font-[family:var(--font-oswald)] text-xs font-bold uppercase leading-tight">
+                  {cat.title.replace(" ROOM", "")}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Room Content */}
+        <div className="pt-4 border-t border-white/5">
+          <RoomContentBlock baseCategory={activeBase} cmsCards={cmsCards} />
+        </div>
       </div>
 
       {/* ── Desktop: Vertical tabs ── */}
