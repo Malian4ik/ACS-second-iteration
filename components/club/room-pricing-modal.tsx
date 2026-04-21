@@ -23,7 +23,7 @@ export const roomCategories: RoomCategory[] = [
     title: "STREAM ROOM",
     catalogTitle: "STREAM",
     accent: "#2f7a65",
-    spec: "Intel Core i7-14700F | 32GB DDR5 | RTX 5080 | 240Hz 27\"",
+    spec: "i5-13600 | RTX 5070 / 4070 SUPER | 2x LG 27\" 165HZ + 1x SAMSUNG 24\" 240HZ",
     peripherals: "ASUS ROG Azoth, Logitech G Pro X Superlight 2, HyperX Cloud III Wireless",
     capacity: "1",
     imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605139142--2026-04-19-162507381.png"
@@ -33,7 +33,7 @@ export const roomCategories: RoomCategory[] = [
     title: "PRIVATE",
     catalogTitle: "PRIVATE",
     accent: "#9f2339",
-    spec: "Intel Core i5-12400F | 16GB DDR5 | RTX 4060 | 360Hz 24.5\"",
+    spec: "i5-12400F | RTX 4060 | LG 27\" 165HZ",
     peripherals: "Dark Project KD87A, Logitech G Pro X, HyperX Cloud II",
     capacity: "2",
     imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776604578515--2026-04-19-161543667.png"
@@ -43,7 +43,7 @@ export const roomCategories: RoomCategory[] = [
     title: "PRIVATE+",
     catalogTitle: "PRIVATE+",
     accent: "#b56b4d",
-    spec: "Усиленный private-формат | Больше комфорта | Длинные сессии",
+    spec: "i5-12400F | RTX 5070 | SAMSUNG 24\" 240HZ",
     peripherals: "Подходит для пары, кооператива и камерных вечеров",
     capacity: "2",
     imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605367623--2026-04-19-162924458.png"
@@ -53,7 +53,7 @@ export const roomCategories: RoomCategory[] = [
     title: "VIP",
     catalogTitle: "VIP",
     accent: "#d8c29a",
-    spec: "Премиальный room-based формат | Больше приватности | Статус",
+    spec: "AMD RYZEN 7 9800X3D | RTX 4080 SUPER | ALIENWARE 24\" 360HZ",
     peripherals: "Для камерных компаний и более премиального опыта",
     capacity: "2-4",
     imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605693268--2026-04-19-163442606.png"
@@ -63,10 +63,10 @@ export const roomCategories: RoomCategory[] = [
     title: "SUPER VIP",
     catalogTitle: "SUPER VIP",
     accent: "#d3a24f",
-    spec: "Максимальный private-уровень | Индивидуальный сценарий",
+    spec: "i9-14900KF | RTX 5080 | SAMSUNG 27\" 360HZ",
     peripherals: "Премиальная подача и полный контроль пространства",
     capacity: "2-4",
-    imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605609687--2026-04-19-163322052.png"
+    imageUrl: "/images/Rectangle 46 (4).svg"
   },
   {
     key: "bootcamp",

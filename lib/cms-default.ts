@@ -110,7 +110,7 @@ export const defaultCmsContent: CmsContent = {
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
         {
-          id: "room-privat",
+          id: "room-private",
           title: "Private",
           capacity: "2 чел",
           dayPrice: "от 490 ₽/час",
@@ -121,7 +121,7 @@ export const defaultCmsContent: CmsContent = {
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },
         {
-          id: "room-privat-plus",
+          id: "room-private-plus",
           title: "Private+",
           capacity: "2 чел",
           dayPrice: "от 690 ₽/час",
@@ -149,7 +149,7 @@ export const defaultCmsContent: CmsContent = {
           dayPrice: "По запросу",
           nightPrice: "По запросу",
           description: "Мощнейшее железо и максимальный уровень приватности с большой зоной отдыха и отдельным входом.",
-          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605609687--2026-04-19-163322052.png",
+          imageUrl: "/images/Rectangle 46 (4).svg",
           telegramCta: { label: "Telegram", href: "https://t.me/AVULUSbot" },
           callCta: { label: "Позвонить", href: "tel:+74959212221" }
         },

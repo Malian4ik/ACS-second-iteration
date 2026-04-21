@@ -265,11 +265,11 @@ function renderOffersBlock({
           <p className="mt-3 text-sm leading-7 text-white/60">{block.emptyStateDescription}</p>
         </article>
       ) : (
-        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="flex items-stretch snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {block.cards.map((card) => (
             <article
               key={card.id}
-              className={`group flex min-h-[30rem] min-w-[86%] snap-start flex-col overflow-hidden rounded-[30px] border border-white/10 bg-[#0f1115] md:min-w-[48%] xl:min-w-[31%] ${
+              className={`group flex h-auto w-[86%] flex-shrink-0 snap-start flex-col overflow-hidden rounded-[30px] border border-white/10 bg-[#0f1115] md:w-[48%] xl:w-[31.5%] ${
                 previewMode && selectedItemId === card.id ? "ring-2 ring-[var(--accent-green)]" : ""
               }`}
               data-editor-item-id={card.id}
@@ -293,16 +293,20 @@ function renderOffersBlock({
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,7,7,0.05),rgba(7,7,7,0.4),rgba(7,7,7,0.94))]" />
               </div>
 
-              <div className="flex flex-1 flex-col space-y-5 p-6">
-                <h3 className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white">{card.title}</h3>
-                <p className="flex-1 text-sm leading-7 text-white/66">{card.description}</p>
-                <ActionLink
-                  className="inline-flex w-fit items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.14)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.26)]"
-                  goal={`offer_${card.id}`}
-                  href={card.cta.href}
-                  label={card.cta.label}
-                  previewMode={previewMode}
-                />
+              <div className="flex flex-1 flex-col justify-between p-6">
+                <div className="space-y-5">
+                  <h3 className="font-[family:var(--font-oswald)] text-4xl uppercase leading-[0.92] text-white min-h-[2.1em]">{card.title}</h3>
+                  <p className="text-sm leading-7 text-white/66">{card.description}</p>
+                </div>
+                <div className="mt-6">
+                  <ActionLink
+                    className="inline-flex w-fit items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.14)] px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.26)]"
+                    goal={`offer_${card.id}`}
+                    href={card.cta.href}
+                    label={card.cta.label}
+                    previewMode={previewMode}
+                  />
+                </div>
               </div>
             </article>
           ))}

@@ -53,12 +53,67 @@
       "cards": [
         {
           "id": "room-stream",
-          "title": "Stream",
+          "title": "Stream Room",
           "capacity": "1 чел",
           "dayPrice": "от 290 ₽/час",
           "nightPrice": "от 330 ₽/час",
-          "description": "Одно место, свой монитор, тишина. Для игры или стрима.",
+          "description": "Готовый стримерский сетап, осталось только запустить поток.",
           "imageUrl": "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605139142--2026-04-19-162507381.png",
+          "telegramCta": { "label": "Telegram", "href": "https://t.me/AVULUSbot" },
+          "callCta": { "label": "Позвонить", "href": "tel:+74959212221" }
+        },
+        {
+          "id": "room-private",
+          "title": "Private",
+          "capacity": "2 чел",
+          "dayPrice: "от 490 ₽/час",
+          "nightPrice": "от 590 ₽/час",
+          "description": "Базовый игровой сетап для стабильной игры в соло или вдвоём.",
+          "imageUrl": "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776604578515--2026-04-19-161543667.png",
+          "telegramCta": { "label": "Telegram", "href": "https://t.me/AVULUSbot" },
+          "callCta": { "label": "Позвонить", "href": "tel:+74959212221" }
+        },
+        {
+          "id": "room-private-plus",
+          "title": "Private+",
+          "capacity": "2 чел",
+          "dayPrice": "от 690 ₽/час",
+          "nightPrice": "от 790 ₽/час",
+          "description": "Усиленный сетап с запасом по мощности.",
+          "imageUrl": "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605367623--2026-04-19-162924458.png",
+          "telegramCta": { "label": "Telegram", "href": "https://t.me/AVULUSbot" },
+          "callCta": { "label": "Позвонить", "href": "tel:+74959212221" }
+        },
+        {
+          "id": "room-vip",
+          "title": "VIP",
+          "capacity": "2-4 чел",
+          "dayPrice": "от 890 ₽/час",
+          "nightPrice": "от 990 ₽/час",
+          "description": "Отдельная комната с продвинутым игровым сетапом и зоной отдыха.",
+          "imageUrl": "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605693268--2026-04-19-163442606.png",
+          "telegramCta": { "label": "Telegram", "href": "https://t.me/AVULUSbot" },
+          "callCta": { "label": "Позвонить", "href": "tel:+74959212221" }
+        },
+        {
+          "id": "room-super-vip",
+          "title": "Super VIP",
+          "capacity": "2-4 чел",
+          "dayPrice": "По запросу",
+          "nightPrice": "По запросу",
+          "description": "Мощнейшее железо и максимальный уровень приватности с большой зоной отдыха и отдельным входом.",
+          "imageUrl": "/images/Rectangle 46 (4).svg",
+          "telegramCta": { "label": "Telegram", "href": "https://t.me/AVULUSbot" },
+          "callCta": { "label": "Позвонить", "href": "tel:+74959212221" }
+        },
+        {
+          "id": "room-bootcamp",
+          "title": "Bootcamp",
+          "capacity": "5+ чел",
+          "dayPrice": "от 850 ₽/час",
+          "nightPrice": "от 850 ₽/час",
+          "description": "Комната для команды. 5+ мест за одним столом.",
+          "imageUrl": "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606434405--2026-04-19-164708526.png",
           "telegramCta": { "label": "Telegram", "href": "https://t.me/AVULUSbot" },
           "callCta": { "label": "Позвонить", "href": "tel:+74959212221" }
         }
