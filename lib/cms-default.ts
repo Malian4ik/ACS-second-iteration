@@ -62,7 +62,7 @@ export const defaultCmsContent: CmsContent = {
           id: "offer-night",
           title: "Ночь без перерывов",
           description: "Отдельная комната только для тебя или твоей компании на всю ночь.",
-          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606594027--2026-04-19-164948844.png",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776605609687--2026-04-19-163322052.png",
           cta: {
             label: "Написать в Telegram",
             href: "https://t.me/AVULUSbot"
@@ -72,7 +72,7 @@ export const defaultCmsContent: CmsContent = {
           id: "offer-privat",
           title: "Комната для двоих",
           description: "Приватное пространство для игры и отдыха вдвоём.",
-          imageUrl: "/images/cyberclub-vip.jpg",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776604578515--2026-04-19-161543667.png",
           cta: {
             label: "Написать в Telegram",
             href: "https://t.me/AVULUSbot"
@@ -82,7 +82,7 @@ export const defaultCmsContent: CmsContent = {
           id: "offer-bootcamp",
           title: "Комната для команды",
           description: "Подходит для тренировок и разборов большой компанией.",
-          imageUrl: "/images/cyberclub-team.jpg",
+          imageUrl: "https://1ux3bxsqbebnnpcv.public.blob.vercel-storage.com/cms/uploads/1776606434405--2026-04-19-164708526.png",
           cta: {
             label: "Написать в Telegram",
             href: "https://t.me/AVULUSbot"
@@ -176,9 +176,9 @@ export const defaultCmsContent: CmsContent = {
       description:
         "Можно просто зайти в ресторан и вкусно провести время. Это полноценная зона, где можно отдохнуть между делами, пообедать или провести встречу.",
       photos: [
-        { id: "rest-photo-1", imageUrl: "/images/restaurant-real-1.jpg", alt: "Ресторан" },
-        { id: "rest-photo-2", imageUrl: "/images/restaurant-real-2.jpg", alt: "Барная стойка" },
-        { id: "rest-photo-3", imageUrl: "/images/restaurant-real-1.jpg", alt: "Ресторан" },
+        { id: "rest-photo-1", imageUrl: "/images/DUAR0803-1.png", alt: "Ресторан" },
+        { id: "rest-photo-2", imageUrl: "/images/DUAR0803-2.png", alt: "Барная стойка" },
+        { id: "rest-photo-3", imageUrl: "/images/DUAR0821-.jpg", alt: "Ресторан" },
         { id: "rest-photo-4", imageUrl: "/images/restaurant-real-2.jpg", alt: "Барная стойка" }
       ],
       menuEmbedUrl: "",

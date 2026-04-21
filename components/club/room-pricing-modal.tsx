@@ -230,11 +230,11 @@ function UnifiedPricingTable({
   return (
     <div className="mt-2 rounded-xl overflow-hidden bg-[#0c0c0e]">
       {/* Header row: Будни / Выходные styled with design character, aligned perfectly to table columns */}
-      <div className="grid grid-cols-3 w-full pt-1">
+      <div className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] w-full pt-2 px-1">
         <div></div>
         <div className="overflow-hidden" style={{ marginRight: '1px' }}>
           <div
-            className="px-2 py-3 text-center font-[family:var(--font-oswald)] text-[17px] sm:text-xl uppercase leading-none text-white shadow-[inset_0_-2px_10px_rgba(0,0,0,0.3)] md:text-3xl"
+            className="px-2 py-3.5 text-center font-[family:var(--font-oswald)] text-[18px] sm:text-2xl uppercase leading-none text-white shadow-[0_4px_20px_rgba(47,122,101,0.2)] md:text-3xl"
             style={{ background: WEEKDAY_COLOR, clipPath: "polygon(2% 0%, 100% 0%, 98% 45%, 100% 100%, 0% 100%, 1% 55%)" }}
           >
             Будни
@@ -242,7 +242,7 @@ function UnifiedPricingTable({
         </div>
         <div className="overflow-hidden" style={{ marginLeft: '1px' }}>
           <div
-            className="px-2 py-3 text-center font-[family:var(--font-oswald)] text-[17px] sm:text-xl uppercase leading-none text-white shadow-[inset_0_-2px_10px_rgba(0,0,0,0.3)] md:text-3xl"
+            className="px-2 py-3.5 text-center font-[family:var(--font-oswald)] text-[18px] sm:text-2xl uppercase leading-none text-white shadow-[0_4px_20px_rgba(159,35,57,0.2)] md:text-3xl"
             style={{ background: WEEKEND_COLOR, clipPath: "polygon(2% 0%, 100% 0%, 98% 45%, 100% 100%, 0% 100%, 1% 55%)" }}
           >
             Выходные
@@ -253,11 +253,11 @@ function UnifiedPricingTable({
       <div className="p-3 md:p-5">
         {/* ── День section ── */}
         {weekdayDay && weekdayDay.entries.length > 0 && weekendDay && weekendDay.entries.length > 0 && (
-          <div className="mb-6">
-            <div className="grid grid-cols-3 items-baseline mb-3">
+          <div className="mb-8">
+            <div className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] items-baseline mb-4">
               <div></div>
-              <div className="col-span-2 text-center border-b border-white/10 pb-2">
-                <span className="font-[family:var(--font-oswald)] text-sm sm:text-base uppercase tracking-[0.15em] text-white/70 font-semibold md:text-lg">
+              <div className="col-span-2 text-center bg-white/[0.03] border-y border-white/5 py-3">
+                <span className="font-[family:var(--font-oswald)] text-base sm:text-lg uppercase tracking-[0.18em] text-white font-bold md:text-xl">
                   День 04:00 – 17:00
                 </span>
               </div>
@@ -266,14 +266,14 @@ function UnifiedPricingTable({
               {weekdayDay.entries.map((entry, i) => {
                 const weekendEntry = weekendDay.entries[i];
                 return (
-                  <div key={`day-${t("ru" as const, entry.label)}`} className="grid grid-cols-3 items-center gap-1 py-3 md:py-4">
-                    <span className="font-[family:var(--font-oswald)] text-left text-base uppercase text-white/70 md:text-lg">
+                  <div key={`day-${t("ru" as const, entry.label)}`} className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] items-center gap-1 py-4 hover:bg-white/[0.01] transition-colors md:py-5">
+                    <span className="font-[family:var(--font-oswald)] text-left text-lg uppercase text-white/80 md:text-xl md:pl-2">
                       {t("ru" as const, entry.label)}
                     </span>
-                    <span className="font-[family:var(--font-oswald)] text-center text-[22px] uppercase font-bold md:text-2xl" style={{ color: WEEKDAY_COLOR }}>
+                    <span className="font-[family:var(--font-oswald)] text-center text-[24px] uppercase font-bold md:text-3xl" style={{ color: WEEKDAY_COLOR }}>
                       {entry.price}
                     </span>
-                    <span className="font-[family:var(--font-oswald)] text-center text-[22px] uppercase font-bold md:text-2xl" style={{ color: WEEKEND_COLOR }}>
+                    <span className="font-[family:var(--font-oswald)] text-center text-[24px] uppercase font-bold md:text-3xl" style={{ color: WEEKEND_COLOR }}>
                       {weekendEntry?.price ?? "—"}
                     </span>
                   </div>
@@ -285,11 +285,11 @@ function UnifiedPricingTable({
 
         {/* ── Вечер section ── */}
         {weekdayNight && weekdayNight.entries.length > 0 && weekendNight && weekendNight.entries.length > 0 && (
-          <div className="mb-6">
-            <div className="grid grid-cols-3 items-baseline mb-3">
+          <div className="mb-8">
+            <div className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] items-baseline mb-4">
               <div></div>
-              <div className="col-span-2 text-center border-b border-white/10 pb-2">
-                <span className="font-[family:var(--font-oswald)] text-sm sm:text-base uppercase tracking-[0.15em] text-white/70 font-semibold md:text-lg">
+              <div className="col-span-2 text-center bg-white/[0.03] border-y border-white/5 py-3">
+                <span className="font-[family:var(--font-oswald)] text-base sm:text-lg uppercase tracking-[0.18em] text-white font-bold md:text-xl">
                   Вечер 17:00 – 04:00
                 </span>
               </div>
@@ -298,14 +298,14 @@ function UnifiedPricingTable({
               {weekdayNight.entries.map((entry, i) => {
                 const weekendEntry = weekendNight.entries[i];
                 return (
-                  <div key={`night-${t("ru" as const, entry.label)}`} className="grid grid-cols-3 items-center gap-1 py-3 md:py-4">
-                    <span className="font-[family:var(--font-oswald)] text-left text-base uppercase text-white/70 md:text-lg">
+                  <div key={`night-${t("ru" as const, entry.label)}`} className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] items-center gap-1 py-4 hover:bg-white/[0.01] transition-colors md:py-5">
+                    <span className="font-[family:var(--font-oswald)] text-left text-lg uppercase text-white/80 md:text-xl md:pl-2">
                       {t("ru" as const, entry.label)}
                     </span>
-                    <span className="font-[family:var(--font-oswald)] text-center text-[22px] uppercase font-bold md:text-2xl" style={{ color: WEEKDAY_COLOR }}>
+                    <span className="font-[family:var(--font-oswald)] text-center text-[24px] uppercase font-bold md:text-3xl" style={{ color: WEEKDAY_COLOR }}>
                       {entry.price}
                     </span>
-                    <span className="font-[family:var(--font-oswald)] text-center text-[22px] uppercase font-bold md:text-2xl" style={{ color: WEEKEND_COLOR }}>
+                    <span className="font-[family:var(--font-oswald)] text-center text-[24px] uppercase font-bold md:text-3xl" style={{ color: WEEKEND_COLOR }}>
                       {weekendEntry?.price ?? "—"}
                     </span>
                   </div>
@@ -318,10 +318,10 @@ function UnifiedPricingTable({
         {/* ── Ночь section (packages) ── */}
         {weekdayNight?.packages && weekdayNight.packages.length > 0 && (
           <div className="pt-2">
-            <div className="grid grid-cols-3 items-baseline mb-3">
+            <div className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] items-baseline mb-4">
               <div></div>
-              <div className="col-span-2 text-center border-b border-white/10 pb-2">
-                <span className="font-[family:var(--font-oswald)] text-sm sm:text-base uppercase tracking-[0.15em] text-white/70 font-semibold md:text-lg">
+              <div className="col-span-2 text-center bg-white/[0.03] border-y border-white/5 py-3">
+                <span className="font-[family:var(--font-oswald)] text-base sm:text-lg uppercase tracking-[0.18em] text-white font-bold md:text-xl">
                   Ночь 23:00 – 11:00
                 </span>
               </div>
@@ -330,14 +330,14 @@ function UnifiedPricingTable({
               {weekdayNight.packages.map((pack, i) => {
                 const weekendPack = weekendNight?.packages?.[i];
                 return (
-                  <div key={`pack-${t("ru" as const, pack.label)}`} className="grid grid-cols-3 items-center gap-1 py-3 md:py-4">
-                    <span className="font-[family:var(--font-oswald)] text-left text-[14px] leading-tight uppercase text-white/60 md:text-base">
+                  <div key={`pack-${t("ru" as const, pack.label)}`} className="grid grid-cols-[110px_1fr_1fr] md:grid-cols-[160px_1fr_1fr] items-center gap-1 py-4 hover:bg-white/[0.01] transition-colors md:py-5">
+                    <span className="font-[family:var(--font-oswald)] text-left text-[15px] leading-tight uppercase text-white/60 md:text-lg md:pl-2">
                       {t("ru" as const, pack.label)}
                     </span>
-                    <span className="font-[family:var(--font-oswald)] text-center text-[22px] uppercase font-bold md:text-2xl" style={{ color: WEEKDAY_COLOR }}>
+                    <span className="font-[family:var(--font-oswald)] text-center text-[24px] uppercase font-bold md:text-3xl" style={{ color: WEEKDAY_COLOR }}>
                       {pack.price}
                     </span>
-                    <span className="font-[family:var(--font-oswald)] text-center text-[22px] uppercase font-bold md:text-2xl" style={{ color: WEEKEND_COLOR }}>
+                    <span className="font-[family:var(--font-oswald)] text-center text-[24px] uppercase font-bold md:text-3xl" style={{ color: WEEKEND_COLOR }}>
                       {weekendPack?.price ?? "—"}
                     </span>
                   </div>

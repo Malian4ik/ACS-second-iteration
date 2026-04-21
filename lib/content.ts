@@ -75,21 +75,23 @@ export const contactLinks = {
 
 export const menuImages = {
   bar: [
-    "/menu/Bar/Layer_5.svg",
-    "/menu/Bar/Layer_5-1.svg",
-    "/menu/Bar/Layer_5-2.svg",
-    "/menu/Bar/Layer_5-3.svg",
-    "/menu/Bar/Layer_5-4.svg",
-    "/menu/Bar/Layer_5-5.svg",
-    "/menu/Bar/Layer_5-6.svg"
+    "/menu/Bar/Frame 369.svg",
+    "/menu/Bar/Frame 377.svg",
+    "/menu/Bar/Frame 378.svg",
+    "/menu/Bar/Frame 379.svg",
+    "/menu/Bar/Frame 380.svg",
+    "/menu/Bar/Frame 381.svg",
+    "/menu/Bar/Frame 383.svg",
+    "/menu/Bar/Frame 384.svg"
   ],
   restaurant: [
-    "/menu/Restoraunt/Layer_5.svg",
-    "/menu/Restoraunt/Layer_5-1.svg",
-    "/menu/Restoraunt/Layer_5-2.svg",
-    "/menu/Restoraunt/Layer_5-3.svg",
-    "/menu/Restoraunt/Layer_5-4.svg",
-    "/menu/Restoraunt/Layer_5-5.svg"
+    "/menu/Restoraunt/Frame 360.svg",
+    "/menu/Restoraunt/Frame 371.svg",
+    "/menu/Restoraunt/Frame 372.svg",
+    "/menu/Restoraunt/Frame 373.svg",
+    "/menu/Restoraunt/Frame 374.svg",
+    "/menu/Restoraunt/Frame 375.svg",
+    "/menu/Restoraunt/Frame 376.svg"
   ]
 };
 
