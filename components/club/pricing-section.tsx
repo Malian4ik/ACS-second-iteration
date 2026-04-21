@@ -29,8 +29,8 @@ const categorySummaries: CategorySummary[] = [
     title: "PRIVATE",
     accent: "#9f2339",
     spec: {
-      ru: "Intel Core i5-12400F | 16GB DDR5 | RTX 4060 | 360Hz 24.5\"",
-      en: "Intel Core i5-12400F | 16GB DDR5 | RTX 4060 | 360Hz 24.5\""
+      ru: "i5-12400F | RTX 4060 | LG 27\" 165HZ",
+      en: "i5-12400F | RTX 4060 | LG 27\" 165HZ"
     },
     details: {
       ru: "Периферия: Dark Project KD87A, Logitech G Pro X, HyperX Cloud II",
@@ -41,8 +41,8 @@ const categorySummaries: CategorySummary[] = [
     title: "PRIVATE+",
     accent: "#b56b4d",
     spec: {
-      ru: "Усиленный private-формат | Больше комфорта | Сценарий для длинных сессий",
-      en: "Enhanced private format | More comfort | Built for longer sessions"
+      ru: "i5-12400F | RTX 5070 | SAMSUNG 24\" 240HZ",
+      en: "i5-12400F | RTX 5070 | SAMSUNG 24\" 240HZ"
     },
     details: {
       ru: "Подходит для пары, кооператива и вечерних блоков без общего зала",
@@ -53,8 +53,8 @@ const categorySummaries: CategorySummary[] = [
     title: "VIP",
     accent: "#d8c29a",
     spec: {
-      ru: "Премиальный room-based формат | Больше приватности | Статусная атмосфера",
-      en: "Premium room-based format | More privacy | Elevated atmosphere"
+      ru: "AMD RYZEN 7 9800X3D | RTX 4080 SUPER | ALIENWARE 24\" 360HZ",
+      en: "AMD RYZEN 7 9800X3D | RTX 4080 SUPER | ALIENWARE 24\" 360HZ"
     },
     details: {
       ru: "Формат для камерных компаний, длинных сессий и более премиального опыта",
@@ -65,8 +65,8 @@ const categorySummaries: CategorySummary[] = [
     title: "STREAM",
     accent: "#2f7a65",
     spec: {
-      ru: "Фокус на соло-игре и контенте | Приватная посадка | Длинные сессии",
-      en: "Focused on solo play and content | Private setup | Longer sessions"
+      ru: "i5-13600 | RTX 5070 / 4070 SUPER | 2x LG 27\" 165HZ + 1x SAMSUNG 24\" 240HZ",
+      en: "i5-13600 | RTX 5070 / 4070 SUPER | 2x LG 27\" 165HZ + 1x SAMSUNG 24\" 240HZ"
     },
     details: {
       ru: "Подходит для стрима, личной игры и тихого режима без лишнего шума",
@@ -89,8 +89,8 @@ const categorySummaries: CategorySummary[] = [
     title: "SUPER VIP",
     accent: "#d3a24f",
     spec: {
-      ru: "Максимальный private-уровень | Индивидуальный сценарий | Премиальная подача",
-      en: "Top private tier | Individual booking flow | Premium presentation"
+      ru: "i9-14900KF | RTX 5080 | SAMSUNG 27\" 360HZ",
+      en: "i9-14900KF | RTX 5080 | SAMSUNG 27\" 360HZ"
     },
     details: {
       ru: "Для самых статусных бронирований, камерных событий и private premium experience",

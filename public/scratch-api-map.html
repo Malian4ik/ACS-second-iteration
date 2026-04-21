@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yandex Map API Test</title>
+    <style>
+        body { background-color: #111; color: white; display:flex; justify-content:center; align-items:center; height: 100vh; margin: 0; }
+        #map { width: 600px; height: 400px; border-radius: 22px; overflow: hidden; }
+        
+        /* The magic dark mode filter for Yandex maps v2.1 tiles */
+        .ymaps-2-1-79-map, .ymaps-2-1-79-ground-pane {
+            filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
+    </style>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <script type="text/javascript">
+        ymaps.ready(init);
+        function init(){
+            var myMap = new ymaps.Map("map", {
+                center: [55.750145, 37.648259],
+                zoom: 17,
+                controls: ['zoomControl']
+            });
+
+            var myPlacemark = new ymaps.Placemark([55.750145, 37.648259], {
+                hintContent: 'Avulus Cyber Space',
+                balloonContent: 'Avulus Cyber Space'
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: '/images/custom-pin.png', // Or anything
+                iconImageSize: [46, 46],
+                iconImageOffset: [-23, -23]
+            });
+
+            myMap.geoObjects.add(myPlacemark);
+            
+            // Wait for map to load and invert tiles only
+            myMap.panes.get('ground').getElement().style.filter = "invert(100%) hue-rotate(180deg) sepia(10%) contrast(90%)";
+        }
+    </script>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>

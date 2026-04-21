@@ -73,6 +73,26 @@ export const contactLinks = {
   cookies: "#"
 };
 
+export const menuImages = {
+  bar: [
+    "/menu/Bar/Layer_5.svg",
+    "/menu/Bar/Layer_5-1.svg",
+    "/menu/Bar/Layer_5-2.svg",
+    "/menu/Bar/Layer_5-3.svg",
+    "/menu/Bar/Layer_5-4.svg",
+    "/menu/Bar/Layer_5-5.svg",
+    "/menu/Bar/Layer_5-6.svg"
+  ],
+  restaurant: [
+    "/menu/Restoraunt/Layer_5.svg",
+    "/menu/Restoraunt/Layer_5-1.svg",
+    "/menu/Restoraunt/Layer_5-2.svg",
+    "/menu/Restoraunt/Layer_5-3.svg",
+    "/menu/Restoraunt/Layer_5-4.svg",
+    "/menu/Restoraunt/Layer_5-5.svg"
+  ]
+};
+
 type SharedContent = {
   localeLabel: string;
   brandSubtitle: string;

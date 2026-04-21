@@ -6,6 +6,8 @@ import { useState, useEffect, useRef, useCallback, Fragment } from "react";
 import { InlineRoomPricing } from "@/components/club/room-pricing-modal";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { DigitalMenuModal } from "@/components/restaurant/digital-menu-modal";
+import { CustomYandexMap } from "@/components/ui/custom-yandex-map";
+import { menuImages } from "@/lib/content";
 import type {
   CmsBlock,
   CmsContent,
@@ -348,7 +350,8 @@ function renderRestaurantBlock({
   selectedItemId,
   onSelectBlock,
   onSelectItem,
-  onOpenMenu
+  onOpenMenu,
+  onSetMenuImages
 }: {
   block: RestaurantBlock;
   previewMode?: boolean;
@@ -357,6 +360,7 @@ function renderRestaurantBlock({
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
   onOpenMenu?: (title: string, docs: MenuDoc[]) => void;
+  onSetMenuImages?: (images: string[]) => void;
 }) {
   const foodImages = block.foodMenuImages.map((item) => item.trim()).filter(Boolean);
   const barImages = block.barMenuImages.map((item) => item.trim()).filter(Boolean);
@@ -473,29 +477,20 @@ function renderRestaurantBlock({
       </div>
 
       <div className="mt-8 flex flex-wrap gap-3">
-        {menuDocs.length > 0 ? (
-          <button
-            className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
-            type="button"
-            onClick={(event) => {
-              if (previewMode) {
-                event.preventDefault();
-                return;
-              }
-              onOpenMenu?.(block.menuCta.label, menuDocs);
-            }}
-          >
-            {block.menuCta.label}
-          </button>
-        ) : (
-          <ActionLink
-            className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
-            goal="restaurant_menu"
-            href={block.menuCta.href}
-            label={block.menuCta.label}
-            previewMode={previewMode}
-          />
-        )}
+        <button
+          className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
+          type="button"
+          onClick={() => onSetMenuImages?.(menuImages.restaurant)}
+        >
+          {previewMode ? "Меню кухни" : "Меню кухни"}
+        </button>
+        <button
+          className="inline-flex items-center justify-center rounded-full border border-[rgba(26,90,73,0.55)] bg-[rgba(26,90,73,0.16)] px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:bg-[rgba(26,90,73,0.28)]"
+          type="button"
+          onClick={() => onSetMenuImages?.(menuImages.bar)}
+        >
+          {previewMode ? "Барное меню" : "Барное меню"}
+        </button>
         <ActionLink
           className="inline-flex items-center justify-center rounded-full border border-white/14 px-6 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white/80 transition hover:border-white/28 hover:text-white"
           goal="restaurant_tg"
@@ -512,27 +507,6 @@ function renderRestaurantBlock({
         />
       </div>
 
-      {/* PDF menu downloads */}
-      <div className="mt-8 flex flex-wrap gap-3">
-        {[
-          { label: "Меню кухни (PDF)", href: "/menu/menu_kitchen.pdf" },
-          { label: "Меню бара (PDF)", href: "/menu/menu_bar.pdf" },
-          { label: "Коктейльная карта (PDF)", href: "/menu/menu_cocktails.pdf" }
-        ].map((pdf) => (
-          <a
-            key={pdf.href}
-            className="group inline-flex items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50 transition hover:border-white/20 hover:bg-white/5 hover:text-white"
-            href={pdf.href}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <svg className="h-3.5 w-3.5 transition group-hover:scale-110" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v12m0 0l-4-4m4 4l4-4M4 18h16" />
-            </svg>
-            <span>{pdf.label}</span>
-          </a>
-        ))}
-      </div>
     </section>
   );
 }
@@ -594,13 +568,7 @@ function renderContactsBlock({
           </div>
 
           <div className="relative overflow-hidden rounded-[22px] border border-white/10">
-            <iframe
-              className="h-[380px] w-full md:h-[460px]"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              src={block.mapEmbedUrl}
-              title="Карта Avulus"
-            />
+            <CustomYandexMap embedUrl={block.mapEmbedUrl} />
           </div>
         </div>
       </div>
@@ -615,7 +583,8 @@ function renderBlock({
   selectedItemId,
   onSelectBlock,
   onSelectItem,
-  onOpenMenu
+  onOpenMenu,
+  onSetMenuImages
 }: {
   block: CmsBlock;
   previewMode?: boolean;
@@ -624,6 +593,7 @@ function renderBlock({
   onSelectBlock?: (blockId: string) => void;
   onSelectItem?: (blockId: string, itemId: string) => void;
   onOpenMenu?: (title: string, docs: MenuDoc[]) => void;
+  onSetMenuImages?: (images: string[]) => void;
 }) {
   switch (block.type) {
     case "hero":
@@ -633,7 +603,7 @@ function renderBlock({
     case "rooms":
       return renderRoomsBlock({ block, previewMode, selected, onSelectBlock });
     case "restaurant":
-      return renderRestaurantBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem, onOpenMenu });
+      return renderRestaurantBlock({ block, previewMode, selected, selectedItemId, onSelectBlock, onSelectItem, onOpenMenu, onSetMenuImages });
     case "contacts":
       return renderContactsBlock({ block, previewMode, selected, onSelectBlock });
     default:
@@ -812,7 +782,8 @@ export function LandingPageRenderer({
                     window.open(fallbackDoc.embedUrl || fallbackDoc.sourceUrl, "_blank");
                   }
                 }
-              }
+              },
+              onSetMenuImages: (images) => setDigitalMenuImages(images)
             })}
           </Fragment>
         ))}
@@ -822,6 +793,7 @@ export function LandingPageRenderer({
       <DigitalMenuModal 
         isOpen={Boolean(digitalMenuImages && !previewMode)} 
         images={digitalMenuImages || []} 
+        imageBackgroundColor={digitalMenuImages?.[0]?.includes("/Restoraunt/") ? "white" : "transparent"}
         onClose={() => setDigitalMenuImages(null)} 
       />
 

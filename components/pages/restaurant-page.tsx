@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 
 import { AvulusFooter } from "@/components/layout/avulus-footer";
 import { LocaleHtmlController } from "@/components/layout/locale-html-controller";
@@ -6,6 +6,7 @@ import { AvulusNav } from "@/components/layout/avulus-nav";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { getCmsContent } from "@/lib/cms";
 import { contactLinks, getRestaurantNav, getSharedContent, type Locale } from "@/lib/content";
+import { RestaurantMenuActions } from "@/components/restaurant/restaurant-menu-actions";
 
 export async function RestaurantPage({ locale }: { locale: Locale }) {
   const c = getSharedContent(locale);
@@ -46,9 +47,7 @@ export async function RestaurantPage({ locale }: { locale: Locale }) {
                 <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_call" href={contactLinks.call}>
                   +7 495 921-22-21
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-6 py-4 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_menu" href={contactLinks.menu} target="_blank">
-                  {cms?.restaurant?.menuButtonLabel ?? "РЎРјРѕС‚СЂРµС‚СЊ РїРѕР»РЅРѕРµ РјРµРЅСЋ"}
-                </TrackedLink>
+                <RestaurantMenuActions locale={locale} variant="hero" />
               </div>
 
               <div className="text-xs uppercase tracking-[0.24em] text-[#d7d1c4]">
@@ -147,9 +146,7 @@ export async function RestaurantPage({ locale }: { locale: Locale }) {
                 <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_contact_call" href={contactLinks.call}>
                   +7 495 921-22-21
                 </TrackedLink>
-                <TrackedLink className="inline-flex items-center justify-center rounded-full border border-white/18 px-5 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition hover:border-[var(--accent-green)] hover:text-[var(--accent-sand)]" goal="restaurant_contact_menu" href={contactLinks.menu} target="_blank">
-                  {cms?.restaurant?.menuButtonLabel ?? "РЎРјРѕС‚СЂРµС‚СЊ РїРѕР»РЅРѕРµ РјРµРЅСЋ"}
-                </TrackedLink>
+                <RestaurantMenuActions locale={locale} variant="reserve" />
               </div>
             </div>
           </div>

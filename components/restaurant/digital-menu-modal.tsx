@@ -6,11 +6,13 @@ import Image from "next/image";
 export function DigitalMenuModal({
   isOpen,
   onClose,
-  images = []
+  images = [],
+  imageBackgroundColor = "transparent"
 }: {
   isOpen: boolean;
   onClose: () => void;
   images: string[];
+  imageBackgroundColor?: string;
 }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -132,7 +134,7 @@ export function DigitalMenuModal({
               }}
             >
               <div 
-                className={`relative h-full w-full max-w-[1100px] transition-transform duration-300 ease-out rounded-lg shadow-[0_0_40px_rgba(0,0,0,0.5)] ${isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
+                className={`relative h-full w-full max-w-[1100px] transition-transform duration-300 ease-out rounded-lg shadow-[0_0_40px_rgba(0,0,0,0.3)] ${isZoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
                 onClick={(e) => {
                   if (!isDragging || Math.abs(position.x) + Math.abs(position.y) < 5) {
                     handleZoomToggle();
@@ -146,6 +148,7 @@ export function DigitalMenuModal({
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleMouseUp}
                 style={{
+                  backgroundColor: imageBackgroundColor,
                   transform: isZoomed 
                     ? `scale(2.5) translate(${position.x / 2.5}px, ${position.y / 2.5}px)` 
                     : "scale(1) translate(0,0)",
